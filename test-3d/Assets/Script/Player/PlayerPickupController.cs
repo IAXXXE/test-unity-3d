@@ -1,10 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// 玩家拾取控制器（使用射线拾取）
-/// 说明：把这个脚本挂在 Player 上，填入 cameraTransform & holdPoint（手的位置）
-/// 默认按 E 拾取/放下，左键投掷（也支持自定义键）
-/// </summary>
 public class PlayerPickupController : MonoBehaviour
 {
     [Header("References")]
@@ -101,25 +96,6 @@ public class PlayerPickupController : MonoBehaviour
 
     void TryPick()
     {
-        // Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        // if (Physics.Raycast(ray, out RaycastHit hit, pickRange, pickupLayer, QueryTriggerInteraction.Ignore))
-        // {
-        //     Pickupable p = hit.collider.GetComponentInParent<Pickupable>();
-        //     if(hit.collider.transform != null)
-        //     {
-        //         Debug.Log(hit.collider.transform.gameObject.name);
-        //     }
-        //     if (p == null)
-        //     {
-        //         p = hit.collider.transform.GetComponent<Pickupable>();
-        //     }
-
-        //     if (p != null && !p.IsHeld())
-        //     {
-        //         p.PickUp(holdPoint);
-        //         heldItem = p;
-        //     }
-        // }
 
         if(currPickupableItem != null)
         {

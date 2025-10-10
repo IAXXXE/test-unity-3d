@@ -99,10 +99,14 @@ public class PlayerController : MonoBehaviour
         bool run = Gamepad.current?.leftStickButton.isPressed == true || Keyboard.current?.leftShiftKey.isPressed == true;
         float targetSpeed = isCrouched ? crouchSpeed : (run ? runSpeed : walkSpeed);
 
-        Vector3 forward = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
-        Vector3 right = new Vector3(cameraTransform.right.x, 0, cameraTransform.right.z).normalized;
+        // Vector3 forward = new Vector3(cameraTransform.forward.x, 0, cameraTransform.forward.z).normalized;
+        // Vector3 right = new Vector3(cameraTransform.right.x, 0, cameraTransform.right.z).normalized;
+        // Vector3 moveDir = (forward * inputDir.y + right * inputDir.x).normalized;
 
-        Vector3 moveDir = (forward * inputDir.y + right * inputDir.x).normalized;
+        Vector3 camForward = Vector3.ProjectOnPlane(cameraTransform.forward, Vector3.up).normalized;
+        Vector3 camRight = cameraTransform.right;
+        Vector3 moveDir = camForward * moveInput.y + camRight * moveInput.x;
+
         float targetMagnitude = inputDir.magnitude;
         float desiredSpeed = targetSpeed * targetMagnitude;
 
