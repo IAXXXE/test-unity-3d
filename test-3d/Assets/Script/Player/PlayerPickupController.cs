@@ -27,6 +27,7 @@ public class PlayerPickupController : MonoBehaviour
     public float chargeSpeed = 4f; // how fast throw force grows per second
 
     // runtime
+    Pickupable currPickupableItem = null;
     Pickupable heldItem = null;
     float currentThrowMultiplier = 1f;
 
@@ -34,7 +35,34 @@ public class PlayerPickupController : MonoBehaviour
     {
         if (playerCamera == null) return;
 
-        // pick/drop
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, pickRange, pickupLayer, QueryTriggerInteraction.Ignore))
+        {
+            Pickupable p = hit.collider.transform.GetComponent<Pickupable>();
+            if(hit.collider.transform != null)
+            {
+            }
+            else
+            {
+                Debug.Log("null Pickupable Script");
+            }
+
+            if (p != null && !p.IsHeld())
+            {
+                if(currPickupableItem != p && currPickupableItem != null) currPickupableItem.OnLoseFocus();
+                p.OnFocus();
+                currPickupableItem = p;
+            }
+        }
+        else
+        {
+            if(currPickupableItem != null)
+            {
+                currPickupableItem.OnLoseFocus();
+                currPickupableItem = null;
+            }
+        }
+        
         if (Input.GetKeyDown(pickKey))
         {
             if (heldItem == null)
@@ -43,23 +71,19 @@ public class PlayerPickupController : MonoBehaviour
             }
             else
             {
-                // drop (no extra velocity)
                 heldItem.Drop();
                 heldItem = null;
             }
         }
 
-        // charging throw
         if (enableChargeThrow && heldItem != null && Input.GetKey(throwKey))
         {
             currentThrowMultiplier += chargeSpeed * Time.deltaTime;
             currentThrowMultiplier = Mathf.Clamp(currentThrowMultiplier, 1f, maxThrowForce / heldItem.defaultThrowForce);
         }
 
-        // throw
         if (heldItem != null && Input.GetKeyDown(throwKey))
         {
-            // immediate throw using current multiplier
             Vector3 forward = playerCamera.transform.forward;
             float mul = enableChargeThrow ? currentThrowMultiplier : throwForceMultiplier;
             mul = Mathf.Clamp(mul, minThrowForce / heldItem.defaultThrowForce, maxThrowForce / heldItem.defaultThrowForce);
@@ -69,39 +93,40 @@ public class PlayerPickupController : MonoBehaviour
             currentThrowMultiplier = 1f;
         }
 
-        // cancel charge on release if enabled
         if (enableChargeThrow && heldItem != null && Input.GetKeyUp(throwKey))
         {
-            // do nothing special here (we already threw on KeyDown) — if you want throw on KeyUp, change logic
             currentThrowMultiplier = 1f;
         }
     }
 
     void TryPick()
     {
-        Debug.Log("try pick");
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickRange, pickupLayer, QueryTriggerInteraction.Ignore))
-        {
-            Debug.Log("Physics.Raycast");
-            Pickupable p = hit.collider.GetComponentInParent<Pickupable>();
-            if(hit.collider.transform != null)
-            {
-                Debug.Log(hit.collider.transform.gameObject.name);
-            }
-            if (p == null)
-            {
-                // sometimes collider is child; try root, etc.
-                p = hit.collider.transform.GetComponent<Pickupable>();
-                Debug.Log("null");
-            }
+        // Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        // if (Physics.Raycast(ray, out RaycastHit hit, pickRange, pickupLayer, QueryTriggerInteraction.Ignore))
+        // {
+        //     Pickupable p = hit.collider.GetComponentInParent<Pickupable>();
+        //     if(hit.collider.transform != null)
+        //     {
+        //         Debug.Log(hit.collider.transform.gameObject.name);
+        //     }
+        //     if (p == null)
+        //     {
+        //         p = hit.collider.transform.GetComponent<Pickupable>();
+        //     }
 
-            if (p != null && !p.IsHeld())
-            {
-                Debug.Log("pick up");
-                p.PickUp(holdPoint);
-                heldItem = p;
-            }
+        //     if (p != null && !p.IsHeld())
+        //     {
+        //         p.PickUp(holdPoint);
+        //         heldItem = p;
+        //     }
+        // }
+
+        if(currPickupableItem != null)
+        {
+            currPickupableItem.PickUp(holdPoint);
+            heldItem = currPickupableItem;
+            currPickupableItem.OnLoseFocus();
+            currPickupableItem = null;
         }
     }
 

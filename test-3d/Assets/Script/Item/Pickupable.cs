@@ -19,16 +19,32 @@ public class Pickupable : MonoBehaviour
     public float defaultThrowForce = 8f;
     public float extraUpwardsVelocity = 1.0f;
 
+    private Outline outline;
+
     // runtime
     Rigidbody rb;
     Transform originalParent;
     bool isHeld = false;
     Transform holder;
 
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         originalParent = transform.parent;
+
+        outline = GetComponent<Outline>();
+        outline.enabled = false;
+    }
+
+    public void OnFocus()
+    {
+        outline.enabled = true;
+    }
+
+    public void OnLoseFocus()
+    {
+        outline.enabled = false;
     }
 
     public bool IsHeld() => isHeld;

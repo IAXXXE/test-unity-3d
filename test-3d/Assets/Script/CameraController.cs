@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         Vector3 e = transform.eulerAngles;
         yaw = e.y; pitch = e.x;
 
-        Cursor.visible = true;//鼠标显示
+        Cursor.visible = true;
     }
 
     void Update()
