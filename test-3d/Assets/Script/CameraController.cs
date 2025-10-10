@@ -42,6 +42,8 @@ public class CameraController : MonoBehaviour
         playerController = player ? player.GetComponent<PlayerController>() : null;
         Vector3 e = transform.eulerAngles;
         yaw = e.y; pitch = e.x;
+
+        Cursor.visible = true;//鼠标显示
     }
 
     void Update()
