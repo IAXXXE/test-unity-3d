@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
+  m_Name: stick
+  m_EditorClassIdentifier: 
+  itemID: C0001
+  itemName: "\u6728\u679D"
+  itemType: 1
+  description: "\u6389\u843D\u5728\u5730\u4E0A\u7684\u7EC6\u5C0F\u6811\u679D"
+  icon: {fileID: 21300000, guid: bd24f49365315ce4ab078b0114790639, type: 3}
+  worldPrefab: {fileID: 9219108085878162497, guid: 8a8acd8f093866d409ed2fe64d294d1e,
+    type: 3}
+  maxStackSize: 2
+  isStackable: 1
+  buyPrice: 10
+  sellPrice: 5
+  isUsable: 1
+  healthRestore: 0
+  manaRestore: 0
+  effectDuration: 0
+  damage: 0
+  defense: 0

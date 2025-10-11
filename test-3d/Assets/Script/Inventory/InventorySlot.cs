@@ -33,14 +33,14 @@ public class InventorySlot
     {
         if (isLocked) return false;
         if (IsEmpty()) return true;
-        Debug.Log("new item id : " + newItem.itemID + " old item id : " + item.itemID);
-        if (item.itemID != newItem.itemID) return false;
-        return quantity + addQuantity <= item.maxStackSize;
+        Debug.Log("new item id : " + newItem.data.itemID + " old item id : " + item.data.itemID);
+        if (item.data.itemID != newItem.data.itemID) return false;
+        return quantity + addQuantity <= item.data.maxStackSize;
     }
     
     public int GetRemainingSpace()
     {
         if (IsEmpty()) return 0;
-        return item.maxStackSize - quantity;
+        return item.data.maxStackSize - quantity;
     }
 }

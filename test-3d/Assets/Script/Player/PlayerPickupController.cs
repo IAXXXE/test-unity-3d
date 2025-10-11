@@ -31,7 +31,6 @@ public class PlayerPickupController : MonoBehaviour
     void Start()
     {
         inputActions = transform.GetComponent<PlayerController>().GetInputActions();
-        if(inputActions == null) Debug.Log("NULL!");
         inputActions.Player.Interact.performed += ctx => TryPick();
         inputActions.Player.Throw.performed += ctx => TryThrow();
     }
@@ -84,7 +83,6 @@ public class PlayerPickupController : MonoBehaviour
     {
         if(currPickupableItem != null)
         {
-            Debug.Log("111");
             currPickupableItem.PickUp(holdPoint);
             heldItem = currPickupableItem;
             currPickupableItem.OnLoseFocus();
@@ -92,7 +90,6 @@ public class PlayerPickupController : MonoBehaviour
         }
         else if (heldItem != null)
         {
-            Debug.Log("222");
             currPickupableItem.Storage();
             currPickupableItem = null;
         }
@@ -125,8 +122,6 @@ public class PlayerPickupController : MonoBehaviour
         currentThrowMultiplier = 1f;
     }
 
-
-    // Optional: draw pick ray gizmo
     void OnDrawGizmosSelected()
     {
         if (playerCamera != null)

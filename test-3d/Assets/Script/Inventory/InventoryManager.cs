@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager Instance;
+
     private List<InventorySlot> slots;
     private int capacity = 12;
-    
+
     public InventoryManager()
     {
         slots = new List<InventorySlot>();
@@ -18,16 +20,25 @@ public class InventoryManager : MonoBehaviour
             slots.Add(new InventorySlot());
         }
     }
-    [Button]
-    public void AddA()
+
+    void Awake()
     {
-        AddItem(new ItemArrow(), 1);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    
+
     [Button]
-    public void AddS()
+    public bool AddItem(string itemId, int quantity = 1)
     {
-        AddItem(new ItemStick(), 1);
+        Debug.Log($"add {quantity} {itemId}");
+        return AddItem(ItemDatabase.Instance.CreateItem(itemId), quantity);
     }
 
     [Button]
@@ -54,7 +65,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         
-        if (quantity > item.maxStackSize)
+        if (quantity > item.data.maxStackSize)
         {
             return AddItemInMultipleSlots(item, quantity);
         }
@@ -107,7 +118,7 @@ public class InventoryManager : MonoBehaviour
         
         for (int i = slots.Count - 1; i >= 0 && remainingToRemove > 0; i--)
         {
-            if (!slots[i].IsEmpty() && slots[i].item.itemID == itemID)
+            if (!slots[i].IsEmpty() && slots[i].item.data.itemID == itemID)
             {
                 int removeAmount = Mathf.Min(remainingToRemove, slots[i].quantity);
                 slots[i].quantity -= removeAmount;
@@ -172,7 +183,7 @@ public class InventoryManager : MonoBehaviour
         int count = 0;
         foreach (var slot in slots)
         {
-            if (!slot.IsEmpty() && slot.item.itemID == itemID)
+            if (!slot.IsEmpty() && slot.item.data.itemID == itemID)
             {
                 count += slot.quantity;
             }
@@ -217,7 +228,7 @@ public class InventoryManager : MonoBehaviour
     public void UpdateSlot(Transform transform, InventorySlot slot)
     {
         var icon = transform.Find("_Icon").GetComponent<Image>();
-        if(slot.item.icon != null) icon.sprite = slot.item.icon;
+        if(slot.item.data.icon != null) icon.sprite = slot.item.data.icon;
         icon.gameObject.SetActive(true);
 
         var count = transform.Find("_Count").GetComponent<TextMeshProUGUI>();
