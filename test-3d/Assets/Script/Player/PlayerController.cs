@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
         if (lockCursor) Cursor.lockState = CursorLockMode.Locked;
         if (!cameraTransform && Camera.main) cameraTransform = Camera.main.transform;
 
-        // hook input callbacks
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
@@ -173,6 +172,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public bool IsCrouched() => isCrouched;
+
+    public PlayerInputActions GetInputActions()
+    {
+        return inputActions;
+    }
 }
 
 

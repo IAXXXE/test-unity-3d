@@ -117,6 +117,13 @@ public class Pickupable : MonoBehaviour
         holder = null;
     }
 
+    public void Storage()
+    {
+        // Inventory
+        
+        Destroy(this.gameObject);
+    }
+
     /// <summary>
     /// Convenience: calculate default throw velocity in forward dir
     /// </summary>
