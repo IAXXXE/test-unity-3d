@@ -50,7 +50,6 @@ public class InventoryManager : MonoBehaviour
         {
             if (slots[i].CanAddItem(item, quantity))
             {
-                Debug.Log("can add slot i :" + i);
                 if (slots[i].IsEmpty())
                 {
                     slots[i].item = item;

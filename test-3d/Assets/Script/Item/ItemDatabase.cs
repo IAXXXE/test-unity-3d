@@ -61,10 +61,8 @@ public class ItemDatabase : MonoBehaviour
         if (data != null)
         {
             var item = new Item(data, quantity);
-            Debug.Log("create " + itemID);
             return item;
         }
-        Debug.Log("create null");
         return null;
     }
     
