@@ -64,11 +64,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactName: Object
-  interactDistance: 3
+  interactDistance: 5
   showOutline: 1
   interactableType: 1
   cooldown: 0
-  itemId: berry
+  itemId: C0002
   minQuantity: 1
   maxQuantity: 3
   currentState: 3
@@ -171,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 9093800912462385870, guid: a0af5f6a0206e434da6a623a5b6018e3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0af5f6a0206e434da6a623a5b6018e3, type: 3}
@@ -439,6 +439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158616456106423632, guid: ddf52a5fa50c94a74b5547d866674dbf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6790334936510984170, guid: ddf52a5fa50c94a74b5547d866674dbf,
         type: 3}

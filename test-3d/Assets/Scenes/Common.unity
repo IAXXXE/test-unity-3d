@@ -1551,16 +1551,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1932693827}
     m_Modifications:
-    - target: {fileID: 7731346223598121982, guid: 8a8acd8f093866d409ed2fe64d294d1e,
-        type: 3}
-      propertyPath: itemId
-      value: C0001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7731346223598121983, guid: 8a8acd8f093866d409ed2fe64d294d1e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9219108085878162497, guid: 8a8acd8f093866d409ed2fe64d294d1e,
         type: 3}
       propertyPath: m_Name
@@ -3033,16 +3023,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1932693827}
     m_Modifications:
-    - target: {fileID: 320977024406744934, guid: c9870733d243e46d2a0e1d59e5c0d484,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3400270846200127426, guid: c9870733d243e46d2a0e1d59e5c0d484,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5837680989181529788, guid: c9870733d243e46d2a0e1d59e5c0d484,
         type: 3}
       propertyPath: m_RootOrder
@@ -3102,16 +3082,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: _BerryBushes
-      objectReference: {fileID: 0}
-    - target: {fileID: 5837680989181529794, guid: c9870733d243e46d2a0e1d59e5c0d484,
-        type: 3}
-      propertyPath: itemId
-      value: C0002
-      objectReference: {fileID: 0}
-    - target: {fileID: 5837680989181529794, guid: c9870733d243e46d2a0e1d59e5c0d484,
-        type: 3}
-      propertyPath: interactDistance
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9870733d243e46d2a0e1d59e5c0d484, type: 3}
