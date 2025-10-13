@@ -147,9 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd99bb2982200e4986dbf58a94dbafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactName: Object
+  interactName: "\u6728\u679D"
   interactDistance: 3
   showOutline: 1
+  interactableType: 0
   cooldown: 0
-  itemId: 
+  itemId: stick
   amount: 1
