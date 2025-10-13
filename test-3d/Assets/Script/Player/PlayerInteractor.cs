@@ -68,18 +68,19 @@ public class PlayerInteractor : MonoBehaviour
                 Vector3 toTarget = go.transform.position - origin;
                 int mask = LayerMask.GetMask("Default");
                 // Debug.Log("1.5 " + !Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore));
-                if (!Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore)) 
+                if (!Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore))
                 {
                     best = it;
                     bestScore = dot;
                 }
             }
         }
+        
 
         if (currentTarget != null)
         {
             var mb = currentTarget as MonoBehaviour;
-            if (mb == null || mb.gameObject == null || !mb.gameObject.activeInHierarchy)
+            if (mb == null || mb.gameObject == null || !mb.gameObject.activeInHierarchy || !currentTarget.CanInteract())
             {
                 currentTarget = null;
                 if (pickupPrompt) pickupPrompt.Hide();
@@ -100,14 +101,16 @@ public class PlayerInteractor : MonoBehaviour
                     pickupPrompt.Hide();
             }
         }
+        if (currentTarget == null && pickupPrompt.gameObject.activeSelf)
+        {
+            pickupPrompt.Hide();
+        }
     }
 
     void TryInteract()
     {
-        Debug.Log("press E");
         if (currentTarget != null)
         {
-            Debug.Log("pick");
             if (currentTarget.CanInteract())
             {
                 currentTarget.Interact(transform.GetComponent<PlayerController>());

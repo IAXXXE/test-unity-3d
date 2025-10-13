@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 5837680989181529795}
   - component: {fileID: 5837680989181529794}
   - component: {fileID: 5837680989181529793}
-  - component: {fileID: 8703098882292922153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _BerryBushes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +49,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.6, z: 1.5}
+  m_Size: {x: 1.75, y: 1.75, z: 1.75}
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &5837680989181529794
 MonoBehaviour:
@@ -67,7 +66,7 @@ MonoBehaviour:
   interactName: Object
   interactDistance: 3
   showOutline: 1
-  interactableType: 0
+  interactableType: 1
   cooldown: 0
   itemId: berry
   minQuantity: 1
@@ -97,24 +96,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &8703098882292922153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5837680989181529789}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1001 &5837680988549909772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,6 +163,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BushFull
       objectReference: {fileID: 0}
+    - target: {fileID: 9093800912462385870, guid: a0af5f6a0206e434da6a623a5b6018e3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9093800912462385870, guid: a0af5f6a0206e434da6a623a5b6018e3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0af5f6a0206e434da6a623a5b6018e3, type: 3}
 --- !u!4 &2628942185492399480 stripped
@@ -190,6 +181,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5837680988549909772}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3400270846200127426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9093800912462385870, guid: a0af5f6a0206e434da6a623a5b6018e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5837680988549909772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1157656271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400270846200127426}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &5837680989032118546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,6 +216,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BushFew
+      objectReference: {fileID: 0}
+    - target: {fileID: 526395090672219663, guid: 8b509a45b28804cdda38d5e820b37e11,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 526395090672219663, guid: 8b509a45b28804cdda38d5e820b37e11,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 866363654716959925, guid: 8b509a45b28804cdda38d5e820b37e11,
         type: 3}
@@ -259,6 +284,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b509a45b28804cdda38d5e820b37e11, type: 3}
+--- !u!1 &6218831607051685661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 526395090672219663, guid: 8b509a45b28804cdda38d5e820b37e11,
+    type: 3}
+  m_PrefabInstance: {fileID: 5837680989032118546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &475017181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218831607051685661}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &6703162508032202151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 866363654716959925, guid: 8b509a45b28804cdda38d5e820b37e11,
@@ -332,6 +381,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BushSome
       objectReference: {fileID: 0}
+    - target: {fileID: 9188525909727753138, guid: 1022e37a79a434443adc9dc1f2eb955f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188525909727753138, guid: 1022e37a79a434443adc9dc1f2eb955f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1022e37a79a434443adc9dc1f2eb955f, type: 3}
 --- !u!4 &2723684791299961935 stripped
@@ -340,6 +399,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5837680989612711239}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3352833507190714101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9188525909727753138, guid: 1022e37a79a434443adc9dc1f2eb955f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5837680989612711239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1236601917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352833507190714101}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &5837680989828700726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -351,6 +434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BushEmpty
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158616456106423632, guid: ddf52a5fa50c94a74b5547d866674dbf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6790334936510984170, guid: ddf52a5fa50c94a74b5547d866674dbf,
         type: 3}

@@ -107,9 +107,8 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     protected virtual void OnCooldownEnd() { }
 
-    public void SetHighlight(bool on)
+    public virtual void SetHighlight(bool on)
     {
-        Debug.Log("Set Highlight ");
         if (outlineComponent != null) 
             outlineComponent.enabled = on && showOutline;
         else

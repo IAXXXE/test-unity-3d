@@ -63,7 +63,6 @@ public class BerryBush : InteractableGather
 
         // 根据状态获取采集数量
         int yieldAmount = GetYieldAmount();
-        
         if (yieldAmount > 0 && itemId != null)
         {
             bool added = InventoryManager.Instance.AddItem(itemId, yieldAmount);
@@ -178,6 +177,13 @@ public class BerryBush : InteractableGather
 
         // 触发状态变化事件
         OnStateChanged();
+    }
+
+    public override void SetHighlight(bool on)
+    {
+        Debug.Log("SetHighlight Berry tree : " + (on && showOutline));
+        if(transform.GetChild((int)currentState).GetComponent<Outline>().enabled != on && showOutline)
+            transform.GetChild((int)currentState).GetComponent<Outline>().enabled = on && showOutline;
     }
 
 

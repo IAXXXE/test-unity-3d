@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleHeightAdjust();
         HandleCameraRotation();
-        UpdateAnimator(); // ✅ 更新动画
+        UpdateAnimator();
     }
 
     void HandleCameraRotation()
