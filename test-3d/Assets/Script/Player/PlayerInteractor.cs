@@ -61,12 +61,13 @@ public class PlayerInteractor : MonoBehaviour
             var go = (it as MonoBehaviour).gameObject;
             Vector3 dir = (go.transform.position - transform.position).normalized;
             float dot = Vector3.Dot(transform.forward, dir);
-
+            // Debug.Log("111 : " + "dot " + dot + " bs : " + bestScore + "Can Inter " + it.CanInteract());
             if (dot > bestScore && it.CanInteract())
             {
                 Vector3 origin = playerCamera.transform.position;
                 Vector3 toTarget = go.transform.position - origin;
-                int mask = LayerMask.GetMask("Default","Interactable");
+                int mask = LayerMask.GetMask("Default");
+                // Debug.Log("1.5 " + !Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore));
                 if (!Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore)) 
                 {
                     best = it;
@@ -103,8 +104,10 @@ public class PlayerInteractor : MonoBehaviour
 
     void TryInteract()
     {
+        Debug.Log("press E");
         if (currentTarget != null)
         {
+            Debug.Log("pick");
             if (currentTarget.CanInteract())
             {
                 currentTarget.Interact(transform.GetComponent<PlayerController>());
