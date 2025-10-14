@@ -21,7 +21,7 @@ public class PlayerInteractor : MonoBehaviour
     void Start()
     {
         inputActions = GetComponent<PlayerController>().GetInputActions();
-        inputActions.Player.Interact.performed += ctx => TryInteract();
+        inputActions.Player.Interact.started += ctx => TryInteract();
 
         if (playerCamera == null && Camera.main)
             playerCamera = Camera.main;
