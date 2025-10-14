@@ -52,11 +52,11 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
         switch (interactableType)
         {
             case InteractableType.Pickup:
-                return $"拾取 {interactName}";
+                return $"Pick {interactName}";
             case InteractableType.Gather:
-                return $"采集 {interactName}";
+                return $"Gather {interactName}";
             case InteractableType.GatherWithTool:
-                return $"使用工具采集 {interactName}";
+                return $"Gather {interactName}";
             case InteractableType.Destructible:
                 return $"破坏 {interactName}";
             case InteractableType.Liftable:

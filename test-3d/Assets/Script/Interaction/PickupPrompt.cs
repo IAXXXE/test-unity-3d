@@ -15,7 +15,7 @@ public class PickupPrompt : MonoBehaviour
     public void Show(string name)
     {
         if (root != null) root.SetActive(true);
-        if (promptText != null) promptText.text = $"[E] Pick {name}";
+        promptText.text = name;
     }
 
     public void Hide()

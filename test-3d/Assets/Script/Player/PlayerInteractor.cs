@@ -96,7 +96,7 @@ public class PlayerInteractor : MonoBehaviour
             if (pickupPrompt)
             {
                 if (currentTarget != null)
-                    pickupPrompt.Show(currentTarget.GetDisplayName());
+                    pickupPrompt.Show("[E] " + currentTarget.GetInteractText());
                 else
                     pickupPrompt.Hide();
             }
