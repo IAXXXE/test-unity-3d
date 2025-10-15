@@ -187,12 +187,14 @@ public class PlayerController : MonoBehaviour
             if(animSpeedParam <= 0.001)
             {
                 tempDogAnimator.SetFloat("Vert", 0);
-                tempDogAnimator.SetFloat("State", 0);    
+                tempDogAnimator.SetFloat("State", 0);
+
             }
             else
             {
                 tempDogAnimator.SetFloat("Vert", animSpeedParam == 0 ? 0 : 1);
                 tempDogAnimator.SetFloat("State", animSpeedParam);
+                tempDogAnimator.transform.localRotation = transform.rotation;
             }
         }
 
