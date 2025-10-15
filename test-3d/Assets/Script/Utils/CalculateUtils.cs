@@ -117,7 +117,7 @@ public static class CalculateUtils
     /// </summary>
     /// <param name="result">切割结果数据</param>
     /// <returns>0-100分的评分</returns>
-    public static float EvaluateCuttingScore(CuttingResult result)
+    public static EvaluateScore EvaluateCuttingScore(CuttingResult result)
     {
         // 1. 块数匹配度 (30% 权重)
         float pieceCountScore = EvaluatePieceCountScore(result.pieceCount, result.targetPieces);
@@ -130,8 +130,9 @@ public static class CalculateUtils
         Debug.Log("体积利用率 : " + volumeUtilizationScore);
         // 综合评分
         float totalScore = pieceCountScore * 0.3f + volumeUniformityScore * 0.4f + volumeUtilizationScore * 0.3f;
-        
-        return Mathf.Clamp(totalScore, 0f, 100f);
+
+        var score = new EvaluateScore((int)totalScore, (int)pieceCountScore, (int)volumeUniformityScore, (int)volumeUniformityScore);
+        return score;
     }
     
     /// <summary>
@@ -183,7 +184,7 @@ public static class CalculateUtils
         if (volumes.Count == 0) return 0f;
         
         float minAcceptableVolume = targetVolume * 0.3f; // 最小可接受体积为理想值的30%
-        float maxAcceptableVolume = targetVolume * 1.7f; // 最大可接受体积为理想值的1700%
+        float maxAcceptableVolume = targetVolume * 2f; // 最大可接受体积为理想值的200%
         int validPieces = 0;
         
         foreach (float volume in volumes)

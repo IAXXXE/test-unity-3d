@@ -54,7 +54,7 @@ public class ScoreManager : MonoBehaviour
         }
         var result = new CuttingResult(ObjectContainer.childCount, volumes, 7.12f / targetPieces, targetPieces);
         var score = CalculateUtils.EvaluateCuttingScore(result);
-        resultPanel.Find("_Title").GetComponent<TextMeshProUGUI>().text = "Score : " + (int)score + " ! ";
+        resultPanel.Find("_Title").GetComponent<TextMeshProUGUI>().text = "Score : " + score.totalScore + " ! ";
 
     }
 
@@ -71,7 +71,6 @@ public class ScoreManager : MonoBehaviour
         {
             var volume = CalculateUtils.GetVolume(obj) * 10000;
             volumes.Add(volume);
-            Debug.Log("v : " + volume);
         }
         return volumes;
     }
@@ -101,4 +100,15 @@ public class CuttingResult
 public class EvaluateScore
 {
     public int totalScore;
+    public int pieceCountScore;
+    public int volumeUniformityScore;
+    public int volumeUtilizationScore;
+
+    public EvaluateScore(int totalScore, int pieceCountScore, int volumeUniformityScore, int volumeUtilizationScore)
+    {
+        this.totalScore = totalScore;
+        this.pieceCountScore = pieceCountScore;
+        this.volumeUniformityScore = volumeUniformityScore;
+        this.volumeUtilizationScore = volumeUtilizationScore;
+    }
 }

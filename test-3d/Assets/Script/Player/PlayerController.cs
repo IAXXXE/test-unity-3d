@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController cc;
     private Animator animator;
 
+    public Animator tempDogAnimator;
+
     [Header("Movement")]
     public float walkSpeed = 4f;
     public float runSpeed = 7f;
@@ -179,6 +181,21 @@ public class PlayerController : MonoBehaviour
         animSpeedParam = Mathf.SmoothDamp(animSpeedParam, normalizedSpeed, ref animSpeedVelocity, animSpeedSmoothTime);
         animator.SetFloat("Speed", animSpeedParam);
         animator.SetBool("IsGrounded", IsGrounded());
+
+        if (tempDogAnimator != null)
+        {
+            if(animSpeedParam <= 0.001)
+            {
+                tempDogAnimator.SetFloat("Vert", 0);
+                tempDogAnimator.SetFloat("State", 0);    
+            }
+            else
+            {
+                tempDogAnimator.SetFloat("Vert", animSpeedParam == 0 ? 0 : 1);
+                tempDogAnimator.SetFloat("State", animSpeedParam);
+            }
+        }
+
     }
 
     public bool IsCrouched() => isCrouched;

@@ -125,8 +125,8 @@ public class ConvertStandardToURPMaterials_Extended : EditorWindow
             mat.SetFloat("_Cutoff", 0.75f);
 
             // 确保透明混合
-            mat.SetOverrideTag("RenderType", "Transparent");
-            mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            // mat.SetOverrideTag("RenderType", "Transparent");
+            // mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
 
             EditorUtility.SetDirty(mat);
             count++;
