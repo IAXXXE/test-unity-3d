@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded() && !isCrouched)
         {
             verticalVelocity = Mathf.Sqrt(2f * jumpHeight * -gravity);
-            if (animator) animator.SetTrigger("Jump"); // ✅ 可选：播放跳跃动画
+            if (animator) animator.SetTrigger("Jump"); // 跳跃动画
         }
     }
 

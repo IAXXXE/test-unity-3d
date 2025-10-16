@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 1695713611}
   - component: {fileID: 1695713610}
   m_Layer: 0
-  m_Name: _Cube
+  m_Name: _RoundCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,9 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66067710aa9b545cea454899d04ba2b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 3
-  ySize: 3
-  zSize: 3
+  xSize: 8
+  ySize: 6
+  zSize: 7
+  roundness: 2
 --- !u!23 &1695713611
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -404,7 +405,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f622697a333fae44492a499ce74fbbb9, type: 2}
+  - {fileID: 2100000, guid: f7a2c993f94fe48e6b809bbfa06decf4, type: 2}
+  - {fileID: 2100000, guid: 0b46aca12d03c436794b4b2bb30065ab, type: 2}
+  - {fileID: 2100000, guid: a43902090119f4a288667fcb936093ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
