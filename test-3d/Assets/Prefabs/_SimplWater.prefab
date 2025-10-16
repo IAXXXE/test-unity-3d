@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2996805712808430204}
+  - component: {fileID: 1134734429}
+  - component: {fileID: 1134734428}
   m_Layer: 0
   m_Name: _SimplWater
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +35,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1134734429
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996805712808430207}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.432005, y: 3.5, z: 10}
+  m_Center: {x: 3.7160025, y: 0.71, z: 4.4963207}
+--- !u!114 &1134734428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2996805712808430207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b441194bc4f754288a6c0ef87b5cee52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buoyancyScript: {fileID: 0}
 --- !u!1 &2996805713090384833
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +176,7 @@ MonoBehaviour:
   TileSize: 0.1
   ShowDebug: 1
   RealtimeUpdates: 0
-  Dimensions: {x: 1, y: 1, z: 1}
+  Dimensions: {x: 10, y: 3, z: 10}
 --- !u!1 &2996805713861632584
 GameObject:
   m_ObjectHideFlags: 0
