@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -13,7 +14,7 @@ public class CharacterBuoyancy : MonoBehaviour
     
     [Header("浮力参数")]
     [Tooltip("浮力加速度")]
-    public float buoyancyAcceleration = 5f;
+    public float buoyancyAcceleration = 20f;
     
     [Tooltip("最大上浮速度")]
     public float maxBuoyancySpeed = 3f;
@@ -63,39 +64,24 @@ public class CharacterBuoyancy : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    // void OnTriggerEnter(Collider collider)
-    // {
-    //     Debug.Log("Can Player Enter Trigger?");
-    //     if(collider.CompareTag("Water"))
-    //     {
-    //         isInWater = true;
-    //     }
-    // }
-
-    // void OnTriggerExit(Collider collider)
-    // {
-    //     if(collider.CompareTag("Water"))
-    //     {
-    //         isInWater = false;
-    //     }
-    // }
-
-    public void SetWaterData(float waterLevel, float waterDrag)
-    {
-        this.waterLevel = waterLevel;
-        this.waterDrag = waterDrag;
-    }
-
-
     void Update()
     {
-        // CheckWaterStatus();
+        CheckWaterStatus();
         ApplyWaterPhysics();
         
         if (splashTimer > 0)
         {
             splashTimer -= Time.deltaTime;
         }
+
+        UpdateInfoText();
+    }
+
+    private void UpdateInfoText()
+    {
+        var text = transform.GetComponentInChildren<TextMeshProUGUI>();
+        if(text != null) return;
+        text.text = $"In Water : {isInWater}/n";
     }
 
     void CheckWaterStatus()
@@ -123,7 +109,7 @@ public class CharacterBuoyancy : MonoBehaviour
         }
     }
 
-    public void ApplyWaterPhysics()
+    void ApplyWaterPhysics()
     {
         if (!isInWater) return;
         
@@ -240,6 +226,7 @@ public class CharacterBuoyancy : MonoBehaviour
 
     void OnEnterWater()
     {
+        Debug.Log("Enter Water");
         entryVelocity = Mathf.Abs(velocity.y);
         
         // 如果入水速度够快，启动缓冲

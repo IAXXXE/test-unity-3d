@@ -26,7 +26,9 @@ public class PlayerControllerWithWater : MonoBehaviour
     private CharacterController controller;
     private CharacterBuoyancy buoyancy;
     private float cameraPitch = 0f;
-    
+
+    private Animator m_Animator;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -35,6 +37,8 @@ public class PlayerControllerWithWater : MonoBehaviour
         // 锁定鼠标
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        m_Animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -52,6 +56,7 @@ public class PlayerControllerWithWater : MonoBehaviour
         
         // 水平旋转（旋转整个角色）
         transform.Rotate(Vector3.up * mouseX);
+        // m_Animator.transform.localRotation = transform.rotation;
         
         // 垂直旋转（只旋转相机）
         cameraPitch -= mouseY;
@@ -103,17 +108,17 @@ public class PlayerControllerWithWater : MonoBehaviour
         {
             buoyancy.ApplyGravity(gravity);
         }
-    }
 
-    void OnGUI()
-    {
-        // 简单的调试信息
-        GUILayout.BeginArea(new Rect(10, 10, 300, 150));
-        GUILayout.Label($"In Water: {buoyancy.IsInWater}");
-        GUILayout.Label($"Fully Submerged: {buoyancy.IsFullySubmerged}");
-        GUILayout.Label($"Water Depth: {buoyancy.WaterDepth:F2}");
-        GUILayout.Label($"Velocity: {buoyancy.Velocity}");
-        GUILayout.Label($"Grounded: {controller.isGrounded}");
-        GUILayout.EndArea();
+        if(currentSpeed != 0)
+        {
+            m_Animator.SetFloat("Vert", currentSpeed == 0 ? 0 : 1);
+            m_Animator.SetFloat("State", currentSpeed);
+            
+        }
+        else
+        {
+            m_Animator.SetFloat("Vert", 0);
+            m_Animator.SetFloat("State", 0);
+        }
     }
 }
