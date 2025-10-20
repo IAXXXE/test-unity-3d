@@ -66,23 +66,15 @@ public class CharacterBuoyancy : MonoBehaviour
 
     void Update()
     {
-        CheckWaterStatus();
+        // CheckWaterStatus();
         ApplyWaterPhysics();
         
         if (splashTimer > 0)
         {
             splashTimer -= Time.deltaTime;
         }
-
-        UpdateInfoText();
     }
 
-    private void UpdateInfoText()
-    {
-        var text = transform.GetComponentInChildren<TextMeshProUGUI>();
-        if(text != null) return;
-        text.text = $"In Water : {isInWater}/n";
-    }
 
     void CheckWaterStatus()
     {

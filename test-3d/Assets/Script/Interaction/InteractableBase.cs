@@ -114,6 +114,7 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
         else
         {
             outlineComponent = GetComponent<Outline>();
+            if (outlineComponent == null) return;
             outlineComponent.enabled = on && showOutline;
         }
     }

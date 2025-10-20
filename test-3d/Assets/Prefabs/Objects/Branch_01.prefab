@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3871777984858353393}
   - component: {fileID: 7731346223598121981}
   - component: {fileID: 7731346223598121983}
-  - component: {fileID: 7731346223598121982}
+  - component: {fileID: 1257341367}
   m_Layer: 6
   m_Name: Branch_01
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &7731346223598121982
+--- !u!114 &1257341367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd99bb2982200e4986dbf58a94dbafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactName: "\u6728\u679D"
+  interactName: Stick
   interactDistance: 3
   showOutline: 1
   interactableType: 0

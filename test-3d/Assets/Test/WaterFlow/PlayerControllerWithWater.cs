@@ -35,8 +35,8 @@ public class PlayerControllerWithWater : MonoBehaviour
         buoyancy = GetComponent<CharacterBuoyancy>();
         
         // 锁定鼠标
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
 
         m_Animator = GetComponent<Animator>();
     }

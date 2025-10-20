@@ -36,6 +36,7 @@ public class ItemData : ScriptableObject
 public enum ItemType
 {
     Consumable,
+    Food,
     Weapon,
     Armor,
     Material,

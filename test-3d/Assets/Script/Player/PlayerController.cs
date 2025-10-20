@@ -1,5 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum PlayerMoveState
+{
+    Idle,
+    Walk,
+    Swim,
+    Clamb,
+    Fly
+}
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -49,11 +59,37 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
 
+    [Header("Swimming")]
+    [SerializeField] private float swimUpSpeed = 3f;
+    [SerializeField] private float swimDownSpeed = 3f;
+    private CharacterBuoyancy buoyancy;
+
+    private PlayerMoveState moveState;
+
+    public bool isLocked = false;
+
     void Awake()
     {
         cc = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         inputActions = new PlayerInputActions();
+
+        buoyancy = GetComponent<CharacterBuoyancy>();
+
+        GameEventManager.OnUIShowed += OnUIShowed;
+        GameEventManager.OnUIShowed += OnUIHided;
+    }
+
+    private void OnUIShowed()
+    {
+        isLocked = true;
+        Cursor.visible = true;
+    }
+
+    private void OnUIHided()
+    {
+        isLocked = false;
+        Cursor.visible = false;
     }
 
     void OnEnable() => inputActions.Player.Enable();
@@ -78,10 +114,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(isLocked) return;
+        CheckMoveStat();
         HandleMovement();
         HandleHeightAdjust();
         HandleCameraRotation();
         UpdateAnimator();
+    }
+
+    PlayerMoveState CheckMoveStat()
+    {
+        return PlayerMoveState.Idle;
     }
 
     void HandleCameraRotation()
@@ -120,6 +163,11 @@ public class PlayerController : MonoBehaviour
             float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, rotationSmoothTime);
             transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
         }
+        switch (moveState)
+        {
+            case PlayerMoveState.Idle:
+                break;
+        }
 
         ApplyMovement(horizontalVelocity);
         ApplyGravity();
@@ -135,6 +183,10 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded())
         {
             if (verticalVelocity < 0f) verticalVelocity = -2f;
+        }
+        else if(buoyancy.IsInWater)
+        {
+
         }
         else
         {

@@ -33,7 +33,6 @@ public class InventorySlot
     {
         if (isLocked) return false;
         if (IsEmpty()) return true;
-        Debug.Log("new item id : " + newItem.data.itemID + " old item id : " + item.data.itemID);
         if (item.data.itemID != newItem.data.itemID) return false;
         return quantity + addQuantity <= item.data.maxStackSize;
     }

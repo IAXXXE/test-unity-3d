@@ -12,10 +12,11 @@ public class InteractableFunction : InteractableBase
     public override void Interact(PlayerController player)
     {
         Debug.Log("Enter Other Mode");
+        
     }
 
     public override string GetInteractText()
     {
-        return $"Cook";
+        return $"";
     }
 }

@@ -32,6 +32,8 @@ public class GameInstance : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+
     }
 
     private void Start()
