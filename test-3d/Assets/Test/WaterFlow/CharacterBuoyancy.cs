@@ -21,11 +21,9 @@ public class CharacterBuoyancy : MonoBehaviour
     
     [Tooltip("水中下沉速度（负值表示下沉）")]
     public float sinkSpeed = -1f;
-    
     [Header("水中运动")]
     [Tooltip("水中移动速度倍数")]
     public float waterMovementMultiplier = 0.5f;
-    
     [Tooltip("水中跳跃力度")]
     public float waterJumpForce = 3f;
     
@@ -41,14 +39,14 @@ public class CharacterBuoyancy : MonoBehaviour
     
     [Header("游泳检测")]
     [Tooltip("完全浸入水中的深度")]
-    public float fullSubmergeDepth = 1.5f;
+    public float fullSubmergeDepth = 1.8f;
     
     [Tooltip("脚部位置偏移（用于检测站在水底）")]
     public float footOffset = 1f;
     
     private CharacterController controller;
     private Vector3 velocity;
-    private bool isInWater = false;
+    public bool isInWater = false;
     private bool isFullySubmerged = false;
     private float splashTimer = 0f;
     private float entryVelocity = 0f;
@@ -67,6 +65,7 @@ public class CharacterBuoyancy : MonoBehaviour
     void Update()
     {
         // CheckWaterStatus();
+        if(!isInWater) return;
         ApplyWaterPhysics();
         
         if (splashTimer > 0)
@@ -89,16 +88,6 @@ public class CharacterBuoyancy : MonoBehaviour
         
         // 检查是否完全浸入
         isFullySubmerged = centerDepth > fullSubmergeDepth;
-        
-        // 入水事件
-        if (isInWater && !wasInWater)
-        {
-            OnEnterWater();
-        }
-        else if (!isInWater && wasInWater)
-        {
-            OnExitWater();
-        }
     }
 
     void ApplyWaterPhysics()
@@ -216,9 +205,8 @@ public class CharacterBuoyancy : MonoBehaviour
         }
     }
 
-    void OnEnterWater()
+    public void OnEnterWater()
     {
-        Debug.Log("Enter Water");
         entryVelocity = Mathf.Abs(velocity.y);
         
         // 如果入水速度够快，启动缓冲
@@ -228,7 +216,7 @@ public class CharacterBuoyancy : MonoBehaviour
         }
     }
 
-    void OnExitWater()
+    public void OnExitWater()
     {
         splashTimer = 0f;
         // 可以在这里添加出水的音效或粒子效果

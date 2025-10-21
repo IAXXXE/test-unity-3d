@@ -1,11 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 改进的水浮力控制器 - 支持Rigidbody
-/// 修复了物体弹出水面的问题
-/// </summary>
-[RequireComponent(typeof(Rigidbody))]
-public class BuoyancyController : MonoBehaviour
+public class WaterManager : MonoBehaviour
 {
     [Header("浮力参数")]
     [Tooltip("水面高度")]
@@ -50,24 +47,19 @@ public class BuoyancyController : MonoBehaviour
     [Tooltip("平衡力强度")]
     public float stabilizeForce = 2f;
     
-    private Rigidbody rb;
     private float defaultDrag;
     private float defaultAngularDrag;
-    private bool isInWater = false;
-    private bool wasInWater = false;
     private float splashTimer = 0f;
     private float entryVelocity = 0f;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        defaultDrag = rb.drag;
-        defaultAngularDrag = rb.angularDrag;
-    }
+    private List<Rigidbody> rbList = new();
 
     void FixedUpdate()
     {
-        ApplyBuoyancy();
+        foreach(var rb in rbList)
+        {
+            ApplyBuoyancy(rb);
+        }
         
         // 更新入水计时器
         if (splashTimer > 0)
@@ -76,7 +68,44 @@ public class BuoyancyController : MonoBehaviour
         }
     }
 
-    void ApplyBuoyancy()
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if(collider.TryGetComponent<PlayerController>(out var controller))
+        {
+            controller.isInWater = true;
+            collider.GetComponent<PlayerController>().OnEnterWater();
+            return;
+        }
+        if(collider.TryGetComponent<Rigidbody>(out var rb))
+        {
+            Debug.Log("Enter water RB");
+            rbList.Add(rb);
+            OnEnterWater(rb);
+        }
+    }
+
+    // void OnTriggerStay(Collider collider)
+    // {}
+
+    void OnTriggerExit(Collider collider)
+    {
+        if(collider.TryGetComponent<PlayerController>(out var controller))
+        {
+            controller.isInWater = false;
+            collider.GetComponent<PlayerController>().OnExitWater();
+            return;
+        }
+        if(collider.TryGetComponent<Rigidbody>(out var rb))
+        {
+            Debug.Log("Exit water RB");
+            rbList.Remove(rb);
+            // OnExitWater();
+        }
+    }
+
+
+    void ApplyBuoyancy(Rigidbody rb)
     {
         int submergedPoints = 0;
         float totalDepth = 0f;
@@ -85,7 +114,7 @@ public class BuoyancyController : MonoBehaviour
         // 遍历所有浮力点
         foreach (Vector3 point in buoyancyPoints)
         {
-            Vector3 worldPoint = transform.TransformPoint(point);
+            Vector3 worldPoint = rb.transform.TransformPoint(point);
             float depth = waterLevel - worldPoint.y;
             
             if (depth > 0)
@@ -106,10 +135,7 @@ public class BuoyancyController : MonoBehaviour
                     buoyancyMultiplier = Mathf.Lerp(0.3f, 1f, splashProgress);
                 }
                 
-                Vector3 buoyancyForceVector = Vector3.up * buoyancyForce * 
-                                               displacementMultiplier * 
-                                               waterDensity * 
-                                               buoyancyMultiplier;
+                Vector3 buoyancyForceVector = buoyancyForce * buoyancyMultiplier * displacementMultiplier * waterDensity * Vector3.up;
                 
                 rb.AddForceAtPosition(buoyancyForceVector, worldPoint, ForceMode.Force);
                 
@@ -132,67 +158,18 @@ public class BuoyancyController : MonoBehaviour
 
         bool currentlyInWater = submergedPoints > 0;
         
-        // 检测入水事件
-        if (currentlyInWater && !wasInWater)
-        {
-            OnEnterWater();
-        }
-        else if (!currentlyInWater && wasInWater)
-        {
-            OnExitWater();
-        }
-        
         // 自动平衡（防止过度翻转）
         if (currentlyInWater && autoStabilize && submergedPoints > 0)
         {
-            ApplyStabilization();
+            ApplyStabilization(rb);
         }
-        
-        // 更新阻力
-        if (currentlyInWater != isInWater)
-        {
-            isInWater = currentlyInWater;
-            
-            if (isInWater)
-            {
-                rb.drag = waterDrag;
-                rb.angularDrag = waterAngularDrag;
-            }
-            else
-            {
-                rb.drag = defaultDrag;
-                rb.angularDrag = defaultAngularDrag;
-            }
-        }
-        
-        wasInWater = currentlyInWater;
+
     }
 
-    void OnEnterWater()
-    {
-        // 记录入水速度
-        entryVelocity = Mathf.Abs(rb.velocity.y);
-        
-        // 如果入水速度超过阈值，启动缓冲
-        if (entryVelocity > splashVelocityThreshold)
-        {
-            splashTimer = splashDuration;
-            
-            // 立即施加一个向下的冲击力
-            rb.AddForce(Vector3.down * splashDownForce * (entryVelocity / splashVelocityThreshold), 
-                       ForceMode.Impulse);
-        }
-    }
-
-    void OnExitWater()
-    {
-        splashTimer = 0f;
-    }
-
-    void ApplyStabilization()
+    void ApplyStabilization(Rigidbody rb)
     {
         // 获取物体当前的倾斜角度
-        Vector3 up = transform.up;
+        Vector3 up = rb.transform.up;
         Vector3 targetUp = Vector3.up;
         
         // 计算需要的旋转力矩
@@ -200,26 +177,32 @@ public class BuoyancyController : MonoBehaviour
         rb.AddTorque(torque, ForceMode.Force);
     }
 
-    void OnDrawGizmos()
+    void OnEnterWater(Rigidbody rb)
     {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x, waterLevel, transform.position.z), 
-                           new Vector3(10f, 0.1f, 10f));
+        // 记录入水速度
+        entryVelocity = Mathf.Abs(rb.velocity.y);
         
-        if (buoyancyPoints != null)
-        {
-            foreach (Vector3 point in buoyancyPoints)
-            {
-                Vector3 worldPoint = transform.position + point;
-                
-                if (Application.isPlaying)
-                {
-                    worldPoint = transform.TransformPoint(point);
-                }
-                
-                Gizmos.color = worldPoint.y < waterLevel ? Color.blue : Color.red;
-                Gizmos.DrawSphere(worldPoint, 0.1f);
-            }
-        }
+        // 如果入水速度超过阈值，启动缓冲
+        // if (entryVelocity > splashVelocityThreshold)
+        // {
+        //     Debug.Log("Splash");
+        //     splashTimer = splashDuration;
+            
+        //     // 立即施加一个向下的冲击力
+        //     rb.AddForce(Vector3.down * splashDownForce * (entryVelocity / splashVelocityThreshold), 
+        //                ForceMode.Impulse);
+        // }
+
+        rb.drag = waterDrag;
+        rb.angularDrag = waterAngularDrag;
     }
+
+    void OnExitWater(Rigidbody rb)
+    {
+        splashTimer = 0f;
+
+        rb.drag = defaultDrag;
+        rb.angularDrag = defaultAngularDrag;
+    }
+
 }

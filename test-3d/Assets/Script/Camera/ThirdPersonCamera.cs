@@ -69,8 +69,6 @@ public class ThirdPersonCamera : MonoBehaviour
         if (!target) return;
         if(isLocked) return;
 
-        Debug.Log("isLocked : " + isLocked);
-
         HandleRotation();
         // HandleZoom();
         HandleCollision();
