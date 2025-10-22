@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum CookLevel
 {
+    None,
     Simple,
     Normal,
     Expert
@@ -13,7 +14,7 @@ public class CookPanel : MonoBehaviour
 {
     public CookLevel level = CookLevel.Simple;
 
-    private CookLevel currentLevel;
+    private CookLevel currentLevel = CookLevel.None;
 
     private int currIdx;
 
@@ -29,8 +30,6 @@ public class CookPanel : MonoBehaviour
         dishesPanel = transform.Find("_Menu/_DishesPanel");
         infoPanel = transform.Find("_Menu/_InfoPanel");
 
-        GameEventManager.OnCooked += OnCookPanelShow;
-
         gameObject.SetActive(false);
     }
 
@@ -44,18 +43,7 @@ public class CookPanel : MonoBehaviour
         GameEventManager.TriggerUIHided();
     }
 
-    void OnDestroy()
-    {
-        GameEventManager.OnCooked += OnCookPanelShow;
-    }
-
-    private void OnCookPanelShow(int kitchenType)
-    {
-        currentLevel = (CookLevel)kitchenType;
-        gameObject.SetActive(true);
-    }
-
-    private void InitPanel(CookLevel level)
+    public void InitPanel(CookLevel level)
     {
         if(currentLevel == level)
         {
@@ -65,12 +53,25 @@ public class CookPanel : MonoBehaviour
         switch(level)
         {
             case CookLevel.Simple:
-                
+                InitDishes();
                 break;
             case CookLevel.Normal:
                 break;
             case CookLevel.Expert:
                 break;
+        }
+        currentLevel = level;
+    }
+
+    void InitDishes()
+    {
+        var dishesDatabase = DishesDatabase.Instance;
+        for (int i = 0; i < dishesPanel.childCount; i++)
+        {
+            if(dishesDatabase.allDishes.Count > i)
+            {
+                dishesDictionary.Add(i, dishesDatabase.allDishes[i]);
+            }    
         }
     }
 

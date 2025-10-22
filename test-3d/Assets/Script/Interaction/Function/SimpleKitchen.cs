@@ -8,7 +8,7 @@ public class SimpleKitchen : InteractableFunction
     public override void Interact(PlayerController player)
     {
         Debug.Log("Enter Other Mode");
-        GameEventManager.TriggerCooked(0);
+        GameEventManager.TriggerCooked(CookLevel.Simple);
     }
 
     public override string GetInteractText()

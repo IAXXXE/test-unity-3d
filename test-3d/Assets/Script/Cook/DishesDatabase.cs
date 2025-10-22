@@ -42,7 +42,7 @@ public class DishesDatabase : MonoBehaviour
             }
 
         }
-        Debug.Log($"角色数据库初始化完成，共加载 {dishesDictionary.Count} 个角色");
+        Debug.Log($"菜品数据库初始化完成，共加载 {dishesDictionary.Count} 个");
     }
 
     public DishesData GetCharacterData(string id)

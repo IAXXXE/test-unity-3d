@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     public Transform cameraTransform;
-    public Transform modelTransform; // 角色模型，用于旋转
+    private Transform modelTransform;
     private Rigidbody rb;
     private CapsuleCollider capsule;
     private Animator animator;
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         capsule = GetComponent<CapsuleCollider>();
         animator = GetComponentInChildren<Animator>();
-        inputActions = new PlayerInputActions();
+        inputActions = GameInstance.Instance.inputActions;
 
         // Rigidbody setup
         rb.freezeRotation = true; // 防止物理旋转
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
         defaultDrag = rb.drag;
         defaultAngularDrag = rb.angularDrag;
 
-        // 如果没有设置模型Transform，就用自己
+        // 用自己旋转
         if (modelTransform == null)
             modelTransform = transform;
 
@@ -138,6 +139,7 @@ public class PlayerController : MonoBehaviour
         isLocked = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        animator.SetFloat("Speed", 0);
     }
 
     private void OnUIHided()
@@ -237,12 +239,17 @@ public class PlayerController : MonoBehaviour
 
     void UpdateGroundCheck()
     {
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.position + Vector3.up * 0.1f;;
         float checkRadius = capsule.radius * 0.9f;
         float checkDistance = (capsule.height * 0.5f) + groundCheckDistance;
+        Debug.Log($" chechRadius{checkRadius} checjDustance {checkDistance} ");
+
+        // isGrounded = Physics.SphereCast(origin, checkRadius, Vector3.down, 
+        //     out RaycastHit hit, checkDistance, groundMask);
         
-        isGrounded = Physics.SphereCast(origin, checkRadius, Vector3.down, 
-            out RaycastHit hit, checkDistance, groundMask);
+        isGrounded = Physics.CheckSphere(origin, checkRadius, groundMask);
+
+        Debug.Log("isGroud : " + isGrounded);
     }
 
     void UpdateWaterStatus()
@@ -384,7 +391,6 @@ public class PlayerController : MonoBehaviour
 
     void ApplyBuoyancy()
     {
-        Debug.Log("Player ApplyBuoyancy");
         // Calculate submersion ratio
         float submersionRatio = Mathf.Clamp01((waterLevel - (transform.position.y - capsule.height * 0.5f)) / capsule.height);
         
@@ -409,6 +415,7 @@ public class PlayerController : MonoBehaviour
 
     void TryJump()
     {
+        Debug.Log("Jump");
         if (isInWater)
         {
             // Swim up impulse
@@ -417,6 +424,7 @@ public class PlayerController : MonoBehaviour
         else if (isGrounded && !isCrouched)
         {
             // Ground jump
+            Debug.Log("Jump");
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
             
             if (animator)

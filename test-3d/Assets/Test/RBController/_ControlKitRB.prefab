@@ -611,6 +611,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3937475146385789565, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4086386007955630631, guid: efc8b08f14d334259b52b2e8de49f1c5,
         type: 3}
       propertyPath: m_Layer
@@ -635,6 +640,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944575653932802701, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944575653932802701, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5484869440984691270, guid: efc8b08f14d334259b52b2e8de49f1c5,
         type: 3}
@@ -758,6 +773,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6914988913484132017, guid: efc8b08f14d334259b52b2e8de49f1c5,
         type: 3}
+      propertyPath: buoyancyForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6914988913484132017, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
+      propertyPath: modelTransform
+      value: 
+      objectReference: {fileID: 5974140987492493239}
+    - target: {fileID: 6914988913484132017, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 762279497272728397}
@@ -816,14 +841,40 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6914988913484132018, guid: efc8b08f14d334259b52b2e8de49f1c5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: efc8b08f14d334259b52b2e8de49f1c5, type: 3}
+--- !u!136 &5623448327307682817 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 4944575653932802701, guid: efc8b08f14d334259b52b2e8de49f1c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 762279495154910860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5974140987492493239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6376042343913660731, guid: efc8b08f14d334259b52b2e8de49f1c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 762279495154910860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6152709761926801443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6914988913484132015, guid: efc8b08f14d334259b52b2e8de49f1c5,
     type: 3}
   m_PrefabInstance: {fileID: 762279495154910860}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2087204588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152709761926801443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
 --- !u!114 &1132198548291792742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,41 +890,11 @@ MonoBehaviour:
   thickness: 0
   material: {fileID: 11400000, guid: d368f2c47473d4bfb8dd9f08073cb403, type: 2}
   filter: -65535
-  m_SourceCollider: {fileID: 6152709761926801470}
+  m_SourceCollider: {fileID: 5623448327307682817}
   m_DistanceField: {fileID: 0}
---- !u!114 &1132198548291792747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6152709761926801443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66163bd36e5ad4919b8d2831118bbcd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterLevel: 0
-  buoyancyAcceleration: 20
-  maxBuoyancySpeed: 3
-  sinkSpeed: -1
-  waterMovementMultiplier: 0.5
-  waterJumpForce: 3
-  waterDrag: 0.9
-  splashDuration: 0.3
-  splashThreshold: 5
-  fullSubmergeDepth: 1.5
-  footOffset: 1
-  isInWater: 0
 --- !u!4 &6152709761926801468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6914988913484132016, guid: efc8b08f14d334259b52b2e8de49f1c5,
-    type: 3}
-  m_PrefabInstance: {fileID: 762279495154910860}
-  m_PrefabAsset: {fileID: 0}
---- !u!143 &6152709761926801470 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 6914988913484132018, guid: efc8b08f14d334259b52b2e8de49f1c5,
     type: 3}
   m_PrefabInstance: {fileID: 762279495154910860}
   m_PrefabAsset: {fileID: 0}
