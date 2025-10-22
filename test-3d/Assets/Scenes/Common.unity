@@ -2666,7 +2666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &162027286
 Transform:
   m_ObjectHideFlags: 0
@@ -16302,6 +16302,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: _ControlKitRB
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337126837584188657, guid: aa9a522a2d9ce4757af2e22e976bbbfd,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 5146633594069116463, guid: aa9a522a2d9ce4757af2e22e976bbbfd,
         type: 3}
