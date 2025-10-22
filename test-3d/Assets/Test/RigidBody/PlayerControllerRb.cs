@@ -242,14 +242,9 @@ public class PlayerController : MonoBehaviour
         Vector3 origin = transform.position + Vector3.up * 0.1f;;
         float checkRadius = capsule.radius * 0.9f;
         float checkDistance = (capsule.height * 0.5f) + groundCheckDistance;
-        Debug.Log($" chechRadius{checkRadius} checjDustance {checkDistance} ");
-
         // isGrounded = Physics.SphereCast(origin, checkRadius, Vector3.down, 
         //     out RaycastHit hit, checkDistance, groundMask);
-        
         isGrounded = Physics.CheckSphere(origin, checkRadius, groundMask);
-
-        Debug.Log("isGroud : " + isGrounded);
     }
 
     void UpdateWaterStatus()

@@ -128,9 +128,10 @@ public class InventoryManager : MonoBehaviour
                     slots[i].item = null;
                     slots[i].quantity = 0;
                 }
+                UpdateSlot(transform.GetChild(i), slots[i]);
             }
         }
-        
+        // RefreshUI();
         return remainingToRemove == 0;
     }
     
@@ -227,6 +228,7 @@ public class InventoryManager : MonoBehaviour
     public void UpdateSlot(Transform transform, InventorySlot slot)
     {
         var icon = transform.Find("_Icon").GetComponent<Image>();
+        if(slot.item == null) return;
         if(slot.item.data.icon != null) icon.sprite = slot.item.data.icon;
         icon.gameObject.SetActive(true);
 

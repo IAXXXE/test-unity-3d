@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d528585d69041298f661905f45ea0b, type: 3}
-  m_Name: berry salad
+  m_Name: vegetable salad
   m_EditorClassIdentifier: 
   cookType: 0
-  id: C0003
-  icon: {fileID: 21300000, guid: 7b3876a2b72c44540a4bbd5aaba9e506, type: 3}
+  id: C0006
+  icon: {fileID: 21300000, guid: f65023889763c7644b5579f0b019da6b, type: 3}
   ingredients:
     m_keys:
-    - C0002
-    m_values: 03000000
+    - C0004
+    - C0005
+    m_values: 0200000002000000
   foodTargetHeat:
     m_keys: []
     m_values: 

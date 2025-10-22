@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
+  m_Name: green vegetable
+  m_EditorClassIdentifier: 
+  itemID: C0005
+  itemName: berry
+  itemType: 0
+  description: 
+  icon: {fileID: 21300000, guid: c1d0e6764d9c5f8458571840fb1d57d3, type: 3}
+  worldPrefab: {fileID: 6867374521560637746, guid: 44833306339e2d54689bd67eae339ee9,
+    type: 3}
+  maxStackSize: 20
+  isStackable: 1
+  buyPrice: 10
+  sellPrice: 5
+  isUsable: 1
+  healthRestore: 0
+  manaRestore: 0
+  effectDuration: 0
+  damage: 0
+  defense: 0
