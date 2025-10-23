@@ -9,11 +9,11 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
     public bool showOutline = true;
     public InteractableType interactableType;
 
-    [Header("Cooldown")]
-    public float cooldown = 0f;
+    // [Header("Cooldown")]
+    // public float cooldown = 0f;
+    // protected bool isOnCooldown = false;
+    // protected float cooldownTimer = 0f;
 
-    protected bool isOnCooldown = false;
-    protected float cooldownTimer = 0f;
     protected Outline outlineComponent;
 
     protected virtual void Start()
@@ -28,21 +28,21 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     protected virtual void Update()
     {
-        if (isOnCooldown)
-        {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0)
-            {
-                isOnCooldown = false;
-                OnCooldownEnd();
-            }
-        }
+        // if (isOnCooldown)
+        // {
+        //     cooldownTimer -= Time.deltaTime;
+        //     if (cooldownTimer <= 0)
+        //     {
+        //         isOnCooldown = false;
+        //         OnCooldownEnd();
+        //     }
+        // }
     }
 
     public virtual string GetInteractText()
     {
-        if (isOnCooldown) 
-            return $"{interactName}（冷却中）";
+        // if (isOnCooldown) 
+        //     return $"{interactName}（冷却中）";
 
         return GetInteractTextByType();
     }
@@ -78,7 +78,8 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     public virtual bool CanInteract()
     {
-        return !isOnCooldown && CheckSpecificRequirements();
+        // return !isOnCooldown && CheckSpecificRequirements();
+        return CheckSpecificRequirements();
     }
 
     protected virtual bool CheckSpecificRequirements()
@@ -98,11 +99,11 @@ public abstract class InteractableBase : MonoBehaviour, IInteractable
 
     protected void StartCooldown()
     {
-        if (cooldown > 0)
-        {
-            isOnCooldown = true;
-            cooldownTimer = cooldown;
-        }
+        // if (cooldown > 0)
+        // {
+        //     isOnCooldown = true;
+        //     cooldownTimer = cooldown;
+        // }
     }
 
     protected virtual void OnCooldownEnd() { }

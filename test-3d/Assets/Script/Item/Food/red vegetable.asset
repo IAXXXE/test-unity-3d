@@ -17,8 +17,10 @@ MonoBehaviour:
   itemType: 0
   description: 
   icon: {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}
-  worldPrefab: {fileID: 40507044379834317, guid: ec25adbf727ce4b668156cace5c842b3,
+  worldPrefab: {fileID: 5028759993301923343, guid: da4e1f3e08946466c9e6932315f507d4,
     type: 3}
+  posOffset: {x: 0, y: 0, z: 0}
+  rotOffset: {x: 0, y: 0, z: 0}
   maxStackSize: 20
   isStackable: 1
   buyPrice: 10

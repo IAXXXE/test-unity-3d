@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
     private List<InventorySlot> slots;
     private int capacity = 12;
 
+    private int selectSlotIdx = 0;
+
     public InventoryManager()
     {
         slots = new List<InventorySlot>();
@@ -32,6 +34,8 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
     }
 
     [Button]
@@ -59,7 +63,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     slots[i].quantity += quantity;
                 }
-                UpdateSlot(transform.GetChild(i), slots[i]);
+                UpdateSlot(i);
                 return true;
             }
         }
@@ -128,7 +132,7 @@ public class InventoryManager : MonoBehaviour
                     slots[i].item = null;
                     slots[i].quantity = 0;
                 }
-                UpdateSlot(transform.GetChild(i), slots[i]);
+                UpdateSlot(i);
             }
         }
         // RefreshUI();
@@ -220,21 +224,30 @@ public class InventoryManager : MonoBehaviour
         {
             var slotTransform = transform.GetChild(idx);
             if(slot.IsEmpty()) ClearSlot(slotTransform);
-            else UpdateSlot(slotTransform, slot);
+            else UpdateSlot(idx);
             idx++;
         }
     }
 
-    public void UpdateSlot(Transform transform, InventorySlot slot)
+    public void UpdateSlot(int idx)
     {
-        var icon = transform.Find("_Icon").GetComponent<Image>();
+        Transform slotTransform = transform.GetChild(idx);
+        InventorySlot slot = slots[idx];
+
+        var icon = slotTransform.Find("_Icon").GetComponent<Image>();
         if(slot.item == null) return;
         if(slot.item.data.icon != null) icon.sprite = slot.item.data.icon;
         icon.gameObject.SetActive(true);
 
-        var count = transform.Find("_Count").GetComponent<TextMeshProUGUI>();
+        var count = slotTransform.Find("_Count").GetComponent<TextMeshProUGUI>();
         count.text = slot.quantity.ToString();
         count.gameObject.SetActive(true);
+
+        if(idx == selectSlotIdx)
+        {
+            Debug.Log("Hold " + slot.item.data.name);
+            GameEventManager.TriggerItemHeld(slot.item.data);
+        }
     }
 
     public void ClearSlot(Transform transform)

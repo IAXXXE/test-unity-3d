@@ -92,10 +92,10 @@ public class BerryBush : InteractableGather
     public override string GetInteractText()
     {
         if (currentState == BerryBushState.NoBerries)
-            return $"{interactName}（没有浆果）";
+            return $"{interactName}（Empty）";
         
         int yieldAmount = GetYieldAmount();
-        return $"采集 {interactName}（可获得 {yieldAmount} 个 {itemId}）";
+        return $"Picking {interactName}（Get {itemId} * {yieldAmount}）";
     }
 
     public override bool CanInteract()

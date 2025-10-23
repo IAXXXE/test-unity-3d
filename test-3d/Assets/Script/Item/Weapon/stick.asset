@@ -17,8 +17,11 @@ MonoBehaviour:
   itemType: 1
   description: "\u6389\u843D\u5728\u5730\u4E0A\u7684\u7EC6\u5C0F\u6811\u679D"
   icon: {fileID: 21300000, guid: bd24f49365315ce4ab078b0114790639, type: 3}
-  worldPrefab: {fileID: 9219108085878162497, guid: 8a8acd8f093866d409ed2fe64d294d1e,
+  worldPrefab: {fileID: 2179000495541555841, guid: 2d66e8d9f8c4246fb807c650e4034534,
     type: 3}
+  posOffset: {x: 0, y: 0, z: 0}
+  rotOffset: {x: 0, y: 0, z: 0}
+  scale: {x: 0, y: 0, z: 0}
   maxStackSize: 2
   isStackable: 1
   buyPrice: 10

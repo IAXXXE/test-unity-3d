@@ -13,7 +13,11 @@ public class ItemData : ScriptableObject
     [Header("显示设置")]
     public Sprite icon;
     public GameObject worldPrefab;
-    
+    [Header("持有时显示偏移设置")]
+    public Vector3 posOffset;
+    public Vector3 rotOffset;
+    public Vector3 scale;
+
     [Header("堆叠设置")]
     public int maxStackSize = 20;
     public bool isStackable = true;

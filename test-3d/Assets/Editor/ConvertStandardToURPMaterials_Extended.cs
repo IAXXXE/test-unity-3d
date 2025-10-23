@@ -118,15 +118,32 @@ public class ConvertStandardToURPMaterials_Extended : EditorWindow
                 mat.EnableKeyword("_EMISSION");
             }
 
-            // Surface 设置
-            mat.SetFloat("_Surface", 1f); // Transparent
-            mat.SetFloat("_Cull", 0f);    // Both
-            mat.SetFloat("_AlphaClip", 1f);
-            mat.SetFloat("_Cutoff", 0.75f);
+            // Surface 设置（根据原Shader _Mode 决定）
+            float mode = mat.HasProperty("_Mode") ? mat.GetFloat("_Mode") : 0f;
 
-            // 确保透明混合
-            // mat.SetOverrideTag("RenderType", "Transparent");
-            // mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            if (mode == 0f) // Opaque
+            {
+                mat.SetFloat("_Surface", 0f);
+                mat.SetOverrideTag("RenderType", "Opaque");
+                mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
+                mat.SetFloat("_AlphaClip", 0f);
+            }
+            else if (mode == 1f) // Cutout
+            {
+                mat.SetFloat("_Surface", 0f);
+                mat.SetOverrideTag("RenderType", "TransparentCutout");
+                mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.AlphaTest;
+                mat.SetFloat("_AlphaClip", 1f);
+                mat.SetFloat("_Cutoff", 0.75f);
+            }
+            else if (mode == 2f || mode == 3f) // Fade or Transparent
+            {
+                mat.SetFloat("_Surface", 1f);
+                mat.SetOverrideTag("RenderType", "Transparent");
+                mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+                mat.SetFloat("_AlphaClip", 0f);
+            }
+            mat.SetFloat("_Cull", 0f); // 0 = Both, 1 = Front, 2 = Back
 
             EditorUtility.SetDirty(mat);
             count++;
