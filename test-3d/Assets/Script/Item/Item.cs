@@ -4,18 +4,16 @@ using UnityEngine;
 public class Item
 {
     public ItemData data;
-    public int quantity;
     public string instanceID;
 
     // 构造函数
-    public Item(ItemData data, int quantity = 1)
+    public Item(ItemData data)
     {
         this.data = data;
-        this.quantity = quantity;
         this.instanceID = System.Guid.NewGuid().ToString();
     }
 
-    #region 使用逻辑
+    // #region 使用逻辑
 
     /// <summary>
     /// 使用物品
@@ -26,12 +24,6 @@ public class Item
         if (data == null)
         {
             Debug.LogWarning("物品数据为空！");
-            return false;
-        }
-
-        if (quantity <= 0)
-        {
-            Debug.LogWarning("物品数量不足！");
             return false;
         }
 
@@ -46,13 +38,12 @@ public class Item
 
         switch (data.itemType)
         {
-            case ItemType.Consumable:
-                useSuccess = UseAsConsumable();
+            case ItemType.Food:
+                Debug.Log("Eat " + data.name);
                 break;
 
-            // case ItemType.Weapon:
-            //     useSuccess = UseAsWeapon();
-            //     break;
+            case ItemType.Weapon:
+                break;
 
             // case ItemType.Armor:
             //     useSuccess = UseAsArmor();
@@ -77,27 +68,20 @@ public class Item
                 break;
         }
 
-        // 如果使用成功且是消耗品，减少数量
-        if (useSuccess && data.itemType == ItemType.Consumable)
-        {
-            quantity--;
-            Debug.Log($"使用消耗品成功，剩余数量: {quantity}");
-        }
-
         return useSuccess;
     }
 
     /// <summary>
     /// 作为消耗品使用
     /// </summary>
-    protected virtual bool UseAsConsumable()
-    {
-        if (data.healthRestore <= 0 && data.manaRestore <= 0)
-        {
-            Debug.LogWarning($"消耗品 {data.itemName} 没有设置恢复效果！");
-            return false;
-        }
-        return true;
+    // protected virtual bool UseAsConsumable()
+    // {
+    //     if (data.healthRestore <= 0 && data.manaRestore <= 0)
+    //     {
+    //         Debug.LogWarning($"消耗品 {data.itemName} 没有设置恢复效果！");
+    //         return false;
+    //     }
+    //     return true;
 
         // 获取玩家状态
         // PlayerStats player = FindPlayer();
@@ -132,27 +116,16 @@ public class Item
         // }
 
         // return effectApplied;
-    }
+    // }
 
-    // /// <summary>
-    // /// 作为武器使用（装备）
-    // /// </summary>
+    /// <summary>
+    /// 作为武器使用（装备）
+    /// </summary>
     // protected virtual bool UseAsWeapon()
     // {
-    //     EquipmentManager equipmentManager = FindEquipmentManager();
-    //     if (equipmentManager == null)
-    //     {
-    //         Debug.LogWarning("未找到装备管理器！");
-    //         return false;
-    //     }
+    //     Debug.Log($"装备武器: {data.itemName}, 伤害: {data.damage}");
 
-    //     bool equipped = equipmentManager.EquipWeapon(this);
-    //     if (equipped)
-    //     {
-    //         Debug.Log($"装备武器: {data.itemName}, 伤害: {data.damage}");
-    //     }
-
-    //     return equipped;
+    //     return true;
     // }
 
     // /// <summary>
@@ -211,7 +184,7 @@ public class Item
     //     // player.StartCoroutine(ApplyEffectOverTime(player));
     // }
 
-    #endregion
+    // #endregion
 
     // #region 辅助方法
 
@@ -241,58 +214,58 @@ public class Item
 
     // #endregion
 
-    #region 物品管理方法
+    // #region 物品管理方法
 
-    public bool IsStackable()
-    {
-        return data != null && data.isStackable;
-    }
+    // public bool IsStackable()
+    // {
+    //     return data != null && data.isStackable;
+    // }
 
-    public bool CanStackWith(Item other)
-    {
-        if (data == null || other.data == null) return false;
-        return data.itemID == other.data.itemID && IsStackable();
-    }
+    // public bool CanStackWith(Item other)
+    // {
+    //     if (data == null || other.data == null) return false;
+    //     return data.itemID == other.data.itemID && IsStackable();
+    // }
 
-    public int GetRemainingStackSpace()
-    {
-        if (data == null) return 0;
-        return data.maxStackSize - quantity;
-    }
+    // public int GetRemainingStackSpace()
+    // {
+    //     if (data == null) return 0;
+    //     return data.maxStackSize - quantity;
+    // }
 
-    public Item Split(int splitQuantity)
-    {
-        if (quantity <= splitQuantity || splitQuantity <= 0) return null;
+    // public Item Split(int splitQuantity)
+    // {
+    //     if (quantity <= splitQuantity || splitQuantity <= 0) return null;
 
-        quantity -= splitQuantity;
-        return new Item(data, splitQuantity);
-    }
+    //     quantity -= splitQuantity;
+    //     return new Item(data, splitQuantity);
+    // }
 
-    public void Merge(Item other)
-    {
-        if (!CanStackWith(other)) return;
+    // public void Merge(Item other)
+    // {
+    //     if (!CanStackWith(other)) return;
 
-        int total = quantity + other.quantity;
-        int maxStack = data.maxStackSize;
+    //     int total = quantity + other.quantity;
+    //     int maxStack = data.maxStackSize;
 
-        if (total <= maxStack)
-        {
-            quantity = total;
-            other.quantity = 0;
-        }
-        else
-        {
-            quantity = maxStack;
-            other.quantity = total - maxStack;
-        }
-    }
+    //     if (total <= maxStack)
+    //     {
+    //         quantity = total;
+    //         other.quantity = 0;
+    //     }
+    //     else
+    //     {
+    //         quantity = maxStack;
+    //         other.quantity = total - maxStack;
+    //     }
+    // }
 
-    public string GetInfo()
-    {
-        if (data == null) return "无效物品";
+    // public string GetInfo()
+    // {
+    //     if (data == null) return "无效物品";
 
-        return $"{data.itemName} x{quantity}\n{data.description}";
-    }
+    //     return $"{data.itemName} x{quantity}\n{data.description}";
+    // }
 
-    #endregion
+    // #endregion
 }

@@ -27,6 +27,8 @@ MonoBehaviour:
   buyPrice: 10
   sellPrice: 5
   isUsable: 1
+  isConsumable: 0
+  useTime: 0
   healthRestore: 0
   manaRestore: 0
   effectDuration: 0

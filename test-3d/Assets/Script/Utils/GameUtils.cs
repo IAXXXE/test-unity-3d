@@ -25,5 +25,8 @@ public class GameUtils : MonoBehaviour
         }
     }
 
+
+    // Quaternion.Euler(Vector3)
+
 }
 

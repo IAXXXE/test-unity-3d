@@ -40,13 +40,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6914988913484132016}
-  - component: {fileID: 6914988913484132017}
+  - component: {fileID: 4256521885968268380}
   - component: {fileID: 6914988913484132019}
   - component: {fileID: 3937475146385789565}
   - component: {fileID: 4944575653932802701}
   - component: {fileID: 2087204588}
   - component: {fileID: 1132198548291792742}
   - component: {fileID: 3724371351127685809}
+  - component: {fileID: 6536859905764176270}
   m_Layer: 7
   m_Name: _Player
   m_TagString: Player
@@ -70,7 +71,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6914988913484132017
+--- !u!114 &4256521885968268380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,18 +80,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6914988913484132015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc9dc474612f4adfa98c8a1aa0bb5b6, type: 3}
+  m_Script: {fileID: 11500000, guid: d13ed8577f9ce493f9aeee2ab7077049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
-  walkSpeed: 5
-  runSpeed: 8
-  crouchSpeed: 3
-  swimSpeed: 4
-  swimAccSpeed: 6
-  moveAcceleration: 20
-  rotationSpeed: 10
-  airControlMultiplier: 0.3
   jumpForce: 8
   gravityMultiplier: 2
   maxFallSpeed: 20
@@ -98,11 +91,11 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  standingHeight: 1.5
+  standingHeight: 1.8
   crouchHeight: 1
   crouchTransitionSpeed: 10
   waterLevel: 0
-  buoyancyForce: 10
+  buoyancyForce: 15
   waterDrag: 3
   waterAngularDrag: 1
   swimUpForce: 3
@@ -209,6 +202,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17720ce6ff28e484d879550f867def35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HandL: {fileID: 0}
+  HandR: {fileID: 0}
+--- !u!114 &6536859905764176270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6914988913484132015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e870879f696a46f991796db68372b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeThreshold: 0.8
+  maxChargeTime: 2
+  weapon: {fileID: 3724371351127685809}
+  playerUI: {fileID: 0}
 --- !u!1 &6914988914022421588
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,17 +9,17 @@ public class PickupPrompt : MonoBehaviour
 
     void Awake()
     {
-        if (root != null) root.SetActive(false);
+        
     }
 
     public void Show(string name)
     {
-        if (root != null) root.SetActive(true);
         promptText.text = name;
+        gameObject.SetActive(true);
     }
 
     public void Hide()
     {
-        if (root != null) root.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

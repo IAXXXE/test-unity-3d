@@ -60,7 +60,7 @@ public class ItemDatabase : MonoBehaviour
         ItemData data = GetItemData(itemID);
         if (data != null)
         {
-            var item = new Item(data, quantity);
+            var item = new Item(data);
             return item;
         }
         return null;

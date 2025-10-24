@@ -38,6 +38,36 @@ public class InventoryManager : MonoBehaviour
         transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1)) UpdateSelectIdx(0);
+        else if(Input.GetKeyDown(KeyCode.Alpha2)) UpdateSelectIdx(1);
+        else if(Input.GetKeyDown(KeyCode.Alpha3)) UpdateSelectIdx(2);
+        else if(Input.GetKeyDown(KeyCode.Alpha4)) UpdateSelectIdx(3);
+        else if(Input.GetKeyDown(KeyCode.Alpha5)) UpdateSelectIdx(4);
+        else if(Input.GetKeyDown(KeyCode.Alpha6)) UpdateSelectIdx(5);
+        else if(Input.GetKeyDown(KeyCode.Alpha7)) UpdateSelectIdx(6);
+        else if(Input.GetKeyDown(KeyCode.Alpha8)) UpdateSelectIdx(7);
+        else if(Input.GetKeyDown(KeyCode.Alpha9)) UpdateSelectIdx(8);
+        else if(Input.GetKeyDown(KeyCode.Alpha0)) UpdateSelectIdx(9);
+        else if(Input.GetKeyDown(KeyCode.Minus)) UpdateSelectIdx(10);
+        else if(Input.GetKeyDown(KeyCode.Equals)) UpdateSelectIdx(11);
+
+    }
+
+    void UpdateSelectIdx(int idx)
+    {
+        if(selectSlotIdx == idx) return;
+        transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(false);
+        selectSlotIdx = idx;
+        transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
+
+        var item = slots[selectSlotIdx].item;
+        
+        GameEventManager.TriggerItemHeld(item);
+        
+    }
+
     [Button]
     public bool AddItem(string itemId, int quantity = 1)
     {
@@ -49,7 +79,6 @@ public class InventoryManager : MonoBehaviour
     public bool AddItem(Item item, int quantity = 1)
     {
         if (item == null || quantity <= 0) return false;
-        
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].CanAddItem(item, quantity))
@@ -235,7 +264,6 @@ public class InventoryManager : MonoBehaviour
         InventorySlot slot = slots[idx];
 
         var icon = slotTransform.Find("_Icon").GetComponent<Image>();
-        if(slot.item == null) return;
         if(slot.item.data.icon != null) icon.sprite = slot.item.data.icon;
         icon.gameObject.SetActive(true);
 
@@ -246,7 +274,7 @@ public class InventoryManager : MonoBehaviour
         if(idx == selectSlotIdx)
         {
             Debug.Log("Hold " + slot.item.data.name);
-            GameEventManager.TriggerItemHeld(slot.item.data);
+            GameEventManager.TriggerItemHeld(slot.item);
         }
     }
 

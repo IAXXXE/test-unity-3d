@@ -19,13 +19,16 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c1d0e6764d9c5f8458571840fb1d57d3, type: 3}
   worldPrefab: {fileID: 4492821927860754639, guid: 25d39e1fcf283424f876cf5bb56ca1d0,
     type: 3}
-  posOffset: {x: 0, y: 0, z: 0}
-  rotOffset: {x: 0, y: 0, z: 0}
+  posOffset: {x: 0, y: -0.2, z: 0}
+  rotOffset: {x: 90, y: 0, z: 0}
+  scale: {x: 0, y: 0, z: 0}
   maxStackSize: 20
   isStackable: 1
   buyPrice: 10
   sellPrice: 5
   isUsable: 1
+  isConsumable: 1
+  useTime: 0.5
   healthRestore: 0
   manaRestore: 0
   effectDuration: 0

@@ -21,11 +21,14 @@ MonoBehaviour:
     type: 3}
   posOffset: {x: 0, y: -0.2, z: 0}
   rotOffset: {x: 90, y: 0, z: 0}
+  scale: {x: 0, y: 0, z: 0}
   maxStackSize: 20
   isStackable: 1
   buyPrice: 10
   sellPrice: 5
   isUsable: 1
+  isConsumable: 1
+  useTime: 1
   healthRestore: 0
   manaRestore: 0
   effectDuration: 0

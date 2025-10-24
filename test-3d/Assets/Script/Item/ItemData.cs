@@ -28,6 +28,8 @@ public class ItemData : ScriptableObject
     
     [Header("使用设置")]
     public bool isUsable = true;
+    public bool isConsumable = true;
+    public float useTime = 0f;
     
     [Header("效果数值")]
     public float healthRestore = 0f;
@@ -39,7 +41,6 @@ public class ItemData : ScriptableObject
 
 public enum ItemType
 {
-    Consumable,
     Food,
     Weapon,
     Armor,
