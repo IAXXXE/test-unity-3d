@@ -44,7 +44,6 @@ public class GameInstance : MonoBehaviour
         // #endif
 
         Apply1080P();
-        
     }
 
     public void Apply1080P() => Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
@@ -52,13 +51,11 @@ public class GameInstance : MonoBehaviour
     #region Gameplay
     // public PlayerStat PlayerStat { get; private set; }
     public PlayerInputActions inputActions;
-    public GameUtils Utils{ get; set; }
     // public InventoryManager Inventory { get; set; }
 
     public void Init()
     {
         inputActions = new PlayerInputActions();
-        Utils = transform.GetComponent<GameUtils>();
         // Inventory = transform.parent.Find("UI_Canvas/MN_Inventory").GetComponent<InventoryManager>();
     }
 

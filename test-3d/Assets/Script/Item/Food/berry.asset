@@ -19,7 +19,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}
   worldPrefab: {fileID: 2529699445592373398, guid: a6818fe8ecb744bfbbbe013590ea8d56,
     type: 3}
-  posOffset: {x: 0, y: -0.2, z: 0}
+  posOffset: {x: 0, y: 0, z: 0}
   rotOffset: {x: 90, y: 0, z: 0}
   scale: {x: 0, y: 0, z: 0}
   maxStackSize: 20

@@ -40,6 +40,7 @@ public class Item
         {
             case ItemType.Food:
                 Debug.Log("Eat " + data.name);
+                useSuccess = true;
                 break;
 
             case ItemType.Weapon:

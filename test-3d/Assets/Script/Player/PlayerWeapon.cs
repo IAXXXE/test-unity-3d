@@ -17,8 +17,8 @@ public class PlayerWeapon : MonoBehaviour
     private void HoldItem(Item item)
     {
         if(heldItemR == item) return;
-        heldItemR = item;
         ClearItem();
+        heldItemR = item;
         if(item == null) return;
 
         var itemGameObject = Instantiate(item.data.worldPrefab, HandR);
@@ -29,7 +29,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public void ClearItem()
     {
-        if(HandR.childCount != 0) GameInstance.Instance.Utils.ClearChildren(HandR);
+        if(HandR.childCount != 0) GameUtils.Instance.ClearChildren(HandR);
         heldItemR = null;
     }
 
@@ -54,8 +54,11 @@ public class PlayerWeapon : MonoBehaviour
     public void UseItem()
     {
         Debug.Log("Use item");
-        heldItemR?.Use();
-        if(heldItemR.data.isConsumable) GameEventManager.TriggerHeldItemConsumed();
+        var isUsed = heldItemR.Use();
+        if(isUsed && heldItemR.data.isConsumable)
+        {
+            GameEventManager.TriggerHeldItemConsumed();
+        }
     }
 
     public void WaveItem()

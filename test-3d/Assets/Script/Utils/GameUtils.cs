@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class GameUtils : MonoBehaviour
 {
+    protected static GameUtils instance;
+    public static GameUtils Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject obj = new GameObject();
+                obj.name = "SS_GameUtils";
+                instance = obj.AddComponent<GameUtils>();
+            }
+            return instance;
+        }
+    }
+
     public void ClearChildren(Transform parent)
     {
         if (parent == null) return;
@@ -24,7 +39,6 @@ public class GameUtils : MonoBehaviour
             }
         }
     }
-
 
     // Quaternion.Euler(Vector3)
 

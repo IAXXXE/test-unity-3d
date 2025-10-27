@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
     private float chargeTimer;
 
     private bool isUsing = false;
+    private bool isLocked = false;
 
     // private bool inputLocked => UIInputLock.IsLocked; // 支持多层UI锁机制
 
@@ -29,6 +31,27 @@ public class PlayerCombat : MonoBehaviour
 
         inputActions.Player.Use.started += ctx => StartUse();
         inputActions.Player.Use.canceled += ctx => EndUse();
+
+        GameEventManager.OnUIShowed += OnUIShowed;
+        GameEventManager.OnUIHided += OnUIHided;
+    }
+
+    private void Destroy()
+    {
+        GameEventManager.OnUIShowed -= OnUIShowed;
+        GameEventManager.OnUIHided -= OnUIHided;
+    }
+
+    private void OnUIShowed()
+    {
+        isLocked = true;
+        inputActions.Disable();
+    }
+
+    private void OnUIHided()
+    {
+        isLocked = false;
+        inputActions.Enable();
     }
 
     private void Update()
@@ -43,10 +66,10 @@ public class PlayerCombat : MonoBehaviour
     private void StartUse()
     {
         if(isUsing) return;
-        if(weapon == null) return;
+
         var item = weapon.GetHeldItem();
         if (item == null) return;
-
+        
         if(item.itemType == ItemType.Food)
         {
             StartCoroutine(StartUseItem());
@@ -87,7 +110,6 @@ public class PlayerCombat : MonoBehaviour
     {
         isUsing = true;
         var item = weapon.GetHeldItem();
-
         float sliceTime = 1f / 30f;
         float time = 0;
         playerUI?.ShowChargeBar(true);

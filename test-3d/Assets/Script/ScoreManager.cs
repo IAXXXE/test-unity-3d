@@ -77,7 +77,7 @@ public class ScoreManager : MonoBehaviour
 
     public void ClearObjectContainer()
     {
-        GameInstance.Instance.Utils.ClearChildren(ObjectContainer);
+        GameUtils.Instance.ClearChildren(ObjectContainer);
     }
 }
 

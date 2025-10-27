@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using EasyButtons;
 using TMPro;
@@ -36,7 +37,16 @@ public class InventoryManager : MonoBehaviour
         }
 
         transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
+
+        GameEventManager.OnHeldItemConsumed += HeldItemConsumed;
     }
+
+    void Destroy()
+    {
+        GameEventManager.OnHeldItemConsumed -= HeldItemConsumed;
+    }
+
+
 
     void Update()
     {
@@ -180,7 +190,7 @@ public class InventoryManager : MonoBehaviour
             slots[slotIndex].item = null;
             slots[slotIndex].quantity = 0;
         }
-        
+        UpdateSlot(selectSlotIdx);
         return true;
     }
     
@@ -262,6 +272,15 @@ public class InventoryManager : MonoBehaviour
     {
         Transform slotTransform = transform.GetChild(idx);
         InventorySlot slot = slots[idx];
+        if (slot.item == null)
+        {
+            ClearSlot(slotTransform);
+            if(idx == selectSlotIdx)
+            {
+                GameEventManager.TriggerItemHeld(slot.item);
+            }
+            return;
+        }
 
         var icon = slotTransform.Find("_Icon").GetComponent<Image>();
         if(slot.item.data.icon != null) icon.sprite = slot.item.data.icon;
@@ -273,7 +292,6 @@ public class InventoryManager : MonoBehaviour
 
         if(idx == selectSlotIdx)
         {
-            Debug.Log("Hold " + slot.item.data.name);
             GameEventManager.TriggerItemHeld(slot.item);
         }
     }
@@ -282,5 +300,10 @@ public class InventoryManager : MonoBehaviour
     {
         transform.Find("_Icon").gameObject.SetActive(false);
         transform.Find("_Count").gameObject.SetActive(false);
+    }
+
+    private void HeldItemConsumed()
+    {
+        RemoveItemFromSlot(selectSlotIdx, 1);
     }
 }

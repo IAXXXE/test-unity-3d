@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1444043082}
   - component: {fileID: 1444043081}
   - component: {fileID: 1444043080}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Prop_Book_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,6 +94,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Knife_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698032315691751251, guid: 15433602e108aae4290663c9644a7298,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4042504448806260201, guid: 15433602e108aae4290663c9644a7298,
         type: 3}
@@ -229,6 +234,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: kitchen island
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b7d5d0c4b49cd0e41a4e1ad4f26a7c2c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3451118302482216456, guid: b7d5d0c4b49cd0e41a4e1ad4f26a7c2c,
         type: 3}
       propertyPath: m_Convex
@@ -242,6 +252,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3606863441780128059}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4525922880359793770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b7d5d0c4b49cd0e41a4e1ad4f26a7c2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3606863441780128059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4613893094411599098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525922880359793770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f0489faea8b434f9e7daae02275317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactName: Kitchen
+  interactDistance: 3
+  showOutline: 0
+  interactableType: 5
+  amount: 1
 --- !u!1001 &4613893092769052118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -383,6 +416,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: book beige
       objectReference: {fileID: 0}
+    - target: {fileID: 9132120375317831168, guid: eed7ba1bb3236074bbcbe2d5ef6e1e2e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eed7ba1bb3236074bbcbe2d5ef6e1e2e, type: 3}
 --- !u!1001 &7310254116268344158
@@ -396,6 +434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Plate_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887432825129157139, guid: 082815481f9809a49bc7e44fb142da32,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6557113903845480617, guid: 082815481f9809a49bc7e44fb142da32,
         type: 3}

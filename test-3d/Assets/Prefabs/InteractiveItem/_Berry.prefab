@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1901226739}
   - component: {fileID: 1901226738}
   - component: {fileID: 2586478979116980168}
-  - component: {fileID: 1901226740}
+  - component: {fileID: 7250843057372197423}
   m_Layer: 6
   m_Name: _Berry
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &1901226740
+--- !u!114 &7250843057372197423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +99,6 @@ MonoBehaviour:
   interactDistance: 3
   showOutline: 1
   interactableType: 0
-  cooldown: 0
   itemId: C0002
   amount: 1
 --- !u!1001 &4129291732850267404
