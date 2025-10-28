@@ -55,18 +55,17 @@ public class CharacterDatabase : MonoBehaviour
         return null;
     }
 
-    public CharacterBase CreateCharacter(string id)
-    {
-        CharacterData data = GetCharacterData(id);
-        if(data != null)
-        {
-            var character = new CharacterBase();
-            character.LoadCharacter(data);
-            return character;
-        }
+    // public CharacterStat CreateCharacter(string id)
+    // {
+    //     CharacterData data = GetCharacterData(id);
+    //     if(data != null)
+    //     {
+    //         var character = gameObject.AddComponent<CharacterStat>();
+    //         return character;
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
 }
 

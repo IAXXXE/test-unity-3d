@@ -14,19 +14,22 @@ public class  CharacterData: ScriptableObject
     public Sprite icon;
     public Sprite portrait;
     public GameObject worldPrefab;
-    
-    [Header("可操控设置")]
-    public bool isUsable = true;
-    
+
     [Header("基础数值")]
-    public float health = 0f;
-    
-    [Header("非直接影响数值")]
-    public float strength = 0f;
+    public int maxHealth;
+    public int maxSatiety;
+    public int maxThirsty;
+    public int maxMagic;
+
+    [Header("基础能力值")]
+    public int vitality;
+    public int strength;
+    public int dexterity;
+    public int intelligence;
+    public int mana;
 
     [Header("技艺")]
-    public float skill = 0f;
-    
+    public string skill; 
 }
 
 

@@ -35,7 +35,6 @@ public class TimeUIDisplay : MonoBehaviour
     public bool animateTransition = true;
     public float transitionSpeed = 2f;
 
-    private int currentDay = 1;
     private Color currentColor;
 
     void Start()
@@ -184,7 +183,6 @@ public class TimeUIDisplay : MonoBehaviour
 
     void OnMidnight()
     {
-        currentDay++;
         UpdateDateDisplay();
     }
 
@@ -192,7 +190,7 @@ public class TimeUIDisplay : MonoBehaviour
     {
         if (dateText == null || !showDate) return;
 
-        dateText.text = $"Day {currentDay}";
+        dateText.text = $"Day {GameTime.Instance.currentDay}";
     }
 
     System.Collections.IEnumerator IconPulse()

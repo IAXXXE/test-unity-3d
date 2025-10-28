@@ -18,6 +18,8 @@ public class PlayerInteractor : MonoBehaviour
     private List<IInteractable> nearby = new();
     private IInteractable currentTarget;
 
+    private bool isLocked;
+
     void Start()
     {
         inputActions = GameInstance.Instance.inputActions;
@@ -25,10 +27,34 @@ public class PlayerInteractor : MonoBehaviour
 
         if (playerCamera == null && Camera.main)
             playerCamera = Camera.main;
+
+        GameEventManager.OnUIShowed += OnUIShowed;
+        GameEventManager.OnUIHided += OnUIHided;
+    }
+
+    void Destroy()
+    {
+        GameEventManager.OnUIShowed -= OnUIShowed;
+        GameEventManager.OnUIHided -= OnUIHided;
+    }
+
+    void OnUIShowed()
+    {
+        isLocked = true;
+    }
+
+    void OnUIHided()
+    {
+        isLocked = false;
     }
 
     void Update()
     {
+        if(isLocked) 
+        {
+            pickupPrompt.Hide();
+            return;
+        }
         DetectNearby();
         UpdateTarget();
     }

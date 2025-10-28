@@ -10,17 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 969615647796b47439e4a746065b8f24, type: 3}
-  m_Name: SamumuData
+  m_Name: Samumu
   m_EditorClassIdentifier: 
   id: samumu
   name: Samumu
   raceType: 0
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: fda47973982a80a40a3641067a9fedf0, type: 3}
   portrait: {fileID: 0}
   worldPrefab: {fileID: 919132149155446097, guid: ff033144cf58d894d87cbdbfc83567f7,
     type: 3}
-  isUsable: 1
-  health: 0
-  strength: 0
+  maxHealth: 30
+  maxSatiety: 30
+  maxThirsty: 30
+  maxMagic: 30
+  vitality: 3
+  strength: 3
+  dexterity: 3
+  intelligence: 3
+  mana: 3
   skill: 0

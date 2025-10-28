@@ -29,8 +29,12 @@ MonoBehaviour:
   isUsable: 1
   isConsumable: 1
   useTime: 1
+  satietyRestore: 24
+  thirstyRestore: 8
   healthRestore: 0
   manaRestore: 0
   effectDuration: 0
+  weaponType: 0
   damage: 0
+  damageMultiplier: 1
   defense: 0

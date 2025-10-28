@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerWeapon))]
-public class PlayerCombat : MonoBehaviour
+public class PlayerAction : MonoBehaviour
 {
     [Header("Settings")]
     public float chargeThreshold = 0.8f; // 超过这个时间算蓄力
@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("References")]
     public PlayerWeapon weapon;
-    public PlayerUI playerUI; // 可选：显示蓄力进度条
+    public PlayerUI playerUI; // charge slider
 
     private PlayerInputActions inputActions;
     private bool isCharging;
@@ -76,12 +76,13 @@ public class PlayerCombat : MonoBehaviour
         }
         if (item.itemType == ItemType.Weapon)
         {
+            
             isCharging = true;
             chargeTimer = 0f;
         }
 
 
-        playerUI?.ShowChargeBar(true);
+        playerUI.ShowChargeBar(true);
     }
 
     private void EndUse()
@@ -89,7 +90,7 @@ public class PlayerCombat : MonoBehaviour
         if (!isCharging) return;
         isCharging = false;
 
-        playerUI?.ShowChargeBar(false);
+        playerUI.ShowChargeBar(false);
 
         var item = weapon.GetHeldItem();
         if (item == null) return;
@@ -112,14 +113,14 @@ public class PlayerCombat : MonoBehaviour
         var item = weapon.GetHeldItem();
         float sliceTime = 1f / 30f;
         float time = 0;
-        playerUI?.ShowChargeBar(true);
+        playerUI.ShowChargeBar(true);
         while(time < item.useTime)
         {
             yield return new WaitForSeconds(sliceTime);
             time += sliceTime;
-            playerUI?.UpdateChargeBar(time / item.useTime);
+            playerUI.UpdateChargeBar(time / item.useTime);
         }
-        playerUI?.ShowChargeBar(false);
+        playerUI.ShowChargeBar(false);
         weapon.UseItem();
         isUsing = false;
         yield break;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.NetworkInformation;
 using UnityEditor.Playables;
 using UnityEngine;
 
@@ -42,21 +43,39 @@ public class GameInstance : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         // #endif
-
         Apply1080P();
+
+        NewGame();
     }
 
     public void Apply1080P() => Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
 
     #region Gameplay
-    // public PlayerStat PlayerStat { get; private set; }
+    public PlayerStat PlayerStat { get; private set; }
     public PlayerInputActions inputActions;
     // public InventoryManager Inventory { get; set; }
+
 
     public void Init()
     {
         inputActions = new PlayerInputActions();
         // Inventory = transform.parent.Find("UI_Canvas/MN_Inventory").GetComponent<InventoryManager>();
+
+        
+    }
+
+    public void NewGame()
+    {
+        InitPlayer();
+
+        GameEventManager.TriggerGameStart();
+    }
+
+    public void InitPlayer()
+    {
+        Debug.Log("InitPlayer");
+        PlayerStat = new PlayerStat("samumu");
+        if(PlayerStat == null ) Debug.Log("null Player stat");
     }
 
     #endregion
