@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class InventorySlot
 {
-    public Item item;
+    public ItemBase item;
     public int quantity;
     public bool isLocked;
 
@@ -17,7 +17,7 @@ public class InventorySlot
         isLocked = false;
     }
     
-    public InventorySlot(Item item, int quantity)
+    public InventorySlot(ItemBase item, int quantity)
     {
         this.item = item;
         this.quantity = quantity;
@@ -26,10 +26,12 @@ public class InventorySlot
     
     public bool IsEmpty()
     {
-        return item == null || quantity <= 0;
+        if(item == null) return true;
+        if(item.data.itemType == ItemType.Container) return false;
+        return quantity <= 0;
     }
     
-    public bool CanAddItem(Item newItem, int addQuantity = 1)
+    public bool CanAddItem(ItemBase newItem, int addQuantity = 1)
     {
         if (isLocked) return false;
         if (IsEmpty()) return true;

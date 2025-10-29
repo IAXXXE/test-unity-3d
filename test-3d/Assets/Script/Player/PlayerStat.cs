@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerStat : CharacterStat
 {
-    int energy;
-    int workSpeed;
-    int eatSpeed;
+    private int energy;
+    private int workSpeed;
+    private int eatSpeed;
 
-    int magic;
-    int maxMagic;
+    private int magic;
+    private int maxMagic;
+
+    private PlayerWeapon weapon;
 
     public PlayerStat(string id) : base(id)
     {
@@ -84,6 +86,21 @@ public class PlayerStat : CharacterStat
     {
         base.SetThirsty(value);
         GameEventManager.TriggerPlayerThirstyChanged(thirsty);
+    }
+
+    public void SetWeapon(PlayerWeapon playerWeapon)
+    {
+        weapon = playerWeapon;
+    }
+
+    public ItemType GetHeldItemType()
+    {
+        return weapon.GetHeldItemType();
+    }
+
+    public PlayerUI GetPlayerUI()
+    {
+        return weapon.playerUI;
     }
 
 

@@ -82,9 +82,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Use"",
+                    ""name"": ""UseL"",
                     ""type"": ""Button"",
                     ""id"": ""bff2b8df-e28f-4ad3-9fa9-3b07436c825a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseR"",
+                    ""type"": ""Button"",
+                    ""id"": ""49dd583f-1019-4979-be7c-5d75b8deff55"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -275,7 +284,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""UseL"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -286,7 +295,29 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""UseL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f79482e7-97ed-47eb-afb8-1a49db827d7c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7342a1b0-fe12-4c87-9ca8-d01a4fedaf56"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -303,7 +334,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_UseL = m_Player.FindAction("UseL", throwIfNotFound: true);
+        m_Player_UseR = m_Player.FindAction("UseR", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -371,7 +403,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Back;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_UseL;
+    private readonly InputAction m_Player_UseR;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -382,7 +415,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Back => m_Wrapper.m_Player_Back;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @UseL => m_Wrapper.m_Player_UseL;
+        public InputAction @UseR => m_Wrapper.m_Player_UseR;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,9 +444,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Use.started += instance.OnUse;
-            @Use.performed += instance.OnUse;
-            @Use.canceled += instance.OnUse;
+            @UseL.started += instance.OnUseL;
+            @UseL.performed += instance.OnUseL;
+            @UseL.canceled += instance.OnUseL;
+            @UseR.started += instance.OnUseR;
+            @UseR.performed += instance.OnUseR;
+            @UseR.canceled += instance.OnUseR;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -435,9 +472,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Use.started -= instance.OnUse;
-            @Use.performed -= instance.OnUse;
-            @Use.canceled -= instance.OnUse;
+            @UseL.started -= instance.OnUseL;
+            @UseL.performed -= instance.OnUseL;
+            @UseL.canceled -= instance.OnUseL;
+            @UseR.started -= instance.OnUseR;
+            @UseR.performed -= instance.OnUseR;
+            @UseR.canceled -= instance.OnUseR;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -463,6 +503,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnUse(InputAction.CallbackContext context);
+        void OnUseL(InputAction.CallbackContext context);
+        void OnUseR(InputAction.CallbackContext context);
     }
 }

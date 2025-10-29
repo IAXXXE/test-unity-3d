@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 
 public class ItemDatabase : MonoBehaviour
 {
@@ -55,17 +56,34 @@ public class ItemDatabase : MonoBehaviour
         return null;
     }
     
-    public Item CreateItem(string itemID, int quantity = 1)
+    public ItemBase CreateItem(string itemID, int quantity = 1)
     {
         ItemData data = GetItemData(itemID);
-        if (data != null)
+        if (data == null) return null;
+
+        ItemBase item = null;
+        switch (data.itemType)
         {
-            var item = new Item(data);
-            return item;
+            case ItemType.Container:
+                item = new ItemContainer(data);
+                break;
+            case ItemType.Food:
+            case ItemType.Potion:
+            case ItemType.Weapon:
+            case ItemType.Armor:
+            case ItemType.Material:
+            case ItemType.Quest:
+            case ItemType.Misc:
+            case ItemType.Props:
+            case ItemType.None:
+            default:
+                item = new ItemBase(data);
+                break;
         }
-        return null;
+
+        return item;
     }
-    
+
     public List<ItemData> GetItemsByType(ItemType type)
     {
         List<ItemData> result = new List<ItemData>();
@@ -90,5 +108,5 @@ public class ItemDatabase : MonoBehaviour
         allItems.AddRange(items);
         InitializeDatabase();
     }
-    #endif
+#endif
 }

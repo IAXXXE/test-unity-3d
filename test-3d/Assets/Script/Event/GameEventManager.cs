@@ -40,8 +40,13 @@ public static class GameEventManager
     // 特殊界面
     public static event Action<CookLevel> OnCooked;
     // 行为
-    public static event Action<Item> OnItemHeld;
+    public static event Action<ItemBase> OnItemHeld;
     public static event Action OnHeldItemConsumed;
+    public static event Action OnItemUpdate;
+    // Action
+    public static event Action<ItemData, AttackType, float> OnWeaponAttack;
+    public static event Action<ItemData> OnItemConsumed;
+    public static event Action<bool> OnAimModeChanged;
     #endregion
 
 /*** Triggers ***/
@@ -95,11 +100,23 @@ public static class GameEventManager
     #region Gameplay Event Triggers
     public static void TriggerCooked(CookLevel level) 
         => OnCooked?.Invoke(level);
-
-    public static void TriggerItemHeld(Item item)
+    public static void TriggerItemHeld(ItemBase item)
         => OnItemHeld?.Invoke(item);
+
+    // Action
     public static void TriggerHeldItemConsumed()
         => OnHeldItemConsumed?.Invoke();
+    public static void TriggerItemUpdate()
+        => OnItemUpdate?.Invoke();
+
+    public static void TriggerWeaponAttack(ItemData item, AttackType type, float power)
+        => OnWeaponAttack?.Invoke(item, type, power);
+
+    public static void TriggerItemConsumed(ItemData item)
+        => OnItemConsumed?.Invoke(item);
+
+    public static void TriggerAimModeChanged(bool isAiming)
+        => OnAimModeChanged?.Invoke(isAiming);
     
     #endregion
 }

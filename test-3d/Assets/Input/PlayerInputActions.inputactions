@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Use",
+                    "name": "UseL",
                     "type": "Button",
                     "id": "bff2b8df-e28f-4ad3-9fa9-3b07436c825a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseR",
+                    "type": "Button",
+                    "id": "49dd583f-1019-4979-be7c-5d75b8deff55",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -253,7 +262,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Use",
+                    "action": "UseL",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -264,7 +273,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Use",
+                    "action": "UseL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f79482e7-97ed-47eb-afb8-1a49db827d7c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7342a1b0-fe12-4c87-9ca8-d01a4fedaf56",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

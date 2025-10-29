@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
+  m_Name: red potion
+  m_EditorClassIdentifier: 
+  itemID: P0001
+  itemName: "\u7EA2\u836F\u6C34"
+  itemType: 1
+  description: 
+  icon: {fileID: 21300000, guid: 117b17facff65dc42b1b57deb7c21551, type: 3}
+  worldPrefab: {fileID: 4046689530314105407, guid: 3bfa679511c7e47fe8b3f16bd01f4a85,
+    type: 3}
+  posOffset: {x: -0.2, y: 0, z: 0}
+  rotOffset: {x: 0, y: 0, z: -90}
+  scale: {x: 0, y: 0, z: 0}
+  maxStackSize: 20
+  isStackable: 1
+  buyPrice: 10
+  sellPrice: 5
+  isUsable: 1
+  isConsumable: 1
+  useTime: 0
+  satietyRestore: 0
+  thirstyRestore: 0
+  healthRestore: 0
+  manaRestore: 0
+  effectDuration: 0
+  containerType: 0
+  capacity: 0
+  weaponType: 0
+  damage: 0
+  damageMultiplier: 1
+  defense: 0

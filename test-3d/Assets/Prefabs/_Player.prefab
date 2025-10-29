@@ -202,8 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17720ce6ff28e484d879550f867def35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandL: {fileID: 0}
-  HandR: {fileID: 0}
+  HandL: {fileID: 6914988914022421589}
+  HandR: {fileID: 4631782739804142383}
+  playerUI: {fileID: 0}
 --- !u!114 &6536859905764176270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,8 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e870879f696a46f991796db68372b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeThreshold: 0.8
-  maxChargeTime: 2
   weapon: {fileID: 3724371351127685809}
   playerUI: {fileID: 0}
 --- !u!1 &6914988914022421588

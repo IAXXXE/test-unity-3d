@@ -40,6 +40,9 @@ public class ItemData : ScriptableObject
     public int manaRestore = 0;
     public float effectDuration = 0f;
 
+    [Header("容器相关")]
+    public ContainerType containerType;
+    public int capacity = 0;
 
     [Header("武器 - ")]
     public WeaponType weaponType;
@@ -53,11 +56,22 @@ public class ItemData : ScriptableObject
 public enum ItemType
 {
     Food,
+    Potion,
     Weapon,
     Armor,
     Material,
     Quest,
-    Misc
+    Misc,
+    Container,
+    Props,
+    None
+}
+
+public enum ContainerType
+{
+    Plastic,
+    Glass,
+    Gourd
 }
 
 public enum WeaponType
@@ -65,4 +79,6 @@ public enum WeaponType
     Stick,
     Sword,
     Bow,
+    Melee,
+
 }

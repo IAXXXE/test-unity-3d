@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net.NetworkInformation;
-using UnityEditor.Playables;
 using UnityEngine;
 
 public class GameInstance : MonoBehaviour
@@ -73,9 +68,7 @@ public class GameInstance : MonoBehaviour
 
     public void InitPlayer()
     {
-        Debug.Log("InitPlayer");
         PlayerStat = new PlayerStat("samumu");
-        if(PlayerStat == null ) Debug.Log("null Player stat");
     }
 
     #endregion

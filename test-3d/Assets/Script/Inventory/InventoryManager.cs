@@ -39,14 +39,14 @@ public class InventoryManager : MonoBehaviour
         transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
 
         GameEventManager.OnHeldItemConsumed += HeldItemConsumed;
+        GameEventManager.OnItemUpdate += RefreshUI;
     }
 
     void Destroy()
     {
         GameEventManager.OnHeldItemConsumed -= HeldItemConsumed;
+        GameEventManager.OnItemUpdate -= RefreshUI;
     }
-
-
 
     void Update()
     {
@@ -86,7 +86,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     [Button]
-    public bool AddItem(Item item, int quantity = 1)
+    public bool AddItem(ItemBase item, int quantity = 1)
     {
         if (item == null || quantity <= 0) return false;
         for (int i = 0; i < slots.Count; i++)
@@ -102,6 +102,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     slots[i].quantity += quantity;
                 }
+
                 UpdateSlot(i);
                 return true;
             }
@@ -124,7 +125,7 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
     
-    private bool AddItemInMultipleSlots(Item item, int totalQuantity)
+    private bool AddItemInMultipleSlots(ItemBase item, int totalQuantity)
     {
         int remainingQuantity = totalQuantity;
         
@@ -210,7 +211,7 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
     
-    public InventorySlot GetSlotForItem(Item item)
+    public InventorySlot GetSlotForItem(ItemBase item)
     {
         foreach (var slot in slots)
         {
@@ -289,6 +290,11 @@ public class InventoryManager : MonoBehaviour
         var count = slotTransform.Find("_Count").GetComponent<TextMeshProUGUI>();
         count.text = slot.quantity.ToString();
         count.gameObject.SetActive(true);
+
+        if(slot.item.data.itemType == ItemType.Container)
+        {
+            count.text = ((ItemContainer)slot.item).GetCapacity().ToString();
+        }
 
         if(idx == selectSlotIdx)
         {
