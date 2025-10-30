@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5837680989181529793}
   m_Layer: 6
   m_Name: _BerryBushes
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,6 @@ MonoBehaviour:
   interactDistance: 5
   showOutline: 1
   interactableType: 1
-  cooldown: 0
   itemId: C0002
   minQuantity: 1
   maxQuantity: 3

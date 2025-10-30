@@ -6,11 +6,11 @@ public static class GameEventManager
 
 /*** Events ***/
 
-    #region Geme
+    #region 1-Geme
     public static event Action OnGameStart;
     #endregion
 
-    #region Time Events
+    #region 2-Time Events
     // 时间
     public static event Action OnSunrise;
     public static event Action OnSunset;
@@ -24,7 +24,11 @@ public static class GameEventManager
     public static event Action<Season, Season> OnSeasonChanged;
     #endregion
 
-    #region UI Events
+    #region 3-Map & Natural
+    public static event Action<Transform> OnTerrainGenerated;
+    #endregion
+
+    #region 4-UI Events
     // UI
     public static event Action OnUIShowed;
     public static event Action OnUIHided;
@@ -36,27 +40,28 @@ public static class GameEventManager
 
     #endregion
 
-    #region Gameplay
+    #region 5-Gameplay
     // 特殊界面
     public static event Action<CookLevel> OnCooked;
     // 行为
     public static event Action<ItemBase> OnItemHeld;
     public static event Action OnHeldItemConsumed;
     public static event Action OnItemUpdate;
-    // Action
+    // 战斗
     public static event Action<ItemData, AttackType, float> OnWeaponAttack;
     public static event Action<ItemData> OnItemConsumed;
     public static event Action<bool> OnAimModeChanged;
     #endregion
 
+
 /*** Triggers ***/
 
-    #region Geme
+    #region 1-Geme
     public static void TriggerGameStart()
         => OnGameStart?.Invoke();
     #endregion
 
-    #region Time Event Triggers
+    #region 2-Time Event Triggers
     public static void TriggerSunrise()
         => OnSunrise?.Invoke(); 
     public static void TriggerSunset()
@@ -79,13 +84,19 @@ public static class GameEventManager
         => OnNewYear?.Invoke(year);
     #endregion
 
-    #region UI Event Triggers
-    // UI Panel
+    #region 3-Environment & Natural
+    // 地形
+    public static void TriggerTerrainGenerated(Transform trans)
+        => OnTerrainGenerated?.Invoke(trans);
+    #endregion
+
+    #region 4-UI Event Triggers
+    // UI界面
     public static void TriggerUIShowed()
         => OnUIShowed?.Invoke();
     public static void TriggerUIHided()
         => OnUIHided?.Invoke();
-    // Player
+    // 玩家状态
     public static void TriggerPlayerHealthChanged(int value)
         => OnPlayerHealthChanged?.Invoke(value);
     public static void TriggerPlayerSatietyChanged(int value)
@@ -97,18 +108,18 @@ public static class GameEventManager
 
     #endregion
 
-    #region Gameplay Event Triggers
+    #region 5-Gameplay Event Triggers
     public static void TriggerCooked(CookLevel level) 
         => OnCooked?.Invoke(level);
+
+    // 玩家行为
     public static void TriggerItemHeld(ItemBase item)
         => OnItemHeld?.Invoke(item);
-
-    // Action
     public static void TriggerHeldItemConsumed()
         => OnHeldItemConsumed?.Invoke();
     public static void TriggerItemUpdate()
         => OnItemUpdate?.Invoke();
-
+    // 玩家战斗
     public static void TriggerWeaponAttack(ItemData item, AttackType type, float power)
         => OnWeaponAttack?.Invoke(item, type, power);
 

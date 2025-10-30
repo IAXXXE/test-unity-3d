@@ -20,4 +20,5 @@ public enum CookType
     BakeStick,
     BakeSlate,
     Boiled,
+    Refine,
 }

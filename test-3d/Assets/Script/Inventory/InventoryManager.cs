@@ -184,6 +184,12 @@ public class InventoryManager : MonoBehaviour
         if (slotIndex < 0 || slotIndex >= slots.Count) return false;
         if (slots[slotIndex].IsEmpty()) return false;
         if (slots[slotIndex].quantity < quantity) return false;
+        if(slots[slotIndex].item.data.isStackable == false)
+        {
+            slots[slotIndex].item = null;
+            slots[slotIndex].quantity = 0;
+            return true;
+        }
         
         slots[slotIndex].quantity -= quantity;
         if (slots[slotIndex].quantity <= 0)

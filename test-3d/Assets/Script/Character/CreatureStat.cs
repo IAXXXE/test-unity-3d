@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBaseStat : ICharacterStat
+public class CreatureStat : ICharacterStat
 {
     public CharacterData data;
 
@@ -15,7 +15,9 @@ public class CharacterBaseStat : ICharacterStat
     protected int thirsty;
     protected int maxThirsty;
 
-    public CharacterBaseStat(string id)
+    private float speed;
+
+    public CreatureStat(string id)
     {
         data = CharacterDatabase.Instance.GetCharacterData(id);
 
@@ -27,6 +29,8 @@ public class CharacterBaseStat : ICharacterStat
         maxSatiety = data.maxSatiety;
         thirsty = data.maxThirsty;
         maxThirsty = data.maxThirsty;
+
+        speed = data.speed;
     }
 
     public virtual int GetHealth()
@@ -135,5 +139,10 @@ public class CharacterBaseStat : ICharacterStat
         if(value > maxThirsty) value = maxThirsty;
 
         thirsty = value;
+    }
+
+    public virtual float GetSpeed()
+    {
+        return speed;
     }
 }

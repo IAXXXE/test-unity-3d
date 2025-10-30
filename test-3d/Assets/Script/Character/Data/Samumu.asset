@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969615647796b47439e4a746065b8f24, type: 3}
   m_Name: Samumu
   m_EditorClassIdentifier: 
-  id: samumu
+  id: 0
   name: Samumu
   raceType: 0
+  isCarnivore: 1
   description: 
   icon: {fileID: 21300000, guid: fda47973982a80a40a3641067a9fedf0, type: 3}
   portrait: {fileID: 0}
   worldPrefab: {fileID: 919132149155446097, guid: ff033144cf58d894d87cbdbfc83567f7,
+    type: 3}
+  primevalPrefab: {fileID: 2629182449500102118, guid: 05ac2d871695640f89fd0aeb9f8f5afd,
     type: 3}
   maxHealth: 30
   maxSatiety: 30
@@ -29,4 +32,5 @@ MonoBehaviour:
   dexterity: 3
   intelligence: 3
   mana: 3
+  speed: 3
   skill: 0

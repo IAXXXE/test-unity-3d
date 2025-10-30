@@ -68,7 +68,7 @@ public class GameInstance : MonoBehaviour
 
     public void InitPlayer()
     {
-        PlayerStat = new PlayerStat("samumu");
+        PlayerStat = new PlayerStat("0");
     }
 
     #endregion

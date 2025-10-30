@@ -199,5 +199,20 @@ public static class CalculateUtils
     }
     #endregion
 
+    /// <summary>
+    /// 从List中随机获取一个元素
+    /// </summary>
+    public static T GetRandom<T>(this List<T> list)
+    {
+        if (list == null || list.Count == 0)
+        {
+            Debug.LogWarning("列表为空或为null");
+            return default(T);
+        }
+        
+        int randomIndex = UnityEngine.Random.Range(0, list.Count);
+        return list[randomIndex];
+    }
+
 
 }

@@ -7,6 +7,7 @@ public class  CharacterData: ScriptableObject
     public string id;
     public string name;
     public RaceType raceType;
+    public bool isCarnivore;
     [TextArea(3, 5)]
     public string description;
     
@@ -14,6 +15,7 @@ public class  CharacterData: ScriptableObject
     public Sprite icon;
     public Sprite portrait;
     public GameObject worldPrefab;
+    public GameObject primevalPrefab;
 
     [Header("基础数值")]
     public int maxHealth;
@@ -27,9 +29,10 @@ public class  CharacterData: ScriptableObject
     public int dexterity;
     public int intelligence;
     public int mana;
+    public float speed;
 
     [Header("技艺")]
-    public string skill; 
+    public string skill;
 }
 
 

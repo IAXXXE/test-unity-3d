@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Water
+  - Food
+  - Prey
   layers:
   - Default
   - TransparentFX

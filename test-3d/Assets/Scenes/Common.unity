@@ -109,8 +109,8 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 20
+    agentClimb: 0.5
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -123,7 +123,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c67e485da796f414e80f6365fb6d01c1, type: 2}
 --- !u!1001 &3717446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21043,6 +21043,7 @@ Transform:
   m_Children:
   - {fileID: 658700337}
   - {fileID: 2006603252}
+  - {fileID: 1807381925}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21488,7 +21489,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allCharacters:
+  - {fileID: 11400000, guid: 701e5c85aa5054049b6ec9770b0823bc, type: 2}
+  - {fileID: 11400000, guid: fb87879767bad47d788baee3f43435cb, type: 2}
   - {fileID: 11400000, guid: b8668be0c827341d9a09d507215110a9, type: 2}
+  - {fileID: 11400000, guid: 739a65d3e87b84078a987ff6f545934e, type: 2}
+  - {fileID: 11400000, guid: 8478bc66caa7d472aa63bee9686f93c1, type: 2}
 --- !u!4 &1760172923
 Transform:
   m_ObjectHideFlags: 0
@@ -21898,6 +21903,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1803995495}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1807381924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807381925}
+  - component: {fileID: 1807381926}
+  m_Layer: 0
+  m_Name: MN_NaturalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1807381925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807381924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1724049312}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1807381926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807381924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb45962d4227464c9e1eefafaab722c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  food: {fileID: 40507044379834317, guid: f6529a89870274c99b4a4bc5c880b95f, type: 3}
+  water: {fileID: 9219108085878162497, guid: 12dd2162acedd4d97b45f650759a5dc3, type: 3}
+  chicken: {fileID: 8073443194988779917, guid: 3cc9c75178c8c4ce1b045f7b5145aecc, type: 3}
+  tiger: {fileID: 5883155896844355918, guid: 8b3c1eb62b4f8426d9bbb81d943cb808, type: 3}
 --- !u!1001 &1811407217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24826,7 +24879,7 @@ MonoBehaviour:
   daysPerSeason: 30
   autoSeasonChange: 1
   currentYear: 1
-  dayDurationInSeconds: 120
+  dayDurationInSeconds: 240
   currentTime: 12
   timeMultiplier: 1
   pauseTime: 0

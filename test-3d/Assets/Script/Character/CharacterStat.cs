@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStat : CharacterBaseStat
+public class CharacterStat : CreatureStat
 {
     protected int vitality;
     protected int strength;
