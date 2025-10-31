@@ -44,7 +44,7 @@ public class GameUtils : MonoBehaviour
     {
         Destroy(obj);
     }
-
+    
     // Quaternion.Euler(Vector3)
 
 }

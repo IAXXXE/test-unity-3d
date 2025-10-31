@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using EasyButtons;
 using Unity.VisualScripting;
@@ -44,22 +43,28 @@ public class NaturalManager : MonoBehaviour
 
     void Update()
     {
-        foreach(var creature in creatures)
-        {
-            // 执行行为树决策
-            creature.behaviorTree.Evaluate();
-            
-            // 执行当前状态
-            creature.currentState?.Execute();
-        }
+
     }
 
     void UpdateByHour(float hour)
     {
         foreach(var creature in creatures)
         {
-            creature.UpdateSurvivalStats();
+            creature.UpdateSurvivalStats();   
+
+            // 执行行为树决策
+            if (creature.isStateLocked)
+            {
+                creature.stateLockTimer -= Time.deltaTime;
+                if (creature.stateLockTimer <= 0)
+                    creature.isStateLocked = false;
+            }
+            else
+            {
+                creature.behaviorTree.Evaluate();
+            }
         }
+
     }
 
     void UpdateByDay(int day)

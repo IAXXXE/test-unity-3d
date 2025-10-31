@@ -129,7 +129,6 @@ public class CreatureStat : ICharacterStat
     {
         if(value < 0) value = 0;
         if(value > maxSatiety) value = maxSatiety;
-        Debug.Log("Set satiety " + value);
         satiety = value;
     }
 

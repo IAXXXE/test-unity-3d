@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75d528585d69041298f661905f45ea0b, type: 3}
-  m_Name: New Item
+  m_Name: red potion
   m_EditorClassIdentifier: 
-  cookType: 0
+  cookType: 4
   id: P0001
   icon: {fileID: 21300000, guid: 117b17facff65dc42b1b57deb7c21551, type: 3}
   ingredients:
     m_keys:
+    - C0001
     - C0002
-    - C0004
     m_values: 0100000001000000
   foodTargetHeat:
     m_keys: []

@@ -24,8 +24,8 @@ MonoBehaviour:
   primevalPrefab: {fileID: 5883155896844355918, guid: 8b3c1eb62b4f8426d9bbb81d943cb808,
     type: 3}
   maxHealth: 50
-  maxSatiety: 50
-  maxThirsty: 50
+  maxSatiety: 30
+  maxThirsty: 25
   maxMagic: 10
   vitality: 5
   strength: 5

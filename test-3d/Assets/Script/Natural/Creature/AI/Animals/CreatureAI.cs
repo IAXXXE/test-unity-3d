@@ -2,15 +2,17 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Animator))]
 public class CreatureAI : MonoBehaviour
 {
     [Header("组件引用")]
     public CreatureStat stat;
     public NavMeshAgent agent;
-    
+    public CreatureAnimation anim;
+
     [Header("AI配置")]
-    public float wanderRadius = 50f;
-    public float detectionRange = 100f;
+    public float wanderRadius = 20f;
+    public float detectionRange = 120f;
     public float attackRange = 2f;
     public float eatRange = 2f;
     public float drinkRange = 1.5f;
@@ -22,14 +24,16 @@ public class CreatureAI : MonoBehaviour
     public CreatureState currentState;
     public BehaviorTree behaviorTree;
     private Vector3[] waterSources;
-    private Transform currentTarget;
+    public Transform currentTarget;
 
-    private bool isStateLocked = false;  // 添加状态锁
-    private float stateLockTimer = 0f;
+    public bool isStateLocked = false;  // 添加状态锁
+    public float stateLockTimer = 0f;
 
     public void Init(CreatureStat stat)
     {
         this.stat = stat;
+
+        anim = GetComponent<CreatureAnimation>();
 
         hungerThreshold = stat.GetMaxSatiety() / 3;
         thirstThreshold = stat.GetMaxThirsty() / 3;
@@ -121,14 +125,41 @@ public class CreatureAI : MonoBehaviour
             )
         );
     }
+
+    public void LockState(float duration = 10000)
+    {
+        isStateLocked = true;
+        stateLockTimer = duration;
+    }
+
+    public void UnlockState()
+    {
+        isStateLocked = false;
+    }
     
     public void ChangeState(CreatureState newState)
     {
+        // 防止饮水/进食被打断
+        // if (currentState is AnimalDrinkState || currentState is AnimalEatState)
+        //     return;
+        StopAllCoroutines();
+
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();
 
         Debug.Log($"{stat.data.name} change state {newState}");
+    }
+
+    public void ForcedChangrState(CreatureState newState)
+    {
+        StopAllCoroutines();
+
+        currentState?.Exit();
+        currentState = newState;
+        currentState?.Enter();
+
+        Debug.Log($"Force {stat.data.name} change state {newState}");
     }
     
     public void UpdateSurvivalStats()
@@ -184,6 +215,8 @@ public class CreatureAI : MonoBehaviour
                 }
             }
         }
+
+        currentTarget = nearest;
         return nearest;
     }
     
@@ -214,6 +247,9 @@ public class CreatureAI : MonoBehaviour
                 }
             }
         }
+        currentTarget = nearest;
+
         return nearest;
     }
 }
+
