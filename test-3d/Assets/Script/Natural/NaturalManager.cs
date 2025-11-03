@@ -41,15 +41,12 @@ public class NaturalManager : MonoBehaviour
         GameEventManager.OnNewDay -= UpdateByDay;
     }
 
-    void Update()
-    {
-
-    }
-
     void UpdateByHour(float hour)
     {
+        var removeList = new List<CreatureAI>();
         foreach(var creature in creatures)
         {
+            if (creature == null || creature.gameObject == null) { removeList.Add(creature); continue; }
             creature.UpdateSurvivalStats();   
 
             // 执行行为树决策
@@ -63,6 +60,11 @@ public class NaturalManager : MonoBehaviour
             {
                 creature.behaviorTree.Evaluate();
             }
+        }
+
+        foreach(var creature in removeList)
+        {
+            creatures.Remove(creature);
         }
 
     }
