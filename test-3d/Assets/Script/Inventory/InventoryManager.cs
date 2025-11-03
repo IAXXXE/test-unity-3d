@@ -86,6 +86,13 @@ public class InventoryManager : MonoBehaviour
     }
 
     [Button]
+    public void AddBow()
+    {
+        AddItem(ItemDatabase.Instance.CreateItem("W0002"), 1);
+        AddItem(ItemDatabase.Instance.CreateItem("W0003"), 10);
+    }
+
+    [Button]
     public bool AddItem(ItemBase item, int quantity = 1)
     {
         if (item == null || quantity <= 0) return false;
@@ -226,6 +233,18 @@ public class InventoryManager : MonoBehaviour
         }
         
         return GetFirstEmptySlot();
+    }
+
+    public ItemData GetItemData(string itemID)
+    {
+        foreach (var slot in slots)
+        {
+            if (!slot.IsEmpty() && slot.item.data.itemID == itemID)
+            {
+                return slot.item.data;
+            }
+        }
+        return null;
     }
     
     public int GetItemCount(string itemID)

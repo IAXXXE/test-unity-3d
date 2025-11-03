@@ -112,9 +112,8 @@ public class NaturalManager : MonoBehaviour
         var dangerWater = CalculateUtils.GetRandom(availableWater);
         var tigerInitPos = pointGenerator.GeneratePointsInRing(1, dangerWater.position, 3, 20);
         var tigerTrans = SpawnObjectOnTerrain(tigerInitPos[0], tiger, creatureTransform);
-        var tigerAI = tigerTrans.AddComponent<CreatureAI>();
-        tigerAI.Init(new CreatureStat("3"));
-        creatures.Add(tigerAI);
+
+        creatures.Add(tigerTrans.GetComponent<CreatureAI>());
 
         availableWater.Remove(dangerWater);
         var safeWater = CalculateUtils.GetRandom(availableWater);
@@ -122,9 +121,7 @@ public class NaturalManager : MonoBehaviour
         foreach(var pos in chickenInitPos)
         {
             var chickenTrans = SpawnObjectOnTerrain(pos, chicken, creatureTransform);
-            var chickenAI = chickenTrans.AddComponent<CreatureAI>();
-            chickenAI.Init(new CreatureStat("1"));
-            creatures.Add(chickenAI);
+            creatures.Add(chickenTrans.GetComponent<CreatureAI>());
         }
 
     }

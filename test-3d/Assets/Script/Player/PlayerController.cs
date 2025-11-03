@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     public Transform cameraTransform;
+    private ThirdPersonCamera thirdPersonCamera;
     private Transform modelTransform;
     private Rigidbody rb;
     private CapsuleCollider capsule;
@@ -112,6 +113,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         inputActions = GameInstance.Instance.inputActions;
 
+        thirdPersonCamera = cameraTransform.GetComponent<ThirdPersonCamera>();
+
         // Rigidbody setup
         rb.freezeRotation = true; // 防止物理旋转
         rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -189,7 +192,7 @@ public class PlayerController : MonoBehaviour
         swimUpPressed = Keyboard.current?.spaceKey.isPressed == true;
         swimDownPressed = Keyboard.current?.leftCtrlKey.isPressed == true;
 
-        HandleCameraRotation();
+        
         UpdateGroundCheck();
         // UpdateWaterStatus();
         UpdateMoveState();
@@ -206,7 +209,8 @@ public class PlayerController : MonoBehaviour
         if (isLocked) return;
 
         ApplyMovement();
-        ApplyRotation();
+        HandleRotation();
+        // ApplyRotation();
 
         if (isInWater)
         {
@@ -221,20 +225,42 @@ public class PlayerController : MonoBehaviour
         UpdatePhysicsDrag();
     }
 
-    void HandleCameraRotation()
+    void HandleRotation()
     {
-        if (cameraTransform == null) return;
+        // if (cameraTransform == null) return;
 
-        float lookX = lookInput.x * Time.deltaTime * 120f;
-        float lookY = -lookInput.y * Time.deltaTime * 80f;
+        // float lookX = lookInput.x * Time.deltaTime * 120f;
+        // float lookY = -lookInput.y * Time.deltaTime * 80f;
 
-        cameraTransform.Rotate(Vector3.up, lookX, Space.World);
-        cameraTransform.Rotate(Vector3.right, lookY, Space.Self);
+        // cameraTransform.Rotate(Vector3.up, lookX, Space.World);
+        // cameraTransform.Rotate(Vector3.right, lookY, Space.Self);
 
-        Vector3 camAngles = cameraTransform.localEulerAngles;
-        if (camAngles.x > 180f) camAngles.x -= 360f;
-        camAngles.x = Mathf.Clamp(camAngles.x, -50f, 80f);
-        cameraTransform.localEulerAngles = new Vector3(camAngles.x, 0, 0);
+        // Vector3 camAngles = cameraTransform.localEulerAngles;
+        // if (camAngles.x > 180f) camAngles.x -= 360f;
+        // camAngles.x = Mathf.Clamp(camAngles.x, -50f, 80f);
+        // cameraTransform.localEulerAngles = new Vector3(camAngles.x, 0, 0);
+        if (!thirdPersonCamera.IsAiming())
+        {
+            // 普通移动时根据移动方向旋转
+            Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y);
+            if (moveDir.sqrMagnitude > 0.01f)
+            {
+                Vector3 camForward = thirdPersonCamera.GetCameraForwardFlat();
+                Quaternion camRot = Quaternion.LookRotation(camForward);
+                Vector3 moveWorld = camRot * moveDir;
+                moveWorld.y = 0;
+
+                Quaternion targetRot = Quaternion.LookRotation(moveWorld);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+            }
+        }
+        else
+        {
+            // 瞄准状态：角色始终朝向摄像机前方
+            Vector3 camForward = thirdPersonCamera.GetCameraForwardFlat();
+            Quaternion targetRot = Quaternion.LookRotation(camForward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 15f);
+        }
     }
 
     void UpdateGroundCheck()
@@ -360,7 +386,7 @@ public class PlayerController : MonoBehaviour
 
     void ApplyRotation()
     {
-        if (moveDirection.sqrMagnitude > 0.01f)
+        if (moveDirection.sqrMagnitude > 0.01f )
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             modelTransform.rotation = Quaternion.Slerp(modelTransform.rotation, targetRotation, 

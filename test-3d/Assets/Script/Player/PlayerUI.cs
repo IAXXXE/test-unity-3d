@@ -1,9 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
     public Slider chargeBar;
+    public GameObject crosshair;
+
+    void Start()
+    {
+        GameEventManager.OnAimModeChanged += SetCrosshair;
+    }
+
+    void OnDestroy()
+    {
+        GameEventManager.OnAimModeChanged -= SetCrosshair;
+    }
+
+    public void SetCrosshair(bool isAiming)
+    {
+        crosshair.SetActive(isAiming);
+    }
 
     public void ShowChargeBar(bool show)
     {
