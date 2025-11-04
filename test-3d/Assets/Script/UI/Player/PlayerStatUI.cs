@@ -17,7 +17,7 @@ public class PlayerStatUI : MonoBehaviour
     public TextMeshProUGUI magicText;
     public TextMeshProUGUI maxMagicText;
 
-    void Start()
+    void Awake()
     {
         GameEventManager.OnGameStart += OnGameStart;
 
@@ -54,6 +54,8 @@ public class PlayerStatUI : MonoBehaviour
         satietyText.text = playerStat.GetSatiety().ToString();
         thirstyText.text = playerStat.GetThirsty().ToString();
         magicText.text = playerStat.GetMagic().ToString();
+
+        Debug.Log($"max health {playerStat.GetMaxHealth()}  health {playerStat.GetHealth()}");
     }
 
     void OnPlayerHealthChanged(int value)

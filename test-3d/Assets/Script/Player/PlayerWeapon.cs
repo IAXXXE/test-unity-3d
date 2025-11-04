@@ -121,6 +121,11 @@ public class PlayerWeapon : MonoBehaviour
 
         return heldItemR.data.itemType;
     }
+
+    public ItemData GetArrowData()
+    {
+        return InventoryManager.Instance.GetItemData("W0003");
+    }
     
     public ItemBehavior GetCurrentBehavior() => currentBehavior;
 

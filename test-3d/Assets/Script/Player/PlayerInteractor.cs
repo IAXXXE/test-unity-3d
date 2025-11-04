@@ -101,7 +101,8 @@ public class PlayerInteractor : MonoBehaviour
                 }
             }
         }
-        
+        if(best == null) GameEventManager.TriggerPlayerLookAt(null);
+        if(best == currentTarget) return;
 
         if (currentTarget != null)
         {
@@ -122,7 +123,10 @@ public class PlayerInteractor : MonoBehaviour
             if (pickupPrompt)
             {
                 if (currentTarget != null)
+                {
                     pickupPrompt.Show("[E] " + currentTarget.GetInteractText());
+                    GameEventManager.TriggerPlayerLookAt((currentTarget as MonoBehaviour).transform);
+                }
                 else
                     pickupPrompt.Hide();
             }
@@ -149,17 +153,17 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
-    // 示例：供 Door 或 Herb 调用
-    public bool HasItem(string itemId)
-    {
-        // TODO: 查询背包逻辑
-        return false;
-    }
+    // // 示例：供 Door with need key 或 Herb 调用
+    // public bool HasItem(string itemId)
+    // {
+    //     // TODO: 查询背包逻辑
+    //     return false;
+    // }
 
-    public void AddItem(string itemId)
-    {
-        // TODO: 加入背包逻辑
-    }
+    // public void AddItem(string itemId)
+    // {
+    //     // TODO: 加入背包逻辑
+    // }
 
     void OnDrawGizmosSelected()
     {

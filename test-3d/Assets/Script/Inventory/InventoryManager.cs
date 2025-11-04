@@ -63,6 +63,9 @@ public class InventoryManager : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Minus)) UpdateSelectIdx(10);
         else if(Input.GetKeyDown(KeyCode.Equals)) UpdateSelectIdx(11);
 
+        // Debug Button
+        else if(Input.GetKeyDown(KeyCode.B)) AddBow();
+
     }
 
     void UpdateSelectIdx(int idx)
@@ -88,7 +91,8 @@ public class InventoryManager : MonoBehaviour
     [Button]
     public void AddBow()
     {
-        AddItem(ItemDatabase.Instance.CreateItem("W0002"), 1);
+        if(!HasItem("W0002")) AddItem(ItemDatabase.Instance.CreateItem("W0002"), 1);
+        
         AddItem(ItemDatabase.Instance.CreateItem("W0003"), 10);
     }
 

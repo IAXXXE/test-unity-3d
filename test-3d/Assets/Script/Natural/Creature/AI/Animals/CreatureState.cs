@@ -8,6 +8,7 @@ public enum CreatureStateType
     Rest,
     SeekFood,
     Attack,
+    Escape,
     Eat,
     SeekWater,
     Drink,

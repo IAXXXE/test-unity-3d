@@ -25,6 +25,7 @@ public struct DamageInfo
 public interface IDamageable
 {
     void TakeDamage(DamageInfo damageInfo);
+    bool IsWeakPoint(Vector3 hitPoint);
     bool IsDead { get; }
     float CurrentHealth { get; }
     float MaxHealth { get; }

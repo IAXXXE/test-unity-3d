@@ -11,7 +11,8 @@ public class WeaponBowBehavior : ItemBehavior
     [Header("Arrow Settings")]
     public GameObject arrowPrefab;
     public Transform arrowSpawnPoint;
-    public float arrowDamage = 30f;
+    public float damageMultiplier = 1f;
+    // public float arrowDamage = 30f;
     public float arrowLifetime = 5f;
     
     // [Header("Aim Settings")]
@@ -30,8 +31,7 @@ public class WeaponBowBehavior : ItemBehavior
     {
         base.Initialize(item, weapon, ui);
         
-        if (item.data.damage > 0)
-            arrowDamage = item.data.damage;
+        damageMultiplier = item.data.damageMultiplier;
         
         if (aimCamera == null)
             aimCamera = Camera.main;
@@ -99,7 +99,9 @@ public class WeaponBowBehavior : ItemBehavior
         // 显示准星
         playerUI.SetCrosshair(true);
         GameEventManager.TriggerAimModeChanged(true);
-        
+
+        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
+
         // 自动开始拉弦
         StartDrawing();
     }
@@ -118,10 +120,10 @@ public class WeaponBowBehavior : ItemBehavior
 
         // 恢复FOV
         // StartCoroutine(SmoothFOVTransition(aimFOV, normalFOV, 0.2f));
+        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z - 90f));
         
         playerUI?.ShowChargeBar(false);
         playerUI?.SetCrosshair(false);
-        
         Debug.Log("[弓箭] 退出瞄准模式");
         GameEventManager.TriggerAimModeChanged(false);
     }
@@ -131,10 +133,8 @@ public class WeaponBowBehavior : ItemBehavior
         isDrawing = true;
         drawTimer = 0f;
 
-        // 生成箭矢视觉效果
-        arrowSpawnPoint = transform;
         //TODO:
-        arrowPrefab = InventoryManager.Instance.GetItemData("W0003")?.worldPrefab;
+        arrowPrefab = playerWeapon.GetArrowData()?.worldPrefab;
 
         if (arrowPrefab != null && arrowSpawnPoint != null)
         {
@@ -168,11 +168,13 @@ public class WeaponBowBehavior : ItemBehavior
 
     private void ShootArrow()
     {
+        var arrowData = playerWeapon.GetArrowData();
+        if(arrowData == null) return;
         float drawRatio = Mathf.Clamp01(drawTimer / maxDrawTime);
         float arrowSpeed = Mathf.Lerp(minArrowSpeed, maxArrowSpeed, drawRatio);
-        float damage = arrowDamage * (0.5f + 0.5f * drawRatio); // 伤害随拉力变化
+        float damage = arrowData.damage * damageMultiplier * (0.5f + 0.5f * drawRatio); // 伤害随拉力变化
 
-        Debug.Log($"[弓箭] 射出箭矢, 拉力={drawRatio:F2}, 速度={arrowSpeed:F1}, 伤害={damage:F1}");
+        Debug.Log($"[弓箭] 射出箭矢, 拉力={drawRatio:F2}, 速度={arrowSpeed:F1}, 伤害倍率={damage:F1}");
 
         // 实例化真实的箭矢物理对象
         if (arrowPrefab != null && arrowSpawnPoint != null)

@@ -228,7 +228,8 @@ public class Arrow : MonoBehaviour
                 attacker = shooter,
                 knockbackDirection = direction,
                 knockbackForce = 2f,
-                isCritical = Random.value < 0.15f // 15%暴击率
+                isCritical = damageable.IsWeakPoint(hitPoint)
+                // isCritical = Random.value < 0.15f // 15%暴击率
             };
 
             damageable.TakeDamage(damageInfo);

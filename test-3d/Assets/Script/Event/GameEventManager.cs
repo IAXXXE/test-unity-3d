@@ -32,7 +32,7 @@ public static class GameEventManager
     // UI
     public static event Action OnUIShowed;
     public static event Action OnUIHided;
-    // Player
+    // 玩家状态
     public static event Action<int> OnPlayerHealthChanged;
     public static event Action<int> OnPlayerSatietyChanged;
     public static event Action<int> OnPlayerThirstyChanged;
@@ -43,10 +43,11 @@ public static class GameEventManager
     #region 5-Gameplay
     // 特殊界面
     public static event Action<CookLevel> OnCooked;
-    // 行为
+    // 玩家行为
     public static event Action<ItemBase> OnItemHeld;
     public static event Action OnHeldItemConsumed;
     public static event Action OnItemUpdate;
+    public static event Action<Transform> OnPlayerLookAt;
     // 战斗
     public static event Action<ItemData, AttackType, float> OnWeaponAttack;
     public static event Action<ItemData> OnItemConsumed;
@@ -119,6 +120,8 @@ public static class GameEventManager
         => OnHeldItemConsumed?.Invoke();
     public static void TriggerItemUpdate()
         => OnItemUpdate?.Invoke();
+    public static void TriggerPlayerLookAt(Transform target)
+        => OnPlayerLookAt?.Invoke(target);
     // 玩家战斗
     public static void TriggerWeaponAttack(ItemData item, AttackType type, float power)
         => OnWeaponAttack?.Invoke(item, type, power);

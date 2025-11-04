@@ -3,28 +3,50 @@ using System.Collections.Generic;
 using TMPro;
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CreatureController : MonoBehaviour, IDamageable
 {
     public string id;
     public CreatureStat stat;
+    private Animator animator;
+    private NavMeshAgent agent;
+    private CreatureAI ai;
 
-    private bool isDead;
-
-    [Header("Feedback")]
-    public GameObject damageTextPrefab;
-    public Color normalDamageColor = Color.white;
-    public Color criticalDamageColor = Color.red;
-
-    public bool IsDead => stat?.GetHealth() < 0;
+    public bool IsDead => stat?.GetHealth() <= 0;
     public float CurrentHealth => stat.GetHealth();
     public float MaxHealth => stat.GetMaxHealth();
+
+    [Header("Weak Points")]
+    public Transform[] weakPointTransforms; // 头部、背部等
+    public float weakPointRadius = 0.3f;
+
+    private bool isDead;
+    [Header("死亡替换为Ragdoll")]
+    public GameObject ragdollPrefab;
+    public float ragdollLifetime = 120f;
+    public float deathForce = 3f;
+
 
     void Start()
     {
         stat = new CreatureStat(id);
-        var tigerAI = gameObject.AddComponent<CreatureAI>();
-        tigerAI.Init(stat);
+        ai = gameObject.AddComponent<CreatureAI>();
+        ai.Init(stat);
+
+        animator = GetComponent<Animator>();
+
+        agent = ai.agent;
+    }
+
+    public bool IsWeakPoint(Vector3 hitPoint)
+    {
+        foreach (var wp in weakPointTransforms)
+        {
+            if (Vector3.Distance(hitPoint, wp.position) <= weakPointRadius)
+                return true;
+        }
+        return false;
     }
 
     public void TakeDamage(DamageInfo damageInfo)
@@ -42,7 +64,7 @@ public class CreatureController : MonoBehaviour, IDamageable
         }
 
         stat.LoseHealth((int)finalDamage);
-
+        
         Debug.Log($"[敌人] 受到 {finalDamage:F1} 伤害 ({damageInfo.damageType}) " +
                   $"{(damageInfo.isCritical ? "【暴击】" : "")} 剩余生命: {stat.GetHealth():F1}/{stat.GetMaxHealth():F1}");
 
@@ -63,16 +85,7 @@ public class CreatureController : MonoBehaviour, IDamageable
 
     private void ShowDamageText(float damage, bool isCritical)
     {
-        if (damageTextPrefab == null) return;
-
-        GameObject textObj = Instantiate(damageTextPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
-        var text = textObj.GetComponent<TextMeshPro>();
-        if (text != null)
-        {
-            text.text = $"{damage:F0}{(isCritical ? "!" : "")}";
-            text.color = isCritical ? criticalDamageColor : normalDamageColor;
-        }
-        Destroy(textObj, 1.5f);
+        DamagePopupPool.Instance.ShowDamage(transform.position + Vector3.up * 2f, (int)damage, isCritical, 1.5f);
     }
 
     private void ApplyKnockback(Vector3 direction, float force)
@@ -87,14 +100,76 @@ public class CreatureController : MonoBehaviour, IDamageable
     private void OnDeath()
     {
         Debug.Log($"[敌人] {gameObject.name} 死亡");
-        
+        Die();
+
         // 播放死亡动画
         // animator?.SetTrigger("Death");
-        
+
         // 掉落物品
         // LootManager.Instance?.SpawnLoot(transform.position);
         
         // 延迟销毁
-        Destroy(gameObject, 2f);
+        // Destroy(gameObject, 2f);
     }
+
+    /// <summary>
+    /// 由CreatureStat或AI在死亡时调用
+    /// </summary>
+    public void Die()
+    {
+        // 1. 停止AI与控制
+        if (ai != null) ai.enabled = false;
+        if (agent != null) agent.enabled = false;
+        if (animator != null) animator.enabled = false;
+
+        // 2. 生成Ragdoll预制体
+        if (ragdollPrefab != null)
+        {
+            GameObject ragdoll = Instantiate(ragdollPrefab, transform.position, transform.rotation);
+
+            // 3. 复制骨骼姿势
+            CopyPoseRecursive(transform, ragdoll.transform);
+
+            // 4. 给Ragdoll施加惯性（继承NavMeshAgent速度）
+            Vector3 velocity = agent != null ? agent.velocity : Vector3.zero;
+            ApplyVelocityToRagdoll(ragdoll, velocity, deathForce);
+            ragdoll.SetActive(true);
+
+            // 5. 延迟销毁尸体
+            Destroy(ragdoll, ragdollLifetime);
+        }
+
+        // 6. 销毁原AI对象
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 递归复制Transform的姿势（根据名称匹配）
+    /// </summary>
+    private void CopyPoseRecursive(Transform source, Transform target)
+    {
+        foreach (Transform child in source)
+        {
+            Transform targetChild = target.Find(child.name);
+            if (targetChild)
+            {
+                targetChild.localPosition = child.localPosition;
+                targetChild.localRotation = child.localRotation;
+                CopyPoseRecursive(child, targetChild);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 给ragdoll的每个Rigidbody施加速度和冲击力
+    /// </summary>
+    private void ApplyVelocityToRagdoll(GameObject ragdoll, Vector3 inheritVelocity, float impulseForce)
+    {
+        foreach (var rb in ragdoll.GetComponentsInChildren<Rigidbody>())
+        {
+            rb.velocity = inheritVelocity;
+            rb.AddForce(Random.insideUnitSphere * impulseForce, ForceMode.Impulse);
+        }
+    }
+
 }

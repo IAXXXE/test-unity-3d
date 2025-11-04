@@ -1,3 +1,4 @@
+using EasyButtons;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -73,7 +74,8 @@ public class PlayerController : MonoBehaviour
     private bool isCrouched = false;
     public bool isInWater = false;
     private bool isFullySubmerged = false;
-    
+    public bool isAiming = false;
+
     // Water physics
     private float waterDepth = 0f;
     private float splashTimer = 0f;
@@ -229,6 +231,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!thirdPersonCamera.IsAiming())
         {
+            isAiming = false;
             // 普通移动时根据移动方向旋转
             Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.y);
             if (moveDir.sqrMagnitude > 0.01f)
@@ -244,6 +247,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            isAiming = true;
             // 瞄准状态：角色始终朝向摄像机前方
             Vector3 camForward = thirdPersonCamera.GetCameraForwardFlat();
             Quaternion targetRot = Quaternion.LookRotation(camForward);

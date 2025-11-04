@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3785061013102558885}
   - component: {fileID: 8025387971952297087}
   - component: {fileID: 1295262190679876037}
+  - component: {fileID: 4769435919795261520}
   m_Layer: 0
   m_Name: _DamageText
   m_TagString: Untagged
@@ -172,3 +173,51 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8025387971952297087}
   m_maskType: 0
+--- !u!114 &4769435919795261520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7982407933221788058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5221fd2dd3d6f4dc09135dde0f9b3784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 1
+  initialVelocity: {x: 0, y: 1, z: 0}
+  gravity: -1.5
+  scaleByDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.05
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0.5
+      inSlope: -0.05
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minDistance: 1
+  maxDistance: 30
+  minScale: 1
+  maxScale: 2
+  faceCamera: 1
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  critColor: {r: 1, g: 0.70054406, b: 0.1745283, a: 1}
+  fadeStart: 0.6
+  fadeEnd: 1
