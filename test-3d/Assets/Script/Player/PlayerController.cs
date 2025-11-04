@@ -227,18 +227,6 @@ public class PlayerController : MonoBehaviour
 
     void HandleRotation()
     {
-        // if (cameraTransform == null) return;
-
-        // float lookX = lookInput.x * Time.deltaTime * 120f;
-        // float lookY = -lookInput.y * Time.deltaTime * 80f;
-
-        // cameraTransform.Rotate(Vector3.up, lookX, Space.World);
-        // cameraTransform.Rotate(Vector3.right, lookY, Space.Self);
-
-        // Vector3 camAngles = cameraTransform.localEulerAngles;
-        // if (camAngles.x > 180f) camAngles.x -= 360f;
-        // camAngles.x = Mathf.Clamp(camAngles.x, -50f, 80f);
-        // cameraTransform.localEulerAngles = new Vector3(camAngles.x, 0, 0);
         if (!thirdPersonCamera.IsAiming())
         {
             // 普通移动时根据移动方向旋转

@@ -88,7 +88,11 @@ public class ThirdPersonCamera : MonoBehaviour
         HandleCollision();
 
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothTime);
-        transform.LookAt(target.position + currentOffset);
+        
+        // Calculate rotated offset for LookAt
+        Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+        Vector3 rotatedOffset = rotation * currentOffset;
+        transform.LookAt(target.position + rotatedOffset);
     }
 
     void HandleRotation()
@@ -110,8 +114,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void HandleCollision()
     {
-        Vector3 targetPos = target.position + currentOffset;
+        // Vector3 targetPos = target.position + currentOffset;
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+        
+        // Apply rotation to the offset so it stays relative to camera
+        Vector3 rotatedOffset = rotation * currentOffset;
+        Vector3 targetPos = target.position + rotatedOffset;
+        
         Vector3 desiredDir = rotation * Vector3.back;
         Vector3 idealPos = targetPos + desiredDir * currentDistance;
 
@@ -124,6 +133,8 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             desiredPosition = idealPos;
         }
+
+
     }
 
     public void SetAiming(bool aiming)
