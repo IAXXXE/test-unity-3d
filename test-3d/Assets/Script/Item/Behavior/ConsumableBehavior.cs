@@ -28,7 +28,7 @@ public class ConsumableBehavior : ItemBehavior
         {
             consumeTimer += deltaTime;
             float progress = Mathf.Clamp01(consumeTimer / totalUseTime);
-            playerUI?.UpdateChargeBar(progress);
+            PlayerUI.Instance.UpdateProgressBar(progress);
 
             // 进度完成
             if (consumeTimer >= totalUseTime)
@@ -53,8 +53,8 @@ public class ConsumableBehavior : ItemBehavior
         consumeTimer = 0f;
         totalUseTime = itemData.useTime > 0 ? itemData.useTime : 1f;
 
-        playerUI?.ShowChargeBar(true);
-        playerUI?.UpdateChargeBar(0f);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Eating);
+        PlayerUI.Instance.UpdateProgressBar(0f);
 
         Debug.Log($"[消耗品] 开始使用: {itemData.name} (按住以继续)");
 
@@ -65,7 +65,7 @@ public class ConsumableBehavior : ItemBehavior
     private void CompleteConsume()
     {
         isConsuming = false;
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         // 触发物品效果
         bool useSuccess = UseItem();
@@ -86,7 +86,7 @@ public class ConsumableBehavior : ItemBehavior
         isConsuming = false;
         consumeTimer = 0f;
         
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         // TODO: 播放取消音效
     }

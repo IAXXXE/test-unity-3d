@@ -2,10 +2,39 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum BarType
+{
+    None,
+    Eating,
+    Drinking,
+    Using,
+    Drawing,
+}
+
 public class PlayerUI : MonoBehaviour
 {
+    public static PlayerUI Instance{ get; private set; }
+
     public Slider chargeBar;
+    public Image handleImage;
     public GameObject crosshair;
+
+
+    public SerializableDictionary<BarType, Sprite> handleIcons;
+
+    void Awake()
+    {
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -22,18 +51,16 @@ public class PlayerUI : MonoBehaviour
         crosshair.SetActive(isAiming);
     }
 
-    public void ShowChargeBar(bool show)
+    public void ShowProgressBar(bool show, BarType type = BarType.None)
     {
-        if (chargeBar)
-        {
-            chargeBar.gameObject.SetActive(show);
-            chargeBar.value = 0;
-        }
+        chargeBar.value = 0;
+        handleImage.sprite = handleIcons[type];
+
+        chargeBar.gameObject.SetActive(show);
     }
 
-    public void UpdateChargeBar(float ratio)
+    public void UpdateProgressBar(float ratio)
     {
-        if (chargeBar)
-            chargeBar.value = Mathf.Clamp01(ratio);
+        chargeBar.value = Mathf.Clamp01(ratio);
     }
 }

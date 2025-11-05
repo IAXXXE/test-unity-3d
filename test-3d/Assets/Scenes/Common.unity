@@ -3594,7 +3594,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeBar: {fileID: 1032176561}
+  handleImage: {fileID: 1973993007}
   crosshair: {fileID: 313183675}
+  handleIcons:
+    m_keys: 0000000001000000020000000300000004000000
+    m_values:
+    - {fileID: 21300000, guid: ea4fcfc6c39de3047a90ef3617f5e431, type: 3}
+    - {fileID: 21300000, guid: b915a7ee8a2712a43a9ed2e24541c454, type: 3}
+    - {fileID: 21300000, guid: 6f649aea2852e3b46a8c4386355a2c53, type: 3}
+    - {fileID: 21300000, guid: ea4fcfc6c39de3047a90ef3617f5e431, type: 3}
+    - {fileID: 21300000, guid: ea4fcfc6c39de3047a90ef3617f5e431, type: 3}
 --- !u!114 &210683561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9143,12 +9152,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6914988914543124384}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &602800081 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1052835634222168897, guid: efc8b08f14d334259b52b2e8de49f1c5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6914988914543124384}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &602800082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9161,14 +9164,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3bab01c214c445eda680fee4f6c7852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 602800081}
+  animator: {fileID: 0}
   playerController: {fileID: 0}
   leftHandTarget: {fileID: 1498737249}
   rightHandTarget: {fileID: 1498737249}
   lookTarget: {fileID: 0}
   ikWeight: 0
+  lookWeight: 0
   transitionSpeed: 5
-  ikLookWeight: 0
+  lookPositionSpeed: 8
   isAiming: 0
 --- !u!1 &607229525
 GameObject:
@@ -14537,7 +14541,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 600, y: -300}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 240, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1037643659
 PrefabInstance:
@@ -22629,7 +22633,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeBar: {fileID: 1836509196}
+  handleImage: {fileID: 0}
   crosshair: {fileID: 0}
+  handleIcons:
+    m_keys: 
+    m_values: []
 --- !u!1001 &1679348751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23410,7 +23418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.81766945, b: 0.24056602, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -27424,15 +27432,15 @@ RectTransform:
   m_GameObject: {fileID: 1973993004}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 266988169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1973993006
 CanvasRenderer:
@@ -27462,7 +27470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b915a7ee8a2712a43a9ed2e24541c454, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29229,6 +29237,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca79ae1456e884f5d9b9665eef60abe7, type: 2}
   - {fileID: 11400000, guid: 9bd36eff8cb98407e9c7810fc3bcd0e2, type: 2}
   - {fileID: 11400000, guid: 4680eecab7f124d38b71557de161973d, type: 2}
+  - {fileID: 11400000, guid: a96003c4b237a4676bd63f671a893f80, type: 2}
+  - {fileID: 11400000, guid: 3f7629f9c33c14c17a8d429d510b56ae, type: 2}
+  - {fileID: 11400000, guid: 4088727d7bb46421f9dcaf16bb24ac61, type: 2}
+  - {fileID: 11400000, guid: ec5a29fbd56b34057a3286a859020ae6, type: 2}
+  - {fileID: 11400000, guid: b19b9fcbe40b84b148ca9bcffbcde9d4, type: 2}
 --- !u!1001 &2081352171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30937,6 +30950,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: _Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6914988913484132015, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6914988913484132016, guid: efc8b08f14d334259b52b2e8de49f1c5,
         type: 3}

@@ -46,18 +46,17 @@ public class InteractableWater : InteractableGatherWithTool
         scoopTime = 0f;
 
         float useTime = 0.2f * (itemContainer.GetMaxCapacity() - itemContainer.GetCapacity());
-        var playerUI = GameInstance.Instance.PlayerStat.GetPlayerUI();
-        playerUI?.ShowChargeBar(true);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
         Debug.Log($"开始打水: {itemContainer.data.name}");
 
         while (scoopTime < useTime)
         {
             yield return null;
             scoopTime += Time.deltaTime;
-            playerUI?.UpdateChargeBar(scoopTime / useTime);
+            PlayerUI.Instance.UpdateProgressBar(scoopTime / useTime);
         }
 
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         itemContainer.Scoop(FillingType.Water);
         Debug.Log($"打完水了: {itemContainer.data.name}");

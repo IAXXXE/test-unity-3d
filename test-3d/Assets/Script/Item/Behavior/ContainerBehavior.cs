@@ -40,7 +40,7 @@ public class ContainerBehavior : ItemBehavior
         {
             usingTimer += deltaTime;
             float progress = Mathf.Clamp01(usingTimer / totalUseTime);
-            playerUI?.UpdateChargeBar(progress);
+            PlayerUI.Instance.UpdateProgressBar(progress);
 
             // 进度完成
             if (usingTimer >= totalUseTime)
@@ -65,8 +65,8 @@ public class ContainerBehavior : ItemBehavior
         usingTimer = 0f;
         totalUseTime = itemData.useTime > 0 ? itemData.useTime : 1f;
 
-        playerUI?.ShowChargeBar(true);
-        playerUI?.UpdateChargeBar(0f);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Drinking);
+        PlayerUI.Instance.UpdateProgressBar(0f);
 
         Debug.Log($"[消耗品] 开始使用: {itemData.name} (按住以继续)");
 
@@ -77,7 +77,7 @@ public class ContainerBehavior : ItemBehavior
     private void CompleteDrink()
     {
         isUsing = false;
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         // 触发物品效果
         Debug.Log($"[消耗品] 使用完成: {itemData.name}");
@@ -129,7 +129,7 @@ public class ContainerBehavior : ItemBehavior
         isUsing = false;
         usingTimer = 0f;
         
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         // TODO: 播放取消音效
     }
@@ -159,7 +159,7 @@ public class ContainerBehavior : ItemBehavior
         {
             usingTimer += deltaTime;
             float progress = Mathf.Clamp01(usingTimer / totalUseTime);
-            playerUI?.UpdateChargeBar(progress);
+            PlayerUI.Instance.UpdateProgressBar(progress);
 
             // 进度完成
             if (usingTimer >= totalUseTime)
@@ -178,8 +178,8 @@ public class ContainerBehavior : ItemBehavior
         usingTimer = 0f;
         totalUseTime = itemData.useTime > 0 ? itemData.useTime : 1f;
 
-        playerUI?.ShowChargeBar(true);
-        playerUI?.UpdateChargeBar(0f);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
+        PlayerUI.Instance.UpdateProgressBar(0f);
 
         Debug.Log($"[容器] 开始倾倒");
 
@@ -190,7 +190,7 @@ public class ContainerBehavior : ItemBehavior
     private void CompletePouring()
     {
         isUsing = false;
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         Debug.Log($"[容器] 倾倒完成");
         itemContainer.Pour();

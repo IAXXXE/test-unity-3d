@@ -2189,12 +2189,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
-  normalDamageColor: {r: 1, g: 1, b: 1, a: 1}
-  criticalDamageColor: {r: 1, g: 0.5707547, b: 0.5707547, a: 1}
   weakPointTransforms:
-  - {fileID: 8202997607815699794}
   - {fileID: 2537077839160277555}
-  weakPointRadius: 0.3
+  - {fileID: 8202997607815699794}
+  weakPointRadius: 0.6
   ragdollPrefab: {fileID: 5663241143391266217}
   ragdollLifetime: 120
   deathForce: 3
@@ -2217,8 +2215,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.75, y: 1.5, z: 3}
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Size: {x: 0.7, y: 1.2, z: 2.75}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &6037559669635371616
 GameObject:
   m_ObjectHideFlags: 0

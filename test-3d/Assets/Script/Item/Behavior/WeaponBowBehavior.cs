@@ -52,7 +52,7 @@ public class WeaponBowBehavior : ItemBehavior
         {
             drawTimer += deltaTime;
             float drawRatio = Mathf.Clamp01(drawTimer / maxDrawTime);
-            playerUI?.UpdateChargeBar(drawRatio);
+            PlayerUI.Instance.UpdateProgressBar(drawRatio);
             
             // 更新弓拉弦动画/音效
             UpdateBowDrawVisual(drawRatio);
@@ -100,7 +100,7 @@ public class WeaponBowBehavior : ItemBehavior
         playerUI.SetCrosshair(true);
         GameEventManager.TriggerAimModeChanged(true);
 
-        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90f));
+        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z));
 
         // 自动开始拉弦
         StartDrawing();
@@ -120,10 +120,9 @@ public class WeaponBowBehavior : ItemBehavior
 
         // 恢复FOV
         // StartCoroutine(SmoothFOVTransition(aimFOV, normalFOV, 0.2f));
-        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z - 90f));
+        transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z));
         
-        playerUI?.ShowChargeBar(false);
-        playerUI?.SetCrosshair(false);
+        PlayerUI.Instance.ShowProgressBar(false);
         Debug.Log("[弓箭] 退出瞄准模式");
         GameEventManager.TriggerAimModeChanged(false);
     }
@@ -140,7 +139,6 @@ public class WeaponBowBehavior : ItemBehavior
         {
             drawnArrowVisual = Instantiate(arrowPrefab, arrowSpawnPoint);
             drawnArrowVisual.transform.localPosition = Vector3.zero;
-            drawnArrowVisual.transform.localRotation = Quaternion.identity;
             
             // 禁用物理碰撞，仅作视觉展示
             var rb = drawnArrowVisual.GetComponent<Rigidbody>();
@@ -149,7 +147,7 @@ public class WeaponBowBehavior : ItemBehavior
             if(col != null) col.enabled = false;
         }
 
-        playerUI?.ShowChargeBar(true);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Drawing);
         Debug.Log("[弓箭] 开始拉弦");
     }
 
@@ -206,7 +204,7 @@ public class WeaponBowBehavior : ItemBehavior
 
         isDrawing = false;
         drawTimer = 0f;
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         InventoryManager.Instance.RemoveItem("W0003", 1);
 

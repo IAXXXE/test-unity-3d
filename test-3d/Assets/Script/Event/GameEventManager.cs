@@ -44,8 +44,8 @@ public static class GameEventManager
     // 特殊界面
     public static event Action<CookLevel> OnCooked;
     // 玩家行为
-    public static event Action<ItemBase> OnItemHeld;
-    public static event Action OnHeldItemConsumed;
+    public static event Action<ItemBase, HandType> OnItemHeld;
+    public static event Action<HandType> OnHeldItemConsumed;
     public static event Action OnItemUpdate;
     public static event Action<Transform> OnPlayerLookAt;
     // 战斗
@@ -91,12 +91,13 @@ public static class GameEventManager
         => OnTerrainGenerated?.Invoke(trans);
     #endregion
 
-    #region 4-UI Event Triggers
+    #region 4-UI Events Triggers
     // UI界面
     public static void TriggerUIShowed()
         => OnUIShowed?.Invoke();
     public static void TriggerUIHided()
         => OnUIHided?.Invoke();
+
     // 玩家状态
     public static void TriggerPlayerHealthChanged(int value)
         => OnPlayerHealthChanged?.Invoke(value);
@@ -106,7 +107,6 @@ public static class GameEventManager
         => OnPlayerThirstyChanged?.Invoke(value);
     public static void TriggerPlayerMagicChanged(int value)
         => OnPlayerMagicChanged?.Invoke(value);
-
     #endregion
 
     #region 5-Gameplay Event Triggers
@@ -114,10 +114,10 @@ public static class GameEventManager
         => OnCooked?.Invoke(level);
 
     // 玩家行为
-    public static void TriggerItemHeld(ItemBase item)
-        => OnItemHeld?.Invoke(item);
-    public static void TriggerHeldItemConsumed()
-        => OnHeldItemConsumed?.Invoke();
+    public static void TriggerItemHeld(ItemBase item, HandType type = HandType.HandR)
+        => OnItemHeld?.Invoke(item, type);
+    public static void TriggerHeldItemConsumed(HandType type = HandType.HandR)
+        => OnHeldItemConsumed?.Invoke(type);
     public static void TriggerItemUpdate()
         => OnItemUpdate?.Invoke();
     public static void TriggerPlayerLookAt(Transform target)

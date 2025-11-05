@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-// ========== 6. 重构后的 PlayerAction ==========
 [RequireComponent(typeof(PlayerWeapon))]
 public class PlayerAction : MonoBehaviour
 {
@@ -30,6 +29,9 @@ public class PlayerAction : MonoBehaviour
 
         // 使用物品
         inputActions.Player.UseL.performed += ctx => OnUsePressed();
+
+        // 合并物品
+        inputActions.Player.Merge.performed += ctx => OnMergePressed();
 
         // UI锁定
         GameEventManager.OnUIShowed += OnUIShowed;
@@ -90,6 +92,49 @@ public class PlayerAction : MonoBehaviour
     {
         if (isLocked) return;
         weapon.OnUse();
+    }
+
+    private void OnMergePressed()
+    {
+        var itemL = weapon.GetHeldItemData(HandType.HandL);
+        var itemR = weapon.GetHeldItemData(HandType.HandR);
+        Debug.Log($"try merge {weapon.GetHeldItemData(HandType.HandL).name} {weapon.GetHeldItemData(HandType.HandR).name}");
+        // 合成表
+        if(itemL == null || itemR == null) return;
+
+            if(itemL.itemID == "W0001" && itemR.itemID == "W0001")
+        {
+            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem("W0005");
+        }
+        if(itemL.itemID == "M0001" && itemR.itemID == "M0001")
+        {
+            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem("M0003");
+        }
+        if(itemL.itemID == "M0002" && itemR.itemID == "M0002")
+        {
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem("W0004");
+        }
+
+        if((itemL.itemID == "M0003" && itemR.itemID == "W0005") || (itemL.itemID == "W0005" && itemR.itemID == "M0003"))
+        {
+            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem("W0002");
+        }
+
+        if((itemL.itemID == "W0004" && itemR.itemID == "W0001") || (itemL.itemID == "W0001" && itemR.itemID == "W0004"))
+        {
+            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem("W0003");
+        }
+
+
     }
 
     private void OnUIShowed()

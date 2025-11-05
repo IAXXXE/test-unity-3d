@@ -12,7 +12,8 @@ public class InventoryManager : MonoBehaviour
     private List<InventorySlot> slots;
     private int capacity = 12;
 
-    private int selectSlotIdx = 0;
+    private int selectSlotIdxL = 0;
+    private int selectSlotIdxR = 0;
 
     public InventoryManager()
     {
@@ -36,7 +37,7 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
+        transform.GetChild(selectSlotIdxR).Find("_HandR").gameObject.SetActive(true);
 
         GameEventManager.OnHeldItemConsumed += HeldItemConsumed;
         GameEventManager.OnItemUpdate += RefreshUI;
@@ -48,8 +49,12 @@ public class InventoryManager : MonoBehaviour
         GameEventManager.OnItemUpdate -= RefreshUI;
     }
 
+    private bool isShiftPressed = false;
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.LeftShift)) isShiftPressed = true;
+        if(Input.GetKeyUp(KeyCode.LeftShift)) isShiftPressed = false;
+
         if(Input.GetKeyDown(KeyCode.Alpha1)) UpdateSelectIdx(0);
         else if(Input.GetKeyDown(KeyCode.Alpha2)) UpdateSelectIdx(1);
         else if(Input.GetKeyDown(KeyCode.Alpha3)) UpdateSelectIdx(2);
@@ -65,19 +70,34 @@ public class InventoryManager : MonoBehaviour
 
         // Debug Button
         else if(Input.GetKeyDown(KeyCode.B)) AddBow();
+        else if(Input.GetKeyDown(KeyCode.M)) AddMat();
 
     }
 
     void UpdateSelectIdx(int idx)
     {
-        if(selectSlotIdx == idx) return;
-        transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(false);
-        selectSlotIdx = idx;
-        transform.GetChild(selectSlotIdx).Find("_HandR").gameObject.SetActive(true);
+        if(isShiftPressed)
+        {
+            if(selectSlotIdxL == idx) return;
+            transform.GetChild(selectSlotIdxL).Find("_HandL").gameObject.SetActive(false);
+            selectSlotIdxL = idx;
+            transform.GetChild(selectSlotIdxL).Find("_HandL").gameObject.SetActive(true);
 
-        var item = slots[selectSlotIdx].item;
-        
-        GameEventManager.TriggerItemHeld(item);
+            var item = slots[selectSlotIdxL].item;
+            
+            GameEventManager.TriggerItemHeld(item, HandType.HandL);
+        }
+        else
+        {
+            if(selectSlotIdxR == idx) return;
+            transform.GetChild(selectSlotIdxR).Find("_HandR").gameObject.SetActive(false);
+            selectSlotIdxR = idx;
+            transform.GetChild(selectSlotIdxR).Find("_HandR").gameObject.SetActive(true);
+
+            var item = slots[selectSlotIdxR].item;
+            
+            GameEventManager.TriggerItemHeld(item, HandType.HandR);
+        }
         
     }
 
@@ -97,6 +117,13 @@ public class InventoryManager : MonoBehaviour
     }
 
     [Button]
+    public void AddMat()
+    {   
+        AddItem(ItemDatabase.Instance.CreateItem("M0001"), 10);
+        AddItem(ItemDatabase.Instance.CreateItem("M0002"), 10);
+        AddItem(ItemDatabase.Instance.CreateItem("W0001"), 10);
+    }
+
     public bool AddItem(ItemBase item, int quantity = 1)
     {
         if (item == null || quantity <= 0) return false;
@@ -208,7 +235,7 @@ public class InventoryManager : MonoBehaviour
             slots[slotIndex].item = null;
             slots[slotIndex].quantity = 0;
         }
-        UpdateSlot(selectSlotIdx);
+        UpdateSlot(selectSlotIdxR);
         return true;
     }
     
@@ -305,9 +332,13 @@ public class InventoryManager : MonoBehaviour
         if (slot.item == null)
         {
             ClearSlot(slotTransform);
-            if(idx == selectSlotIdx)
+            if(idx == selectSlotIdxR)
             {
-                GameEventManager.TriggerItemHeld(slot.item);
+                GameEventManager.TriggerItemHeld(slot.item, HandType.HandR);
+            }
+            if(idx == selectSlotIdxL)
+            {
+                GameEventManager.TriggerItemHeld(slot.item, HandType.HandL);
             }
             return;
         }
@@ -325,10 +356,30 @@ public class InventoryManager : MonoBehaviour
             count.text = ((ItemContainer)slot.item).GetCapacity().ToString();
         }
 
-        if(idx == selectSlotIdx)
+        if(idx == selectSlotIdxR)
         {
-            GameEventManager.TriggerItemHeld(slot.item);
+            GameEventManager.TriggerItemHeld(slot.item, HandType.HandR);
+            if(selectSlotIdxL == selectSlotIdxR && !CanHeldEachHand(slot))
+            {
+                GameEventManager.TriggerItemHeld(null, HandType.HandL);
+            }
         }
+        if(idx == selectSlotIdxL)
+        {
+            if(selectSlotIdxL != selectSlotIdxR)
+                GameEventManager.TriggerItemHeld(slot.item, HandType.HandL);
+            else if(CanHeldEachHand(slot))
+                GameEventManager.TriggerItemHeld(slot.item, HandType.HandL);
+            else
+                GameEventManager.TriggerItemHeld(null, HandType.HandL);
+        }
+    }
+
+    public bool CanHeldEachHand(InventorySlot slot)
+    {
+        if(slot.item.data.isStackable && slot.quantity > 1) return true;
+
+        return false;
     }
 
     public void ClearSlot(Transform transform)
@@ -337,8 +388,15 @@ public class InventoryManager : MonoBehaviour
         transform.Find("_Count").gameObject.SetActive(false);
     }
 
-    private void HeldItemConsumed()
+    private void HeldItemConsumed(HandType type)
     {
-        RemoveItemFromSlot(selectSlotIdx, 1);
+        if(type == HandType.HandR)
+        {
+            RemoveItemFromSlot(selectSlotIdxR, 1);
+        }
+        else if(type == HandType.HandL)
+        {
+            RemoveItemFromSlot(selectSlotIdxL, 1);
+        }
     }
 }

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
+  m_Name: takagrass
+  m_EditorClassIdentifier: 
+  itemID: M0001
+  itemName: "\u957F\u8349"
+  itemType: 4
+  description: "\u5177\u6709\u4E00\u5B9A\u97E7\u6027\u7684\u8349"
+  icon: {fileID: 21300000, guid: 1fe19ffae1abab0479d7d9716bcbbb9c, type: 3}
+  worldPrefab: {fileID: 4452947085904611623, guid: e4807f87d5c884b19a03820f70bf28de,
+    type: 3}
+  posOffset: {x: 0, y: -90, z: 0}
+  rotOffset: {x: 0, y: 0, z: 0}
+  scale: {x: 0, y: 0, z: 0}
+  maxStackSize: 2
+  isStackable: 1
+  buyPrice: 10
+  sellPrice: 5
+  isUsable: 0
+  isConsumable: 0
+  useTime: 0
+  satietyRestore: 0
+  thirstyRestore: 0
+  healthRestore: 0
+  manaRestore: 0
+  effectDuration: 0
+  containerType: 0
+  capacity: 0
+  weaponType: 3
+  damage: 1
+  damageMultiplier: 1
+  defense: 0

@@ -1,7 +1,12 @@
 using EasyButtons;
 using UnityEngine;
 
-// ========== 5. 重构后的 PlayerWeapon ==========
+public enum HandType
+{
+    HandL,
+    HandR
+}
+
 public class PlayerWeapon : MonoBehaviour
 {
     [Header("Hand Transforms")]
@@ -13,10 +18,10 @@ public class PlayerWeapon : MonoBehaviour
 
     private ItemBase heldItemL;
     private ItemBase heldItemR;
-    private GameObject currentItemObject;
+    private GameObject currentItemObjectL;
+    private GameObject currentItemObjectR;
     private ItemBehavior currentBehavior;
 
-    // pos TEST:
     [Button]
     public void HoldItem(GameObject obj)
     {
@@ -35,26 +40,40 @@ public class PlayerWeapon : MonoBehaviour
         GameEventManager.OnItemHeld -= HoldItem;
     }
 
-    private void HoldItem(ItemBase item)
+    private void HoldItem(ItemBase item, HandType type)
     {
-        if (heldItemR == item) return;
-        
-        ClearItem();
-        heldItemR = item;
-        
+        Transform itemParent = null;
+        if(type == HandType.HandR)
+        {
+            if (heldItemR == item) return;
+            ClearItem(HandType.HandR);
+            heldItemR = item;
+            if(item == null) return;
+            // 实例化物品模型
+            currentItemObjectR = Instantiate(item.data.worldPrefab, HandR);
+            currentItemObjectR.transform.SetLocalPositionAndRotation(
+                item.data.posOffset, 
+                Quaternion.Euler(item.data.rotOffset)
+            );
+            // 根据物品类型附加对应的行为组件
+            AttachItemBehavior(item);
+            Debug.Log($"[装备] {item.data.name} ({item.data.itemType})");
+        }
+        else
+        {
+            if (heldItemL == item) return;
+            ClearItem(HandType.HandL);
+            heldItemL = item;
+            if(item == null) return;
+            // 实例化物品模型
+            currentItemObjectL = Instantiate(item.data.worldPrefab, HandL);
+            currentItemObjectL.transform.SetLocalPositionAndRotation(
+                item.data.posOffset, 
+                Quaternion.Euler(item.data.rotOffset)
+            );
+        }
+
         if (item == null) return;
-
-        // 实例化物品模型
-        currentItemObject = Instantiate(item.data.worldPrefab, HandR);
-        currentItemObject.transform.SetLocalPositionAndRotation(
-            item.data.posOffset, 
-            Quaternion.Euler(item.data.rotOffset)
-        );
-
-        // 根据物品类型附加对应的行为组件
-        AttachItemBehavior(item);
-
-        Debug.Log($"[装备] {item.data.name} ({item.data.itemType})");
     }
 
     private void AttachItemBehavior(ItemBase item)
@@ -70,11 +89,11 @@ public class PlayerWeapon : MonoBehaviour
             case ItemType.Weapon:
                 if (item.data.weaponType == WeaponType.Melee)
                 {
-                    currentBehavior = currentItemObject.AddComponent<WeaponMeleeBehavior>();
+                    currentBehavior = currentItemObjectR.AddComponent<WeaponMeleeBehavior>();
                 }
                 else if (item.data.weaponType == WeaponType.Bow)
                 {
-                    currentBehavior = currentItemObject.AddComponent<WeaponBowBehavior>();
+                    currentBehavior = currentItemObjectR.AddComponent<WeaponBowBehavior>();
                 }
                 break;
 
@@ -94,32 +113,77 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    public void ClearItem()
+    public void ClearItem(HandType type)
     {
-        if (currentBehavior != null)
+        if(type == HandType.HandR)
         {
-            currentBehavior.OnUnequipped();
-            Destroy(currentBehavior);
-            currentBehavior = null;
-        }
+            if (currentBehavior != null)
+            {
+                currentBehavior.OnUnequipped();
+                Destroy(currentBehavior);
+                currentBehavior = null;
+            }
 
-        if (HandR.childCount > 0)
+            if (HandR.childCount > 0)
+            {
+                GameUtils.Instance.ClearChildren(HandR);
+            }
+
+            currentItemObjectR = null;
+            heldItemR = null;
+        }
+        else if(type == HandType.HandL)
         {
-            GameUtils.Instance.ClearChildren(HandR);
+            if (HandL.childCount > 0)
+            {
+                GameUtils.Instance.ClearChildren(HandL);
+            }
+            currentItemObjectL = null;
+            heldItemL = null;
         }
-
-        currentItemObject = null;
-        heldItemR = null;
     }
 
-    public ItemBase GetHeldItem() => heldItemR;
-    public ItemData GetHeldItemData() => heldItemR?.data;
-
-    public ItemType GetHeldItemType()
+    public ItemBase GetHeldItem(HandType type = HandType.HandR)
     {
-        if(heldItemR == null) return ItemType.None;
+        if(type == HandType.HandL)
+        {
+            return heldItemL;
+        }
+        else if(type == HandType.HandR)
+        {
+            return heldItemR;
+        }
 
-        return heldItemR.data.itemType;
+        return null;
+    }
+    public ItemData GetHeldItemData(HandType type = HandType.HandR)
+    {
+        if(type == HandType.HandL)
+        {
+            return heldItemL?.data;
+        }
+        else if(type == HandType.HandR)
+        {
+            return heldItemR?.data;
+        }
+
+        return null;
+    }
+
+    public ItemType GetHeldItemType(HandType type = HandType.HandR)
+    {
+        if(type == HandType.HandL)
+        {
+            if(heldItemL == null) return ItemType.None;
+            return heldItemL.data.itemType;
+        }
+        else if(type == HandType.HandR)
+        {
+            if(heldItemR == null) return ItemType.None;
+            return heldItemR.data.itemType;
+        }
+
+        return ItemType.None;
     }
 
     public ItemData GetArrowData()

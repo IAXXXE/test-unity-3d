@@ -18,7 +18,7 @@ public class WeaponMeleeBehavior : ItemBehavior
 
         isCharging = true;
         chargeTimer = 0f;
-        playerUI?.ShowChargeBar(true);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
     }
 
     public override void OnPrimaryUpdate(float deltaTime)
@@ -31,7 +31,7 @@ public class WeaponMeleeBehavior : ItemBehavior
         if (isCharging)
         {
             chargeTimer += deltaTime;
-            playerUI?.UpdateChargeBar(chargeTimer / maxChargeTime);
+            PlayerUI.Instance.UpdateProgressBar(chargeTimer / maxChargeTime);
         }
     }
 
@@ -40,7 +40,7 @@ public class WeaponMeleeBehavior : ItemBehavior
         if (!isCharging) return;
 
         isCharging = false;
-        playerUI?.ShowChargeBar(false);
+        PlayerUI.Instance.ShowProgressBar(false);
 
         float chargeRatio = Mathf.Clamp01(chargeTimer / maxChargeTime);
 
