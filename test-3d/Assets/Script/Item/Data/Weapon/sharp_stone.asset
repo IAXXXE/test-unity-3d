@@ -36,6 +36,7 @@ MonoBehaviour:
   effectDuration: 0
   containerType: 0
   capacity: 0
+  toolProperties: 04000000
   weaponType: 3
   damage: 5
   damageMultiplier: 1

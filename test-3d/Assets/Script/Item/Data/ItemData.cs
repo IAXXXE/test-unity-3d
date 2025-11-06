@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item Data")]
@@ -45,6 +46,7 @@ public class ItemData : ScriptableObject
     public int capacity = 0;
 
     [Header("武器 - ")]
+    public List<ToolProperty> toolProperties;
     public WeaponType weaponType;
     public float damage = 0f;
     public float damageMultiplier = 1;
@@ -81,5 +83,14 @@ public enum WeaponType
     Sword,
     Bow,
     Melee,
+}
+
+public enum ToolProperty
+{
+    None,
+    Axe, // 斧头
+    Pickaxe, //稿子
+    Hoeing, //锄头
+    Sickle, //镰刀
 
 }

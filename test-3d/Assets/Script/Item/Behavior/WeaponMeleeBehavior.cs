@@ -17,6 +17,7 @@ public class WeaponMeleeBehavior : ItemBehavior
     [Header("Hit Detection")]
     public LayerMask damageableLayers;
     public Transform attackPoint; // 攻击检测点（通常在武器前端）
+    private Collider[] hitBuffer = new Collider[32]; // 最多同时命中 32 个目标
     
     [Header("Visual Feedback")]
     public GameObject hitEffectPrefab;
@@ -35,7 +36,7 @@ public class WeaponMeleeBehavior : ItemBehavior
         lightAttackDamage = item.data.damage;
         attackRange = item.data.attackRange;
 
-        damageableLayers = 1 << 8 | 1 << 9;
+        damageableLayers = 1 << 6 | 1 << 8 | 1 << 9;
 
         weaponAnimator = GetComponent<Animator>();
         
@@ -154,29 +155,37 @@ public class WeaponMeleeBehavior : ItemBehavior
         Vector3 origin = attackPoint != null ? attackPoint.position : transform.position;
         Vector3 forward = attackPoint != null ? attackPoint.forward : transform.forward;
 
-        // 方法1: 使用 OverlapSphere + 角度检测（推荐用于近战）
-        Collider[] hits = Physics.OverlapSphere(origin, attackRange, damageableLayers);
+        // 方法1: 使用 OverlapSphere + 角度检测（推荐用于近战
+        // NonAlloc 
+        int hitCount = Physics.OverlapSphereNonAlloc(origin, attackRange, hitBuffer, damageableLayers);
 
-        Debug.Log("Collider[] hits " + hits.Length);
-        int hitCount = 0;
-        foreach (var hit in hits)
+        int damageCount = 0;
+        for (int i = 0; i < hitCount; i++)
         {
+            var hit = hitBuffer[i];
+            
             // 检查是否在攻击扇形内
             Vector3 directionToTarget = (hit.transform.position - origin).normalized;
             float angleToTarget = Vector3.Angle(forward, directionToTarget);
-            Debug.Log(" name : " + hit.gameObject.name + " angleToTarget " + angleToTarget);
+            
+            Debug.Log($"  目标: {hit.name}, 角度: {angleToTarget:F1}°");
+
             if (angleToTarget <= attackAngle / 2f)
             {
-                // 尝试造成伤害
                 if (TryDamageTarget(hit.gameObject, damage, powerMultiplier, directionToTarget))
                 {
-                    hitCount++;
+                    damageCount++;
                     SpawnHitEffect(hit.ClosestPoint(origin));
+                }
+
+                if(TryActingTarget(hit.gameObject))
+                {
+
                 }
             }
         }
 
-        Debug.Log($"[近战] 命中 {hitCount} 个目标，伤害={damage:F1}");
+        Debug.Log($"[近战] 命中 {damageCount} 个目标，伤害={damage:F1}");
     }
 
     /// <summary>
@@ -210,6 +219,30 @@ public class WeaponMeleeBehavior : ItemBehavior
             return true;
         }
         
+        return false;
+    }
+
+    /// <summary>
+    /// 尝试作用特殊效果
+    /// </summary>
+    private bool TryActingTarget(GameObject target)
+    {
+        var toolProperties = item.data.toolProperties;
+        if(toolProperties.Count == 0) return false;
+
+        if(target.CompareTag("Tree") && toolProperties.Contains(ToolProperty.Axe))
+        {
+            
+        }
+        if((target.CompareTag("Rock")||target.CompareTag("Ore")) && toolProperties.Contains(ToolProperty.Pickaxe))
+        {
+            
+        }
+        if(target.CompareTag("Grass") && toolProperties.Contains(ToolProperty.Sickle))
+        {
+            var interactable = target.GetComponent<InteractableGrass>();
+            interactable.DropItems();
+        }
         return false;
     }
 

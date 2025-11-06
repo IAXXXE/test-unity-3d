@@ -98,6 +98,11 @@ public class PlayerStat : CharacterStat
         return weapon.GetHeldItemType();
     }
 
+    public List<ToolProperty> GetHeldItemProperty()
+    {
+        return weapon.GetHeldItem()?.data.toolProperties;
+    }
+
     public PlayerUI GetPlayerUI()
     {
         return weapon.playerUI;
