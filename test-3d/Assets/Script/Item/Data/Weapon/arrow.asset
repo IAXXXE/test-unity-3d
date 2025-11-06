@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: W0003
   itemName: Arrow
-  itemType: 8
+  itemType: 2
   description: 
   icon: {fileID: 21300000, guid: 59c8cd2a91ad7f846b9efd79b945c356, type: 3}
   worldPrefab: {fileID: 5594435687386807671, guid: fad9ae7233d3e45448ab51a8c695b92f,

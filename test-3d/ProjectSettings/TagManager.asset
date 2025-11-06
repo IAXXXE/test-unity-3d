@@ -8,6 +8,9 @@ TagManager:
   - Food
   - Prey
   - Grass
+  - Tree
+  - Rock
+  - Ore
   layers:
   - Default
   - TransparentFX
