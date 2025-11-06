@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 7922649801668778610}
   - component: {fileID: -8079902911904709376}
   - component: {fileID: -4071510519526472971}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Deer
   m_TagString: Prey
   m_Icon: {fileID: 0}

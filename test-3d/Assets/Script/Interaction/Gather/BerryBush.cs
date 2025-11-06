@@ -25,7 +25,7 @@ public class BerryBush : InteractableGather
     [Header("采集数量设置")]
     public int fewBerriesYield = 1;      // 少量时的产量
     public int someBerriesYield = 4;     // 一定量时的产量
-    public int fullBerriesYield = 10;     // 长满时的产量
+    private int fullBerriesYield = 10;     // 长满时的产量
     
     [Header("视觉效果")]
     public List<GameObject> berryVisuals;// 浆果的视觉表现
@@ -60,13 +60,38 @@ public class BerryBush : InteractableGather
             Debug.Log($"{interactName} 还没有浆果可以采集");
             return;
         }
+        if (isGathering) return;
 
+        StartCoroutine(Gather());
+
+    }
+
+    private bool isGathering;
+    private float gatherTime;
+    private IEnumerator Gather()
+    {
+        isGathering = true;
+        StartGather();
+        yield return new WaitForSeconds(0.2f);
+
+        gatherTime = 0f;
         // 根据状态获取采集数量
         int yieldAmount = GetYieldAmount();
+        float useTime = 0.2f * yieldAmount;
+        Debug.Log("useTime " + useTime);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
+        while (gatherTime < useTime)
+        {
+            yield return null;
+            gatherTime += Time.deltaTime;
+            PlayerUI.Instance.UpdateProgressBar(gatherTime / useTime);
+        }
+        PlayerUI.Instance.ShowProgressBar(false);
+
         if (yieldAmount > 0 && itemId != null)
         {
+            yieldAmount = GetYieldAmount();
             bool added = InventoryManager.Instance.AddItem(itemId, yieldAmount);
-            
             if (added)
             {
                 // 播放采集特效
@@ -74,19 +99,18 @@ public class BerryBush : InteractableGather
                 {
                     gatherEffect.Play();
                 }
-                
                 Debug.Log($"从 {interactName} 采集了 {yieldAmount} 个 {itemId}");
-                
                 // 采集后状态变为无浆果
                 currentState = BerryBushState.NoBerries;
                 UpdateVisualState();
-                
                 // 开始生长周期
                 StartGrowthCycle();
-                
                 StartCooldown();
             }
         }
+
+        StopGather();
+        isGathering = false;
     }
 
     public override string GetInteractText()

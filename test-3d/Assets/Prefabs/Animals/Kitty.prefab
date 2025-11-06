@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 6397291155531275066}
   - component: {fileID: 8569425760197703547}
   - component: {fileID: 827456126118016773}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kitty
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -26,6 +26,7 @@ public class InteractableWater : InteractableGatherWithTool
         if (isScooping) return;
         var weapon = player.GetComponent<PlayerWeapon>();
         itemContainer = weapon.GetHeldItem() as ItemContainer;
+        itemContainer ??= weapon.GetHeldItem(HandType.HandL) as ItemContainer;
         if(itemContainer == null) Debug.Log("Null Item Container");
         StartCoroutine(ScoopWater());
     }
@@ -45,6 +46,10 @@ public class InteractableWater : InteractableGatherWithTool
         isScooping = true;
         scoopTime = 0f;
 
+        PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, true);
+
+        yield return new WaitForSeconds(0.2f);
+
         float useTime = 0.2f * (itemContainer.GetMaxCapacity() - itemContainer.GetCapacity());
         PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
         Debug.Log($"开始打水: {itemContainer.data.name}");
@@ -57,6 +62,7 @@ public class InteractableWater : InteractableGatherWithTool
         }
 
         PlayerUI.Instance.ShowProgressBar(false);
+        PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, false);
 
         itemContainer.Scoop(FillingType.Water);
         Debug.Log($"打完水了: {itemContainer.data.name}");

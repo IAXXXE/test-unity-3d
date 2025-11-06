@@ -13,8 +13,19 @@ public class InteractableGather : InteractableBase
         // interactableType = InteractableType.Gather;
     }
 
+    public void StartGather()
+    {
+        PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, true);
+    }
+
+    public void StopGather()
+    {
+        PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, false);
+    }
+
     public override void Interact(PlayerController player)
     {
+        StartGather();
         int quantity = Random.Range(minQuantity, maxQuantity + 1);
         bool added = InventoryManager.Instance.AddItem(itemId, quantity);
         
@@ -23,6 +34,8 @@ public class InteractableGather : InteractableBase
             Debug.Log($"采集了 {quantity} 个 {itemId}");
             StartCooldown();
         }
+
+        StopGather();
     }
 
     // 其他基础采集逻辑...

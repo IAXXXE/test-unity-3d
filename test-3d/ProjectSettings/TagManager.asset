@@ -16,8 +16,8 @@ TagManager:
   - UI
   - Interactable
   - Player
-  - 
-  - 
+  - Hitable
+  - Damageable
   - 
   - 
   - 

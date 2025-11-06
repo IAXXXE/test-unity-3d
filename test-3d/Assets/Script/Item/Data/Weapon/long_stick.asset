@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 2
   description: "\u8F83\u957F\u7684\u6811\u679D"
   icon: {fileID: 21300000, guid: 40d526b51d159064f851539ce7779eec, type: 3}
-  worldPrefab: {fileID: 2179000495541555841, guid: 2d66e8d9f8c4246fb807c650e4034534,
+  worldPrefab: {fileID: 2179000495541555841, guid: 8af04ce2d994a40799a78c42763d0ae0,
     type: 3}
   posOffset: {x: 0, y: 0, z: 0}
   rotOffset: {x: 0, y: 0, z: 0}
@@ -37,6 +37,7 @@ MonoBehaviour:
   containerType: 0
   capacity: 0
   weaponType: 3
-  damage: 1
+  damage: 3
   damageMultiplier: 1
+  attackRange: 2
   defense: 0

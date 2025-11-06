@@ -48,6 +48,7 @@ public class ItemData : ScriptableObject
     public WeaponType weaponType;
     public float damage = 0f;
     public float damageMultiplier = 1;
+    public float attackRange = 1;
 
     [Header("装备 - ")]
     public float defense = 0f;

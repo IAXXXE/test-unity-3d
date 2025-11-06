@@ -50,6 +50,7 @@ public static class GameEventManager
     public static event Action<Transform> OnPlayerLookAt;
     // 战斗
     public static event Action<ItemData, AttackType, float> OnWeaponAttack;
+    public static event Action OnLightAttackHit;
     public static event Action<ItemData> OnItemConsumed;
     public static event Action<bool> OnAimModeChanged;
     #endregion
@@ -125,10 +126,11 @@ public static class GameEventManager
     // 玩家战斗
     public static void TriggerWeaponAttack(ItemData item, AttackType type, float power)
         => OnWeaponAttack?.Invoke(item, type, power);
+    public static void TriggerLightAttackHit()
+        => OnLightAttackHit?.Invoke();
 
     public static void TriggerItemConsumed(ItemData item)
         => OnItemConsumed?.Invoke(item);
-
     public static void TriggerAimModeChanged(bool isAiming)
         => OnAimModeChanged?.Invoke(isAiming);
     

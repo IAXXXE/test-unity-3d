@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using EasyButtons;
 using UnityEngine;
 
-public class PlayerIK : MonoBehaviour
+public class PlayerIKController : MonoBehaviour
 {
+    public static PlayerIKController Instance;
+
     public Animator animator;
     public PlayerController playerController;
 
@@ -25,6 +29,21 @@ public class PlayerIK : MonoBehaviour
     private Vector3 currentLookPosition; // 当前平滑的注视位置
     private Vector3 targetLookPosition;  // 目标注视位置
 
+    private Dictionary<AnimActionType, string> typeToString = new Dictionary<AnimActionType, string>();
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -34,6 +53,17 @@ public class PlayerIK : MonoBehaviour
         // 初始化位置为前方
         currentLookPosition = transform.position + transform.forward * 2f;
         targetLookPosition = currentLookPosition;
+
+        typeToString = new Dictionary<AnimActionType, string>
+        {
+            { AnimActionType.LightAttack, "LightAttack" },
+            { AnimActionType.Farm, "IsFarming" },
+            { AnimActionType.Fish, "IsFishing" },
+            { AnimActionType.Gather, "IsGathering" },
+            { AnimActionType.Hammer, "IsHammering" },
+            { AnimActionType.Mining, "IsMining" }
+        };
+
     }
 
     void OnDestroy()
@@ -96,16 +126,39 @@ public class PlayerIK : MonoBehaviour
             animator.SetLookAtPosition(currentLookPosition);
         }
     }
+
+    [Button]
+    public void SetAnimBool(AnimActionType type, bool isTrue)
+    {
+        // animator.SetLayerWeight(animator.GetLayerIndex("BaseLayer"), isTrue ? 0 : 1);
+        // animator.SetLayerWeight(animator.GetLayerIndex("ActionLayer"), isTrue ? 1 : 0);
+        animator.SetBool(typeToString[type], isTrue);
+    }
+
+    public void SetAnimTrigger(AnimActionType type)
+    {
+        animator.SetTrigger(typeToString[type]);
+    }
+
+    public void OnAttackHit()
+    {
+        Debug.Log("OnHit");
+        GameEventManager.TriggerLightAttackHit();
+    }
 }
 
+public enum AnimActionType
+{
+    None,
+    LightAttack,
+    ComboAttack,
+    Farm,
+    Fish,
+    Gather,
+    Hammer,
+    Mining
 
-// public enum IKState
-// {
-//     None,
-//     LookAt,
-//     Aim,
-//     Melee
-// }
+}
 
 // [RequireComponent(typeof(Animator))]
 // public class PlayerIKController : MonoBehaviour

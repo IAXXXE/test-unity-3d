@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 3851015956068934393}
   - component: {fileID: 1352980233418422053}
   - component: {fileID: 7412888186355346158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Horse
   m_TagString: Untagged
   m_Icon: {fileID: 0}

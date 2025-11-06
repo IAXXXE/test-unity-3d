@@ -3152,7 +3152,7 @@ GameObject:
   - component: {fileID: -5168455314500562520}
   - component: {fileID: -1731050137061979522}
   - component: {fileID: 7585008851841617638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chicken
   m_TagString: Prey
   m_Icon: {fileID: 0}
@@ -3297,8 +3297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  normalDamageColor: {r: 1, g: 1, b: 1, a: 1}
-  criticalDamageColor: {r: 1, g: 0.5801887, b: 0.5801887, a: 1}
   weakPointTransforms:
   - {fileID: 9145230129149524862}
   - {fileID: 4407777030313449626}

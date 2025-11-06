@@ -37,6 +37,7 @@ MonoBehaviour:
   containerType: 0
   capacity: 0
   weaponType: 3
-  damage: 1
+  damage: 5
   damageMultiplier: 1
+  attackRange: 1
   defense: 0

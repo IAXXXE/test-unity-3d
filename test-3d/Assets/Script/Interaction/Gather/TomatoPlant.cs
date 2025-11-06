@@ -42,11 +42,35 @@ public class TomatoPlant : InteractableGather
             Debug.Log($"{interactName} 还没有番茄可以采集");
             return;
         }
+        if(isGathering) return;
 
-        int yieldAmount = quantity;
-        if (yieldAmount > 0 && itemId != null)
+        StartCoroutine(Gather());
+    }
+
+    private bool isGathering;
+    private float gatherTime;
+    private IEnumerator Gather()
+    {
+        isGathering = true;
+        StartGather();
+        yield return new WaitForSeconds(0.2f);
+
+        gatherTime = 0f;
+        // 根据状态获取采集数量
+        float useTime = 0.5f * quantity;
+        Debug.Log("useTime " + useTime);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
+        while (gatherTime < useTime)
         {
-            bool added = InventoryManager.Instance.AddItem(itemId, yieldAmount);
+            yield return null;
+            gatherTime += Time.deltaTime;
+            PlayerUI.Instance.UpdateProgressBar(gatherTime / useTime);
+        }
+        PlayerUI.Instance.ShowProgressBar(false);
+
+        if (quantity > 0 && itemId != null)
+        {
+            bool added = InventoryManager.Instance.AddItem(itemId, quantity);
             
             if (added)
             {
@@ -55,12 +79,15 @@ public class TomatoPlant : InteractableGather
                     gatherEffect.Play();
                 }
                 
-                Debug.Log($"从 {interactName} 采集了 {yieldAmount} 个 {itemId}");
+                Debug.Log($"从 {interactName} 采集了 {quantity} 个 {itemId}");
                 currentState = TomatoPlantState.Empty;
                 UpdateVisualState();
                 StartGrowthCycle();
             }
         }
+
+        StopGather();
+        isGathering = false;
     }
 
     public override string GetInteractText()

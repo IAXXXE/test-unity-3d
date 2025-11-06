@@ -46,7 +46,7 @@ public class PlayerAction : MonoBehaviour
         inputActions.Player.UseR.started -= ctx => OnSecondaryPressed();
         inputActions.Player.UseR.canceled -= ctx => OnSecondaryReleased();
 
-        inputActions.Player.UseL.performed -= ctx => OnUsePressed();
+        // inputActions.Player.UseL.performed -= ctx => OnUsePressed();
 
         GameEventManager.OnUIShowed -= OnUIShowed;
         GameEventManager.OnUIHided -= OnUIHided;
