@@ -17,6 +17,12 @@ public class CreatureStat : ICharacterStat
 
     private float speed;
 
+    [Header("情绪值")]
+    protected float angerValue;      // 愤怒值 0-100
+    protected float fearValue;       // 恐惧值 0-100
+
+    public CreaturePersonality personality;
+
     public CreatureStat(string id)
     {
         data = CharacterDatabase.Instance.GetCharacterData(id);
@@ -31,6 +37,11 @@ public class CreatureStat : ICharacterStat
         maxThirsty = data.maxThirsty;
 
         speed = data.speed;
+
+        // 初始化性格（如果未提供则使用默认）
+        this.personality = personality ?? new CreaturePersonality(data.raceType);
+        angerValue = 0f;
+        fearValue = 0f;
     }
 
     public virtual int GetHealth()
@@ -143,5 +154,53 @@ public class CreatureStat : ICharacterStat
     public virtual float GetSpeed()
     {
         return speed;
+    }
+
+    // 情绪管理
+    public void IncreaseAnger(float value)
+    {
+        angerValue = Mathf.Clamp(angerValue + value, 0f, 100f);
+        Debug.Log($"愤怒值增加: {angerValue}");
+    }
+    
+    public void IncreaseFear(float value)
+    {
+        fearValue = Mathf.Clamp(fearValue + value, 0f, 100f);
+        Debug.Log($"恐惧值增加: {fearValue}");
+    }
+    
+    public void DecayEmotions(float deltaTime)
+    {
+        angerValue = Mathf.Max(0f, angerValue - personality.angerDecayRate * deltaTime);
+        fearValue = Mathf.Max(0f, fearValue - personality.fearDecayRate * deltaTime);
+    }
+    
+    public float GetAnger() => angerValue;
+    public float GetFear() => fearValue;
+    
+    // 判断情绪状态
+    public EmotionState GetEmotionState()
+    {
+        // 愤怒和恐惧同时存在时，根据性格决定
+        if (angerValue >= personality.angerThreshold && fearValue >= personality.fearThreshold)
+        {
+            // 攻击性高的生物选择战斗
+            return personality.aggressiveness > 0.5f ? EmotionState.Angry : EmotionState.Afraid;
+        }
+        
+        if (angerValue >= personality.angerThreshold)
+            return EmotionState.Angry;
+            
+        if (fearValue >= personality.fearThreshold)
+            return EmotionState.Afraid;
+            
+        return EmotionState.Calm;
+    }
+    
+    // 重置情绪
+    public void ResetEmotions()
+    {
+        angerValue = 0f;
+        fearValue = 0f;
     }
 }

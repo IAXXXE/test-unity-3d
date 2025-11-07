@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Character", menuName = "Character/Item Data")]
+[CreateAssetMenu(fileName = "New Character", menuName = "Data/Character/Item Data")]
 public class  CharacterData: ScriptableObject
 {
     [Header("基础信息")]
@@ -35,9 +35,3 @@ public class  CharacterData: ScriptableObject
     public string skill;
 }
 
-
-public enum RaceType
-{
-    Normal,
-
-}

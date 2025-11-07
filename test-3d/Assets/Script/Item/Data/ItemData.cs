@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item Data")]
+[CreateAssetMenu(fileName = "New Item", menuName = "Data/Inventory/Item Data")]
 public class ItemData : ScriptableObject
 {
     [Header("基础信息")]

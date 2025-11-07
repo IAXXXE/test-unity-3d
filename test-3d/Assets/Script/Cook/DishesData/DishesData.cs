@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Cook/Dishes Data")]
+[CreateAssetMenu(fileName = "New Dishes", menuName = "Data/Cook/Dishes Data")]
 public class DishesData : ScriptableObject
 {
     public CookType cookType;

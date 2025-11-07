@@ -47,8 +47,11 @@ public class NaturalManager : MonoBehaviour
         foreach(var creature in creatures)
         {
             if (creature == null || creature.gameObject == null) { removeList.Add(creature); continue; }
+            
+            // 生存相关属性更新
             creature.UpdateSurvivalStats();   
-
+            // 情绪
+            creature.stat.DecayEmotions(Time.deltaTime);
             // 执行行为树决策
             if (creature.isStateLocked)
             {

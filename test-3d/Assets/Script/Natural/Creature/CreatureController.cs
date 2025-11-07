@@ -27,6 +27,10 @@ public class CreatureController : MonoBehaviour, IDamageable
     public float ragdollLifetime = 120f;
     public float deathForce = 3f;
 
+    [Header("伤害反馈")]
+    public float damageToAngerMultiplier = 2f;   // 伤害转愤怒倍率
+    public float damageToFearMultiplier = 1.5f;  // 伤害转恐惧倍率
+
 
     void Start()
     {
@@ -80,7 +84,10 @@ public class CreatureController : MonoBehaviour, IDamageable
         if (IsDead)
         {
             OnDeath();
+            return;
         }
+
+        CalculateEmotionalResponse(damageInfo.damage, damageInfo.attacker);
     }
 
     private void ShowDamageText(float damage, bool isCritical)
@@ -95,6 +102,29 @@ public class CreatureController : MonoBehaviour, IDamageable
         {
             rb.AddForce(direction * force, ForceMode.Impulse);
         }
+    }
+
+    private void CalculateEmotionalResponse(float damage, GameObject attacker)
+    {
+        // 基于伤害和性格计算情绪变化
+        float damagePercent = damage / stat.GetMaxHealth() * 100f;
+        
+        // 计算愤怒增加（攻击性高的生物更容易愤怒）
+        float angerIncrease = damagePercent * damageToAngerMultiplier * stat.personality.aggressiveness;
+        stat.IncreaseAnger(angerIncrease);
+        
+        // 计算恐惧增加（勇气低的生物更容易害怕）
+        float fearIncrease = damagePercent * damageToFearMultiplier * (1f - stat.personality.courage);
+        stat.IncreaseFear(fearIncrease);
+        
+        // 如果生命值过低，大幅增加恐惧
+        float healthPercent = (float)stat.GetHealth() / stat.GetMaxHealth();
+        if (healthPercent < 0.3f)
+        {
+            stat.IncreaseFear(30f);
+        }
+
+        ai.OnDamageReceived(damage, attacker);
     }
 
     private void OnDeath()

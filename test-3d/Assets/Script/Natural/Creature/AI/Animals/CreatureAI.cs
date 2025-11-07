@@ -16,15 +16,21 @@ public class CreatureAI : MonoBehaviour
     public float attackRange = 2f;
     public float eatRange = 2f;
     public float drinkRange = 1.5f;
+
+    [Header("战斗配置")]
+    public float fleeDistance = 20f;        // 逃跑距离
+    public float combatCheckInterval = 0.5f; // 战斗检测间隔
+    public int attackDamage = 10;            // 攻击伤害
     
     [Header("需求阈值")]
     public int hungerThreshold;  // 低于此值开始寻找食物
     public int thirstThreshold;  // 低于此值开始寻找水源
     
-    public CreatureState currentState;
+    public CreatureActionState currentActionState;
     public BehaviorTree behaviorTree;
     private Vector3[] waterSources;
     public Transform currentTarget;
+    private GameObject currentThreat;  // 当前威胁目标
 
     public bool isStateLocked = false;  // 添加状态锁
     public float stateLockTimer = 0f;
@@ -72,6 +78,30 @@ public class CreatureAI : MonoBehaviour
     {
         return new BehaviorTree(
             new SelectorNode(
+                // 优先级0: 情绪反应（最高优先级）
+                new SequenceNode(
+                    new ConditionNode(() => stat.GetEmotionState() != EmotionState.Calm &&
+                                           !(currentActionState is FleeState) &&
+                                           !(currentActionState is CombatState)),
+                    new ActionNode(() => {
+                        EmotionState emotion = stat.GetEmotionState();
+                        
+                        if (emotion == EmotionState.Afraid)
+                        {
+                            // 逃跑
+                            ChangeState(new FleeState(this, currentThreat));
+                        }
+                        else if (emotion == EmotionState.Angry)
+                        {
+                            // 反击
+                            if (currentThreat != null)
+                                ChangeState(new CombatState(this, currentThreat));
+                        }
+                        
+                        return NodeState.SUCCESS;
+                    })
+                ),
+
                 // 优先级1: 生存危机
                 new SequenceNode(
                     new ConditionNode(() => stat.GetSatiety() == 0 || stat.GetThirsty() == 0),
@@ -118,7 +148,7 @@ public class CreatureAI : MonoBehaviour
                 
                 // 默认: 游走
                 new ActionNode(() => {
-                    if (!(currentState is AnimalWanderState))
+                    if (!(currentActionState is AnimalWanderState))
                         ChangeState(new AnimalWanderState(this));
                     return NodeState.SUCCESS;
                 })
@@ -137,29 +167,58 @@ public class CreatureAI : MonoBehaviour
         isStateLocked = false;
     }
     
-    public void ChangeState(CreatureState newState)
+    public void ChangeState(CreatureActionState newState)
     {
-        // 防止饮水/进食被打断
-        // if (currentState is AnimalDrinkState || currentState is AnimalEatState)
-        //     return;
+        if(isStateLocked) return;
+
+        // 战斗和逃跑状态可以互相切换
+        if ((currentActionState is FleeState || currentActionState is CombatState) &&
+            !(newState is FleeState || newState is CombatState))
+        {
+            // 只有在情绪平复后才能切换到其他状态
+            if (stat.GetEmotionState() != EmotionState.Calm)
+                return;
+        }
+
         StopAllCoroutines();
 
-        currentState?.Exit();
-        currentState = newState;
-        currentState?.Enter();
+        currentActionState?.Exit();
+        currentActionState = newState;
+        currentActionState?.Enter();
 
         Debug.Log($"{stat.data.name} change state {newState}");
     }
 
-    public void ForcedChangrState(CreatureState newState)
+    public void ForcedChangrState(CreatureActionState newState)
     {
         StopAllCoroutines();
 
-        currentState?.Exit();
-        currentState = newState;
-        currentState?.Enter();
+        currentActionState?.Exit();
+        currentActionState = newState;
+        currentActionState?.Enter();
 
         Debug.Log($"Force {stat.data.name} change state {newState}");
+    }
+
+    // 受到伤害时的回调
+    public void OnDamageReceived(float damage, GameObject attacker)
+    {
+        currentThreat = attacker;
+        
+        // 根据性格和情绪立即做出反应
+        EmotionState emotion = stat.GetEmotionState();
+        
+        // 强制切换状态（忽略锁定）
+        isStateLocked = false;
+        
+        if (emotion == EmotionState.Afraid)
+        {
+            ChangeState(new FleeState(this, attacker));
+        }
+        else if (emotion == EmotionState.Angry)
+        {
+            ChangeState(new CombatState(this, attacker));
+        }
     }
     
     public void UpdateSurvivalStats()

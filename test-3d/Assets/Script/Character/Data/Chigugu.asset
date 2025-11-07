@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   name: Chigugu
-  raceType: 0
+  raceType: 1
   isCarnivore: 0
   description: 
   icon: {fileID: 21300000, guid: 96b97ad148ec9eb4495df6577730f10c, type: 3}

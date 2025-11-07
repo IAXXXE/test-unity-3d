@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   name: Nahoho
-  raceType: 0
+  raceType: 2
   isCarnivore: 1
   description: 
   icon: {fileID: 21300000, guid: fda47973982a80a40a3641067a9fedf0, type: 3}

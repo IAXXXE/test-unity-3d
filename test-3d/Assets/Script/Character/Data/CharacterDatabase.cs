@@ -10,7 +10,11 @@ public class CharacterDatabase : MonoBehaviour
     public List<CharacterData> allCharacters = new List<CharacterData>();
 
     private Dictionary<string, CharacterData> characterDictionary = new Dictionary<string, CharacterData>();
-    
+
+    // TODO: 暂放
+    public List<RaceData> allRaceData = new List<RaceData>();
+    private Dictionary<RaceType, RaceData> raceDictionary = new Dictionary<RaceType, RaceData>();
+
     void Awake()
     {
         if (Instance == null)
@@ -43,6 +47,22 @@ public class CharacterDatabase : MonoBehaviour
 
         }
         Debug.Log($"角色数据库初始化完成，共加载 {characterDictionary.Count} 个角色");
+
+        foreach(RaceData raceData in allRaceData)
+        {
+            if(raceData != null)
+            {
+                if(!raceDictionary.ContainsKey(raceData.type))
+                {
+                    raceDictionary.Add(raceData.type, raceData);
+                }
+                else
+                {
+                    Debug.LogWarning($"重复的Race Type: {raceData.id}");
+                }
+            }
+
+        }
     }
 
     public CharacterData GetCharacterData(string id)
@@ -50,6 +70,16 @@ public class CharacterDatabase : MonoBehaviour
         if(characterDictionary.ContainsKey(id))
         {
             return characterDictionary[id];
+        }
+
+        return null;
+    }
+
+    public RaceData GetRaceData(RaceType type)
+    {
+        if(raceDictionary.ContainsKey(type))
+        {
+            return raceDictionary[type];
         }
 
         return null;
