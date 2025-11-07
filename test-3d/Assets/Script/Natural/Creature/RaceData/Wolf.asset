@@ -15,6 +15,16 @@ MonoBehaviour:
   id: 0
   Name: wolf
   type: 0
+  wanderRadius: 30
+  detectionRange: 100
+  attackRange: 2
+  eatRange: 2
+  drinkRange: 2
+  fleeDistance: 30
+  combatCheckInterval: 0.5
+  attackDamage: 9
+  hungerThreshold: 30
+  thirstThreshold: 30
   personalityType: 3
   aggressiveness: 0.5
   courage: 0.5

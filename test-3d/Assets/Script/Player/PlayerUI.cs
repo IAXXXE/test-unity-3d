@@ -9,6 +9,9 @@ public enum BarType
     Drinking,
     Using,
     Drawing,
+    Axe,
+    Split,
+    Pickaxe
 }
 
 public class PlayerUI : MonoBehaviour

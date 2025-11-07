@@ -15,10 +15,20 @@ MonoBehaviour:
   id: 1
   Name: chicken
   type: 1
+  wanderRadius: 20
+  detectionRange: 70
+  attackRange: 2
+  eatRange: 2
+  drinkRange: 2
+  fleeDistance: 15
+  combatCheckInterval: 0.5
+  attackDamage: 1
+  hungerThreshold: 16
+  thirstThreshold: 16
   personalityType: 0
   aggressiveness: 0
   courage: 0
   angerThreshold: 100
   fearThreshold: 10
   angerDecayRate: 5
-  fearDecayRate: 5
+  fearDecayRate: 10

@@ -19,10 +19,10 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1fe19ffae1abab0479d7d9716bcbbb9c, type: 3}
   worldPrefab: {fileID: 4452947085904611623, guid: e4807f87d5c884b19a03820f70bf28de,
     type: 3}
-  posOffset: {x: 0, y: -90, z: 0}
-  rotOffset: {x: 0, y: 0, z: 0}
+  posOffset: {x: 0, y: 0, z: 0}
+  rotOffset: {x: 0, y: -90, z: 0}
   scale: {x: 0, y: 0, z: 0}
-  maxStackSize: 2
+  maxStackSize: 20
   isStackable: 1
   buyPrice: 10
   sellPrice: 5
@@ -36,7 +36,9 @@ MonoBehaviour:
   effectDuration: 0
   containerType: 0
   capacity: 0
+  toolProperties: 
   weaponType: 3
   damage: 1
   damageMultiplier: 1
+  attackRange: 1
   defense: 0

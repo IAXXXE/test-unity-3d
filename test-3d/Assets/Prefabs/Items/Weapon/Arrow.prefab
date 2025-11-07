@@ -102,9 +102,9 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -159208425650231603, guid: 14dd357cc5f3a764db1e87e0c3a52aa6, type: 3}
 --- !u!54 &2251309363129366880

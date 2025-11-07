@@ -48,13 +48,20 @@ public class CreatureAI : MonoBehaviour
         agent.speed = stat.GetSpeed();
         agent.radius = transform.GetComponent<CharacterController>().radius;
         agent.height = transform.GetComponent<CharacterController>().height;
-        
+
+        var raceData = CharacterDatabase.Instance.GetRaceData(stat.data.raceType);
         // 根据Race配置
-        // wanderRadius
-        // detectionRange
-        // attackRange
-        // eatRange
-        // drinkRange
+        wanderRadius = raceData.wanderRadius;
+        detectionRange = raceData.detectionRange;
+        attackRange = raceData.attackRange;
+        eatRange = raceData.eatRange;
+        drinkRange = raceData.drinkRange;
+
+        fleeDistance = raceData.fleeDistance;
+        combatCheckInterval = raceData.combatCheckInterval;
+        attackDamage = raceData.attackDamage;
+        hungerThreshold = raceData.hungerThreshold;
+        thirstThreshold = raceData.thirstThreshold;
     }
     
     private void Start()

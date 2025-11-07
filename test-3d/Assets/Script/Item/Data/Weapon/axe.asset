@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
-  m_Name: stone
+  m_Name: axe
   m_EditorClassIdentifier: 
-  itemID: M0002
-  itemName: "\u5C0F\u5757\u77F3\u5934"
-  itemType: 4
-  description: "\u968F\u5904\u53EF\u6361\u7684\u5C0F\u5757\u77F3\u5934"
-  icon: {fileID: 21300000, guid: b6da46610f2e67c47ab4f5011422203a, type: 3}
-  worldPrefab: {fileID: 919132149155446097, guid: 403eb90de18bb994596c995722b7fdd3,
+  itemID: W0006
+  itemName: "\u65A7\u5934"
+  itemType: 2
+  description: "\u780D\u6811\u7684\u65A7\u5934"
+  icon: {fileID: 21300000, guid: 6a08ec4b334ea1c46b8171679417a74f, type: 3}
+  worldPrefab: {fileID: 6453309886974881835, guid: 8ec81fe3172b14156a6ad9647e9954a6,
     type: 3}
   posOffset: {x: 0, y: 0, z: 0}
-  rotOffset: {x: 0, y: 0, z: 0}
+  rotOffset: {x: 0, y: -90, z: 75}
   scale: {x: 0, y: 0, z: 0}
-  maxStackSize: 10
-  isStackable: 1
+  maxStackSize: 1
+  isStackable: 0
   buyPrice: 10
   sellPrice: 5
   isUsable: 0
@@ -36,9 +36,9 @@ MonoBehaviour:
   effectDuration: 0
   containerType: 0
   capacity: 0
-  toolProperties: 
+  toolProperties: 0100000004000000
   weaponType: 3
-  damage: 1
+  damage: 5
   damageMultiplier: 1
-  attackRange: 1
+  attackRange: 1.5
   defense: 0

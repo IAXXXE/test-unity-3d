@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
-  m_Name: stone
+  m_Name: middle_stone
   m_EditorClassIdentifier: 
-  itemID: M0002
-  itemName: "\u5C0F\u5757\u77F3\u5934"
+  itemID: M0005
+  itemName: "\u77F3\u5934"
   itemType: 4
-  description: "\u968F\u5904\u53EF\u6361\u7684\u5C0F\u5757\u77F3\u5934"
-  icon: {fileID: 21300000, guid: b6da46610f2e67c47ab4f5011422203a, type: 3}
+  description: "\u6572\u51FB\u4E0B\u6765\u7684\u77F3\u5934"
+  icon: {fileID: 21300000, guid: b9a847102a75c8c429a8f749008df6c2, type: 3}
   worldPrefab: {fileID: 919132149155446097, guid: 403eb90de18bb994596c995722b7fdd3,
     type: 3}
   posOffset: {x: 0, y: 0, z: 0}

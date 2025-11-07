@@ -15,6 +15,16 @@ MonoBehaviour:
   id: 2
   Name: tiger
   type: 2
+  wanderRadius: 50
+  detectionRange: 150
+  attackRange: 3
+  eatRange: 2
+  drinkRange: 2
+  fleeDistance: 30
+  combatCheckInterval: 0.5
+  attackDamage: 16
+  hungerThreshold: 50
+  thirstThreshold: 30
   personalityType: 2
   aggressiveness: 1
   courage: 1

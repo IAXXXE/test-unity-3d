@@ -94,7 +94,6 @@ public class AnimalWanderState : CreatureActionState
         if (NavMesh.SamplePosition(randomDir, out hit, ai.wanderRadius, NavMesh.AllAreas))
         {
             ai.agent.SetDestination(hit.position);
-            Debug.Log($" pos {ai.transform.position}  target {hit.position}");
         }
         ai.anim.SetAnimationSmooth(AnimState.Walk, 0.15f, EaseType.EaseOutQuad);
         ai.StartCoroutine(Execute());
@@ -220,6 +219,15 @@ public class AnimalSeekFoodState : CreatureActionState
         while(dist > ai.eatRange)
         {
             yield return new WaitForSeconds(0.5f);
+            if(food == null)
+            {
+                food = ai.FindNearestFood();
+                if (food == null)
+                {
+                    ai.ChangeState(new AnimalWanderState(ai));
+                    yield break;
+                }
+            }
             dist = Vector3.Distance(ai.transform.position, food.position);
         }
         ai.ChangeState(new AnimalEatState(ai));

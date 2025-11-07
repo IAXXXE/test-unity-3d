@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
-  m_Name: stone
+  m_Name: wood
   m_EditorClassIdentifier: 
-  itemID: M0002
-  itemName: "\u5C0F\u5757\u77F3\u5934"
+  itemID: M0004
+  itemName: "\u6728\u5934"
   itemType: 4
-  description: "\u968F\u5904\u53EF\u6361\u7684\u5C0F\u5757\u77F3\u5934"
-  icon: {fileID: 21300000, guid: b6da46610f2e67c47ab4f5011422203a, type: 3}
-  worldPrefab: {fileID: 919132149155446097, guid: 403eb90de18bb994596c995722b7fdd3,
+  description: "\u4E00\u5927\u5757\u6728\u5934"
+  icon: {fileID: 21300000, guid: 0e1ccb64303778e4081913a6d9cca677, type: 3}
+  worldPrefab: {fileID: 701745969669603572, guid: 96741a7ebe69e42c7bb840b90b26dbc9,
     type: 3}
   posOffset: {x: 0, y: 0, z: 0}
   rotOffset: {x: 0, y: 0, z: 0}

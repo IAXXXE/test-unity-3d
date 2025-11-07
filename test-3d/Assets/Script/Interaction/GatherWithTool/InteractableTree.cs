@@ -1,15 +1,22 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableGrass : InteractableGatherWithTool
+public class InteractableTree : InteractableGatherWithTool
 {
+    public int interactableTimes;
     public ToolProperty toolProperty;
     private bool isCutting;
     private float cutTime;
 
-    public void Start()
+    private ParticleSystem particleSystem;
+
+    void Start()
     {
-        toolProperty = ToolProperty.Sickle;
+        interactableTimes = 3;
+        toolProperty = ToolProperty.Axe;
+
+        particleSystem = transform.GetComponentInChildren<ParticleSystem>();
     }
 
     public override bool CanInteract()
@@ -29,7 +36,7 @@ public class InteractableGrass : InteractableGatherWithTool
 
     public override string GetInteractText()
     {
-        return $"Cut Grass";
+        return $"Cut Tree";
     }
 
     public override void SetHighlight(bool on)
@@ -37,9 +44,22 @@ public class InteractableGrass : InteractableGatherWithTool
 
     }
 
+    public void OnHit()
+    {
+        if(interactableTimes <= 0) return;
+        particleSystem.Play();
+
+        interactableTimes--;
+
+        if(interactableTimes <= 0)
+        {
+            DropItems();
+        }
+    }
+
     public void DropItems()
     {
-        InventoryManager.Instance.AddItem("M0001", 2);
+        InventoryManager.Instance.AddItem("M0004", 3);
         gameObject.SetActive(false);
     }
 
@@ -48,12 +68,12 @@ public class InteractableGrass : InteractableGatherWithTool
         isCutting = true;
         cutTime = 0f;
 
-        PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, true);
+        PlayerIKController.Instance.SetAnimBool(AnimActionType.Mining, true);
 
         yield return new WaitForSeconds(0.2f);
 
-        float useTime = 1f;
-        PlayerUI.Instance.ShowProgressBar(true, BarType.Split);
+        float useTime = 2.5f;
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Axe);
 
         while (cutTime < useTime)
         {
@@ -62,9 +82,9 @@ public class InteractableGrass : InteractableGatherWithTool
             PlayerUI.Instance.UpdateProgressBar(cutTime / useTime);
         }
 
-        InventoryManager.Instance.AddItem("M0001", 2);
+        InventoryManager.Instance.AddItem("M0004", 3);
         PlayerUI.Instance.ShowProgressBar(false);
-        PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, false);
+        PlayerIKController.Instance.SetAnimBool(AnimActionType.Mining, false);
         isCutting = false;
 
         gameObject.SetActive(false);

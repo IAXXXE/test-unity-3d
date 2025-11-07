@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea970d2b37ec5a141beb22b269c3524a, type: 3}
-  m_Name: stone
+  m_Name: pickaxe
   m_EditorClassIdentifier: 
-  itemID: M0002
-  itemName: "\u5C0F\u5757\u77F3\u5934"
-  itemType: 4
-  description: "\u968F\u5904\u53EF\u6361\u7684\u5C0F\u5757\u77F3\u5934"
-  icon: {fileID: 21300000, guid: b6da46610f2e67c47ab4f5011422203a, type: 3}
-  worldPrefab: {fileID: 919132149155446097, guid: 403eb90de18bb994596c995722b7fdd3,
+  itemID: W0007
+  itemName: "\u9550\u5B50"
+  itemType: 2
+  description: 
+  icon: {fileID: 21300000, guid: 1fb46228a3bcb5042a763829cc07f9e5, type: 3}
+  worldPrefab: {fileID: 783568845274904932, guid: dd040549aac684f958d2bd9c1698b315,
     type: 3}
   posOffset: {x: 0, y: 0, z: 0}
-  rotOffset: {x: 0, y: 0, z: 0}
+  rotOffset: {x: 0, y: -90, z: 75}
   scale: {x: 0, y: 0, z: 0}
-  maxStackSize: 10
-  isStackable: 1
+  maxStackSize: 1
+  isStackable: 0
   buyPrice: 10
   sellPrice: 5
   isUsable: 0
@@ -36,9 +36,9 @@ MonoBehaviour:
   effectDuration: 0
   containerType: 0
   capacity: 0
-  toolProperties: 
+  toolProperties: 02000000
   weaponType: 3
-  damage: 1
+  damage: 5
   damageMultiplier: 1
-  attackRange: 1
+  attackRange: 1.5
   defense: 0

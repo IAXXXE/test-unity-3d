@@ -180,7 +180,7 @@ public class WeaponMeleeBehavior : ItemBehavior
 
                 if(TryActingTarget(hit.gameObject))
                 {
-
+                    Debug.Log($"使用道具与场景物体完成交互");
                 }
             }
         }
@@ -232,16 +232,21 @@ public class WeaponMeleeBehavior : ItemBehavior
 
         if(target.CompareTag("Tree") && toolProperties.Contains(ToolProperty.Axe))
         {
-            
+            var interactable = target.GetComponent<InteractableTree>();
+            interactable.OnHit();
+            return true;
         }
         if((target.CompareTag("Rock")||target.CompareTag("Ore")) && toolProperties.Contains(ToolProperty.Pickaxe))
         {
-            
+            var interactable = target.GetComponent<InteractableRock>();
+            interactable.OnHit();
+            return true;
         }
         if(target.CompareTag("Grass") && toolProperties.Contains(ToolProperty.Sickle))
         {
             var interactable = target.GetComponent<InteractableGrass>();
             interactable.DropItems();
+            return true;
         }
         return false;
     }
