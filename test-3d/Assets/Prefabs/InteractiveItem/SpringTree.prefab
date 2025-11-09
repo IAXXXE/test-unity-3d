@@ -156,6 +156,7 @@ MonoBehaviour:
   showOutline: 1
   interactableType: 2
   toolType: 0
+  itemId: 100001
   interactableTimes: 0
   toolProperty: 0
 --- !u!1001 &3509092936025767760

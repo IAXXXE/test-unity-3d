@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InteractablePickup : InteractableBase
 {
-    public string itemId;
+    public int itemId;
     public int amount = 1;
 
     public void Start()

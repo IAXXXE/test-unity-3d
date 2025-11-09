@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Data/Inventory/Item Data")]
-public class ItemData : ScriptableObject
+[System.Serializable]
+public class ItemData
 {
     [Header("基础信息")]
-    public string itemID;
+    public int itemID;
     public string itemName;
     public ItemType itemType;
     [TextArea(3, 5)]
@@ -24,6 +24,7 @@ public class ItemData : ScriptableObject
     public bool isStackable = true;
 
     [Header("价值设置")]
+    public bool canSell = true;
     public int buyPrice = 10;
     public int sellPrice = 5;
 

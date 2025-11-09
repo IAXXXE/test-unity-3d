@@ -68,7 +68,7 @@ public class ContainerBehavior : ItemBehavior
         PlayerUI.Instance.ShowProgressBar(true, BarType.Drinking);
         PlayerUI.Instance.UpdateProgressBar(0f);
 
-        Debug.Log($"[消耗品] 开始使用: {itemData.name} (按住以继续)");
+        Debug.Log($"[消耗品] 开始使用: {itemData.itemName} (按住以继续)");
 
         // TODO: 播放使用动画
         // TODO: 播放使用音效
@@ -80,12 +80,12 @@ public class ContainerBehavior : ItemBehavior
         PlayerUI.Instance.ShowProgressBar(false);
 
         // 触发物品效果
-        Debug.Log($"[消耗品] 使用完成: {itemData.name}");
+        Debug.Log($"[消耗品] 使用完成: {itemData.itemName}");
         itemContainer.Drink();
         switch(itemContainer.GetFillingType())
         {
             case FillingType.Water:
-                Drink(ItemDatabase.Instance.GetItemData("WT0001"));
+                Drink(ItemDatabase.Instance.GetItemData(100018));
                 break;
         }
 
@@ -124,7 +124,7 @@ public class ContainerBehavior : ItemBehavior
 
     private void CancelDrink()
     {
-        Debug.Log($"[消耗品] 取消使用: {itemData.name} (进度: {usingTimer / totalUseTime:P0})");
+        Debug.Log($"[消耗品] 取消使用: {itemData.itemName} (进度: {usingTimer / totalUseTime:P0})");
         
         isUsing = false;
         usingTimer = 0f;

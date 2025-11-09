@@ -108,7 +108,7 @@ public class WeaponMeleeBehavior : ItemBehavior
 
     private void PerformLightAttack()
     {
-        Debug.Log($"[近战] 轻攻击: {itemData.name}");
+        Debug.Log($"[近战] 轻攻击: {itemData.itemName}");
         
         // 播放动画
         PlayerIKController.Instance.SetAnimTrigger(AnimActionType.LightAttack);
@@ -121,7 +121,7 @@ public class WeaponMeleeBehavior : ItemBehavior
 
     private void PerformChargedAttack(float chargeRatio)
     {
-        Debug.Log($"[近战] 蓄力攻击: {itemData.name}, 蓄力={chargeRatio:F2}");
+        Debug.Log($"[近战] 蓄力攻击: {itemData.itemName}, 蓄力={chargeRatio:F2}");
         
         float damage = lightAttackDamage * chargedAttackMultiplier * chargeRatio;
         

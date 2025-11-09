@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dishes", menuName = "Data/Cook/Dishes Data")]
-public class DishesData : ScriptableObject
+public class DishesData
 {
     public CookType cookType;
-    public string id;
+    public int id;
+    public string dishesName;
     public Sprite icon;
 
-    public SerializableDictionary<string, int> ingredients;
+    public SerializableDictionary<int, int> ingredients;
 
-    public SerializableDictionary<string, int> foodTargetHeat;
+    public SerializableDictionary<int, int> foodTargetHeat;
 
 }
 

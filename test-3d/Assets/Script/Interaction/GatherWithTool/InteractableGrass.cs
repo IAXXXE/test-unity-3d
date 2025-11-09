@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InteractableGrass : InteractableGatherWithTool
 {
+    public int itemId;
     public ToolProperty toolProperty;
     private bool isCutting;
     private float cutTime;
@@ -39,7 +40,7 @@ public class InteractableGrass : InteractableGatherWithTool
 
     public void DropItems()
     {
-        InventoryManager.Instance.AddItem("M0001", 2);
+        InventoryManager.Instance.AddItem(itemId, 2);
         gameObject.SetActive(false);
     }
 
@@ -62,7 +63,7 @@ public class InteractableGrass : InteractableGatherWithTool
             PlayerUI.Instance.UpdateProgressBar(cutTime / useTime);
         }
 
-        InventoryManager.Instance.AddItem("M0001", 2);
+        InventoryManager.Instance.AddItem(itemId, 2);
         PlayerUI.Instance.ShowProgressBar(false);
         PlayerIKController.Instance.SetAnimBool(AnimActionType.Gather, false);
         isCutting = false;

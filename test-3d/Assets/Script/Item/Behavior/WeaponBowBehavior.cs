@@ -206,7 +206,7 @@ public class WeaponBowBehavior : ItemBehavior
         drawTimer = 0f;
         PlayerUI.Instance.ShowProgressBar(false);
 
-        InventoryManager.Instance.RemoveItem("W0003", 1);
+        InventoryManager.Instance.RemoveItem(13000003, 1);
 
         // 播放射击音效
         // AudioManager.Instance?.PlaySound("bow_shoot");

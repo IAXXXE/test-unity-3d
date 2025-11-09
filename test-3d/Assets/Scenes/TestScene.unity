@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69509976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb257b300d8d9d748bf8d0eeb8190b52, type: 3}
   m_Name: 
@@ -1500,7 +1500,7 @@ MonoBehaviour:
     m_LayerIndex: 0
   pointCount: 10
   multiplyByArea: 1
-  pointLODFactor: 1
+  pointLODFactor: 0.15
   randomiseSeed: 1
   seed: 0
   overwriteNormalDirection: 0

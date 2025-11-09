@@ -56,7 +56,7 @@ public class ConsumableBehavior : ItemBehavior
         PlayerUI.Instance.ShowProgressBar(true, BarType.Eating);
         PlayerUI.Instance.UpdateProgressBar(0f);
 
-        Debug.Log($"[消耗品] 开始使用: {itemData.name} (按住以继续)");
+        Debug.Log($"[消耗品] 开始使用: {itemData.itemName} (按住以继续)");
 
         // TODO: 播放使用动画
         // TODO: 播放使用音效
@@ -72,7 +72,7 @@ public class ConsumableBehavior : ItemBehavior
 
         if (useSuccess)
         {
-            Debug.Log($"[消耗品] 使用完成: {itemData.name}");
+            Debug.Log($"[消耗品] 使用完成: {itemData.itemName}");
             GameEventManager.TriggerHeldItemConsumed();
         }
 
@@ -81,7 +81,7 @@ public class ConsumableBehavior : ItemBehavior
 
     private void CancelConsume()
     {
-        Debug.Log($"[消耗品] 取消使用: {itemData.name} (进度: {consumeTimer / totalUseTime:P0})");
+        Debug.Log($"[消耗品] 取消使用: {itemData.itemName} (进度: {consumeTimer / totalUseTime:P0})");
         
         isConsuming = false;
         consumeTimer = 0f;
@@ -154,7 +154,7 @@ public class ConsumableBehavior : ItemBehavior
 //         float useTime = itemData.useTime > 0 ? itemData.useTime : 1f;
 //         playerUI?.ShowChargeBar(true);
 
-//         Debug.Log($"[消耗品] 开始使用: {itemData.name}");
+//         Debug.Log($"[消耗品] 开始使用: {itemData.itemName}");
 
 //         while (consumeTimer < useTime)
 //         {
@@ -170,7 +170,7 @@ public class ConsumableBehavior : ItemBehavior
 
 //         if(useSuccess)
 //         {
-//             Debug.Log($"[消耗品] 使用完成: {itemData.name}");
+//             Debug.Log($"[消耗品] 使用完成: {itemData.itemName}");
 //             // GameEventManager.TriggerItemConsumed(itemData);
 //             GameEventManager.TriggerHeldItemConsumed();
 //         }

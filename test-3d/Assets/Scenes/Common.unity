@@ -25256,9 +25256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be9cd8de94014f9fae3d962a2693843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allDishes:
-  - {fileID: 11400000, guid: 2e6268c6eddba4dc7905bc3ca7fe35d0, type: 2}
-  - {fileID: 11400000, guid: 24704923d8ceb4758bc835faecdee766, type: 2}
 --- !u!1001 &1870886338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29299,28 +29296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0078ce49f2bae37498d0f67537cd21b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allItems:
-  - {fileID: 11400000, guid: 36b46db39a6ff5c49ad8d0cd91f35e29, type: 2}
-  - {fileID: 11400000, guid: 6b264d39da5a6431fad20258e17e824f, type: 2}
-  - {fileID: 11400000, guid: 8024a1817b67e416cbca825cc695829d, type: 2}
-  - {fileID: 11400000, guid: d0add12d128f84536aaebdcf304254dc, type: 2}
-  - {fileID: 11400000, guid: 79464267050644816a2420995b76428d, type: 2}
-  - {fileID: 11400000, guid: 2b395f33840494520a16ebf1a40a9aaf, type: 2}
-  - {fileID: 11400000, guid: 6d1415c20530a47958f6fea84f442392, type: 2}
-  - {fileID: 11400000, guid: eb59c1a19801542f9ac73a4260dbf5c6, type: 2}
-  - {fileID: 11400000, guid: b668ce482e0204e9388ea9e19f7a3736, type: 2}
-  - {fileID: 11400000, guid: ca79ae1456e884f5d9b9665eef60abe7, type: 2}
-  - {fileID: 11400000, guid: 9bd36eff8cb98407e9c7810fc3bcd0e2, type: 2}
-  - {fileID: 11400000, guid: 4680eecab7f124d38b71557de161973d, type: 2}
-  - {fileID: 11400000, guid: a96003c4b237a4676bd63f671a893f80, type: 2}
-  - {fileID: 11400000, guid: 3f7629f9c33c14c17a8d429d510b56ae, type: 2}
-  - {fileID: 11400000, guid: 4088727d7bb46421f9dcaf16bb24ac61, type: 2}
-  - {fileID: 11400000, guid: ec5a29fbd56b34057a3286a859020ae6, type: 2}
-  - {fileID: 11400000, guid: b19b9fcbe40b84b148ca9bcffbcde9d4, type: 2}
-  - {fileID: 11400000, guid: fc1f8ed9fd3d247ddbfebd297e15c863, type: 2}
-  - {fileID: 11400000, guid: 8636c8808e5194bf9b1aa4eae39f56d4, type: 2}
-  - {fileID: 11400000, guid: d87b074d696af4605a4e83c33c628788, type: 2}
-  - {fileID: 11400000, guid: 909cc306b1801401280cfed5f62124c5, type: 2}
+  itemDataList: {fileID: 11400000, guid: 56f8802a79c884a48830c2469da1dfb5, type: 2}
+  allItems: []
 --- !u!1001 &2081352171
 PrefabInstance:
   m_ObjectHideFlags: 0

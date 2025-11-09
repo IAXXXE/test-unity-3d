@@ -1,0 +1,665 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9463437d2ca5bdd47b2513bd82a06ca1, type: 3}
+  m_Name: ItemDataList_SO
+  m_EditorClassIdentifier: 
+  itemDataList:
+  - itemID: 100000
+    itemName: grass
+    itemType: 4
+    description: "\u8349"
+    icon: {fileID: 21300000, guid: 1fe19ffae1abab0479d7d9716bcbbb9c, type: 3}
+    worldPrefab: {fileID: 4452947085904611623, guid: e4807f87d5c884b19a03820f70bf28de,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 5
+    sellPrice: 1
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 0
+    attackRange: 0
+    defense: 0
+  - itemID: 100001
+    itemName: branch
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: 0e1ccb64303778e4081913a6d9cca677, type: 3}
+    worldPrefab: {fileID: 2179000495541555841, guid: 2d66e8d9f8c4246fb807c650e4034534,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 3
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 3
+    damage: 1
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100002
+    itemName: stone
+    itemType: 4
+    description: 
+    icon: {fileID: 21300000, guid: b9a847102a75c8c429a8f749008df6c2, type: 3}
+    worldPrefab: {fileID: 4034967733092172569, guid: 772e8fad8b9861742b6573f19f0fe458,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 3
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100003
+    itemName: rock
+    itemType: 4
+    description: 
+    icon: {fileID: 21300000, guid: b9a847102a75c8c429a8f749008df6c2, type: 3}
+    worldPrefab: {fileID: 4034967733092172569, guid: 772e8fad8b9861742b6573f19f0fe458,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100004
+    itemName: rope
+    itemType: 4
+    description: 
+    icon: {fileID: 21300000, guid: 3281101b955224c4f9bfd58e8ab4c342, type: 3}
+    worldPrefab: {fileID: 4142893916624930976, guid: f44948b023a6044e4928edb38c75a7c4,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100005
+    itemName: long stick
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: 40d526b51d159064f851539ce7779eec, type: 3}
+    worldPrefab: {fileID: 2179000495541555841, guid: 8af04ce2d994a40799a78c42763d0ae0,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 20
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 3
+    damage: 1
+    damageMultiplier: 1
+    attackRange: 2
+    defense: 0
+  - itemID: 100006
+    itemName: sharp stone
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: edcbd57032ccbd44e9f228cdd323ab50, type: 3}
+    worldPrefab: {fileID: 5537602928074422738, guid: dbd6a40657b81bc4ab70815b32c064ab,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0.2, y: 0.2, z: 0.2}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 15
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 04000000
+    weaponType: 3
+    damage: 3
+    damageMultiplier: 1
+    attackRange: 0.5
+    defense: 0
+  - itemID: 100007
+    itemName: sharp rock
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: edcbd57032ccbd44e9f228cdd323ab50, type: 3}
+    worldPrefab: {fileID: 5537602928074422738, guid: dbd6a40657b81bc4ab70815b32c064ab,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0.3, y: 0.3, z: 0.3}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 20
+    sellPrice: 10
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 04000000
+    weaponType: 3
+    damage: 3
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100008
+    itemName: axe
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: 6a08ec4b334ea1c46b8171679417a74f, type: 3}
+    worldPrefab: {fileID: 6453309886974881835, guid: 8ec81fe3172b14156a6ad9647e9954a6,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 0
+    canSell: 1
+    buyPrice: 30
+    sellPrice: 10
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 0100000004000000
+    weaponType: 3
+    damage: 5
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100009
+    itemName: pickaxe
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: 1fb46228a3bcb5042a763829cc07f9e5, type: 3}
+    worldPrefab: {fileID: 783568845274904932, guid: dd040549aac684f958d2bd9c1698b315,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 0
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 02000000
+    weaponType: 3
+    damage: 5
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100010
+    itemName: arrow
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: 59c8cd2a91ad7f846b9efd79b945c356, type: 3}
+    worldPrefab: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 1
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 04000000
+    weaponType: 3
+    damage: 3
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100011
+    itemName: bow
+    itemType: 2
+    description: 
+    icon: {fileID: 21300000, guid: bbf8638a8a75d9c42b93639213c92c9b, type: 3}
+    worldPrefab: {fileID: 4099206960519170807, guid: b01fc3acba5084381bcc01289e2adebb,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 0
+    canSell: 1
+    buyPrice: 50
+    sellPrice: 15
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 2
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100012
+    itemName: bottle
+    itemType: 7
+    description: 
+    icon: {fileID: 21300000, guid: bbc53608878294d46a1e3b694ee0a1fb, type: 3}
+    worldPrefab: {fileID: 3863253787088592551, guid: ce98c8977872846a090aec247c5b8f81,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 0
+    canSell: 0
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 0
+    isConsumable: 0
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 10
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100013
+    itemName: berry
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}
+    worldPrefab: {fileID: 2529699445592373398, guid: a6818fe8ecb744bfbbbe013590ea8d56,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 5
+    sellPrice: 1
+    isUsable: 1
+    isConsumable: 1
+    useTime: 0.5
+    satietyRestore: 3
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100014
+    itemName: cabbage
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: c1d0e6764d9c5f8458571840fb1d57d3, type: 3}
+    worldPrefab: {fileID: 8554979865545778643, guid: aec8969d0290c6d4cbc587ef85a01ce4,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 5
+    sellPrice: 2
+    isUsable: 1
+    isConsumable: 1
+    useTime: 1
+    satietyRestore: 5
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100015
+    itemName: tomato
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: 70e92df91699f664ab5bad7bf4723022, type: 3}
+    worldPrefab: {fileID: 5028759993301923343, guid: da4e1f3e08946466c9e6932315f507d4,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 1
+    isConsumable: 1
+    useTime: 1
+    satietyRestore: 5
+    thirstyRestore: 1
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100016
+    itemName: chicken
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: 14e62563269c11443b9c936be93b95f4, type: 3}
+    worldPrefab: {fileID: 6662072979905104206, guid: 559fb06e8d45742d18231d53e2549e0a,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 1
+    isConsumable: 1
+    useTime: 1.5
+    satietyRestore: 10
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100017
+    itemName: meat
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: c1101a972f67d164db2754844fbeeda2, type: 3}
+    worldPrefab: {fileID: 4996552262797058478, guid: 70da43861d4c9b741b310ca202d69593,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 100
+    sellPrice: 70
+    isUsable: 1
+    isConsumable: 1
+    useTime: 2
+    satietyRestore: 20
+    thirstyRestore: 0
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100018
+    itemName: water
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: 3a481bc5b3972b54ab4918d5226622af, type: 3}
+    worldPrefab: {fileID: 3863253787088592551, guid: ce98c8977872846a090aec247c5b8f81,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: 0, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 1
+    isConsumable: 1
+    useTime: 0
+    satietyRestore: 0
+    thirstyRestore: 5
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100019
+    itemName: berry salad
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: d1f94eb541d98c94c9e0a776707e9c7c, type: 3}
+    worldPrefab: {fileID: 6720557300420926973, guid: 1f1933227da144bb19f2c0cdbe083ee3,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 1
+    isConsumable: 1
+    useTime: 1
+    satietyRestore: 12
+    thirstyRestore: 3
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0
+  - itemID: 100020
+    itemName: vegetable salad
+    itemType: 0
+    description: 
+    icon: {fileID: 21300000, guid: 117b17facff65dc42b1b57deb7c21551, type: 3}
+    worldPrefab: {fileID: 6720557300420926973, guid: 1f1933227da144bb19f2c0cdbe083ee3,
+      type: 3}
+    posOffset: {x: 0, y: 0, z: 0}
+    rotOffset: {x: 0, y: -90, z: 0}
+    scale: {x: 0, y: 0, z: 0}
+    maxStackSize: 20
+    isStackable: 1
+    canSell: 1
+    buyPrice: 10
+    sellPrice: 5
+    isUsable: 1
+    isConsumable: 1
+    useTime: 1
+    satietyRestore: 20
+    thirstyRestore: 5
+    healthRestore: 0
+    manaRestore: 0
+    effectDuration: 0
+    containerType: 0
+    capacity: 0
+    toolProperties: 
+    weaponType: 0
+    damage: 0
+    damageMultiplier: 1
+    attackRange: 1
+    defense: 0

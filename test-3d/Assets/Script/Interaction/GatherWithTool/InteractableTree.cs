@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractableTree : InteractableGatherWithTool
 {
+    public int itemId;
     public int interactableTimes;
     public ToolProperty toolProperty;
     private bool isCutting;
@@ -59,7 +60,7 @@ public class InteractableTree : InteractableGatherWithTool
 
     public void DropItems()
     {
-        InventoryManager.Instance.AddItem("M0004", 3);
+        InventoryManager.Instance.AddItem(itemId, 3);
         gameObject.SetActive(false);
     }
 
@@ -82,7 +83,7 @@ public class InteractableTree : InteractableGatherWithTool
             PlayerUI.Instance.UpdateProgressBar(cutTime / useTime);
         }
 
-        InventoryManager.Instance.AddItem("M0004", 3);
+        InventoryManager.Instance.AddItem(itemId, 3);
         PlayerUI.Instance.ShowProgressBar(false);
         PlayerIKController.Instance.SetAnimBool(AnimActionType.Mining, false);
         isCutting = false;

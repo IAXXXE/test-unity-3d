@@ -98,40 +98,50 @@ public class PlayerAction : MonoBehaviour
     {
         var itemL = weapon.GetHeldItemData(HandType.HandL);
         var itemR = weapon.GetHeldItemData(HandType.HandR);
-        Debug.Log($"try merge {weapon.GetHeldItemData(HandType.HandL).name} {weapon.GetHeldItemData(HandType.HandR).name}");
+        Debug.Log($"try merge {weapon.GetHeldItemData(HandType.HandL).itemName} {weapon.GetHeldItemData(HandType.HandR).itemName}");
         // 合成表
         if(itemL == null || itemR == null) return;
 
-            if(itemL.itemID == "W0001" && itemR.itemID == "W0001")
+        if(itemL.itemID == 100000 && itemR.itemID == 100000)
         {
             GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
             GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem("W0005");
+            InventoryManager.Instance.AddItem(100004);
         }
-        if(itemL.itemID == "M0001" && itemR.itemID == "M0001")
+        if(itemL.itemID == 100001 && itemR.itemID == 100001)
         {
             GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
             GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem("M0003");
+            InventoryManager.Instance.AddItem(100005);
         }
-        if(itemL.itemID == "M0002" && itemR.itemID == "M0002")
+        if (itemL.itemID == 100002 && itemR.itemID == 100002)
         {
             GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem("W0004");
+            InventoryManager.Instance.AddItem(100006);
         }
-
-        if((itemL.itemID == "M0003" && itemR.itemID == "W0005") || (itemL.itemID == "W0005" && itemR.itemID == "M0003"))
+        if(itemL.itemID == 100003 && itemR.itemID == 100003)
         {
-            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
             GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem("W0002");
+            InventoryManager.Instance.AddItem(100007);
         }
 
-        if((itemL.itemID == "W0004" && itemR.itemID == "W0001") || (itemL.itemID == "W0001" && itemR.itemID == "W0004"))
+        if((itemL.itemID == 100006 && itemR.itemID == 100001) || (itemL.itemID == 100001 && itemR.itemID == 100006))
         {
             GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
             GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem("W0003");
+            InventoryManager.Instance.AddItem(100010);
+        }
+        if((itemL.itemID == 100004 && itemR.itemID == 100005) || (itemL.itemID == 100005 && itemR.itemID == 100004))
+        {
+            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem(100011);
+        }
+        if((itemL.itemID == 100007 && itemR.itemID == 100001) || (itemL.itemID == 100001 && itemR.itemID == 100007))
+        {
+            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+            GameEventManager.TriggerHeldItemConsumed();
+            InventoryManager.Instance.AddItem(100008);
         }
 
 

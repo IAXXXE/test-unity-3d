@@ -102,7 +102,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     [Button]
-    public bool AddItem(string itemId, int quantity = 1)
+    public bool AddItem(int itemId, int quantity = 1)
     {
         Debug.Log($"add {quantity} {itemId}");
         return AddItem(ItemDatabase.Instance.CreateItem(itemId), quantity);
@@ -111,17 +111,17 @@ public class InventoryManager : MonoBehaviour
     [Button]
     public void AddBow()
     {
-        if(!HasItem("W0002")) AddItem(ItemDatabase.Instance.CreateItem("W0002"), 1);
+        if(!HasItem(100011)) AddItem(ItemDatabase.Instance.CreateItem(100011), 1);
         
-        AddItem(ItemDatabase.Instance.CreateItem("W0003"), 10);
+        AddItem(ItemDatabase.Instance.CreateItem(100010), 10);
     }
 
     [Button]
     public void AddMat()
     {   
-        AddItem(ItemDatabase.Instance.CreateItem("M0001"), 10);
-        AddItem(ItemDatabase.Instance.CreateItem("M0002"), 10);
-        AddItem(ItemDatabase.Instance.CreateItem("W0001"), 10);
+        AddItem(ItemDatabase.Instance.CreateItem(100000), 10);
+        AddItem(ItemDatabase.Instance.CreateItem(100001), 10);
+        AddItem(ItemDatabase.Instance.CreateItem(100002), 10);
     }
 
     public bool AddItem(ItemBase item, int quantity = 1)
@@ -193,7 +193,7 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
     
-    public bool RemoveItem(string itemID, int quantity = 1)
+    public bool RemoveItem(int itemID, int quantity = 1)
     {
         int remainingToRemove = quantity;
         
@@ -266,7 +266,7 @@ public class InventoryManager : MonoBehaviour
         return GetFirstEmptySlot();
     }
 
-    public ItemData GetItemData(string itemID)
+    public ItemData GetItemData(int itemID)
     {
         foreach (var slot in slots)
         {
@@ -278,7 +278,7 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
     
-    public int GetItemCount(string itemID)
+    public int GetItemCount(int itemID)
     {
         int count = 0;
         foreach (var slot in slots)
@@ -291,7 +291,7 @@ public class InventoryManager : MonoBehaviour
         return count;
     }
     
-    public bool HasItem(string itemID, int quantity = 1)
+    public bool HasItem(int itemID, int quantity = 1)
     {
         return GetItemCount(itemID) >= quantity;
     }

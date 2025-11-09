@@ -1,0 +1,85 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor/UI%20Builder/ItemEditor.uss?fileID=7433441132597879392&amp;guid=dc0de1ca5572a28439dba8bf30dd7c62&amp;type=3#ItemEditor" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="ItemList" style="flex-grow: 1; width: 30%; height: 100%;">
+            <ui:VisualElement name="Header" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
+                <ui:Label tabindex="-1" text=" - 物品列表" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButton" style="background-color: rgb(79, 79, 79); color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:ListView name="ListView" reorderable="true" show-border="true" style="flex-grow: 1;" />
+        </ui:VisualElement>
+        <ui:ScrollView name="ItemDatas" style="width: 70%; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+            <ui:VisualElement name="Header" style="flex-grow: 0; flex-direction: row; justify-content: space-between;">
+                <ui:Label tabindex="-1" text=" - 物品数据" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteButton" style="background-color: rgb(79, 79, 79); color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Content" style="flex-grow: 1;">
+                <ui:VisualElement name="Row1" style="flex-grow: 1; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); height: auto;">
+                    <ui:Label tabindex="-1" text="基本信息" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                    <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: row; align-self: auto; align-items: center;">
+                        <ui:VisualElement name="Icon" style="flex-grow: 0; margin-right: 5px; margin-left: 5px; width: 128px; height: 128px; background-image: url(&quot;project://database/Assets/Packages/Cainos/Pixel%20Art%20Icon%20Pack%20-%20RPG/Texture/Misc/Book.png?fileID=2800000&amp;guid=7972dd97521bb1c44ba8e3774391b996&amp;type=3#Book&quot;); flex-shrink: 0; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px;" />
+                        <ui:VisualElement name="Genaeral" style="flex-grow: 1; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(14, 14, 14); border-right-color: rgb(14, 14, 14); border-top-color: rgb(14, 14, 14); border-bottom-color: rgb(14, 14, 14);">
+                            <ui:IntegerField label="ID" value="0" name="ItemID" style="color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-font-style: bold; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px;" />
+                            <ui:TextField picking-mode="Ignore" label="Name" name="ItemName" style="color: rgb(0, 0, 0); padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; -unity-text-align: middle-left;" />
+                            <ui:EnumField label="Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="ItemType" style="padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; -unity-text-align: middle-left;" />
+                            <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="ItemIcon" style="padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; -unity-text-align: middle-left;" />
+                            <uie:ObjectField label="World Prefab" name="ItemPrefab" type="UnityEngine.GameObject, UnityEngine.CoreModule" style="padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; -unity-text-align: middle-left;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Row2" style="flex-grow: 1; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                    <ui:Label tabindex="-1" text="描述" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                    <ui:VisualElement name="Container" style="flex-grow: 1;">
+                        <ui:TextField picking-mode="Ignore" name="Description" multiline="true" style="flex-grow: 1; height: 60px; padding-top: 2px; padding-bottom: 2px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Row3" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:VisualElement name="Left" style="flex-grow: 1; width: 50px; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                        <ui:Label tabindex="-1" text="位置偏移" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                        <ui:Vector3Field label="Position" name="Position" />
+                        <ui:Vector3Field label="Rotation" name="Rotation" />
+                        <ui:Vector3Field label="Scale" name="Scale" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Right" style="flex-grow: 1; width: 50px; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                        <ui:Label tabindex="-1" text="堆叠设置" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                        <ui:Toggle label="Is Stackable" name="Stackable" />
+                        <ui:IntegerField label="Max Stack Size" value="20" name="MaxStackSize" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Row4" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement name="Left" style="flex-grow: 1; width: 50px; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                        <ui:Label tabindex="-1" text="使用设置" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                        <ui:Toggle label="Is Usable" name="IsUsable" />
+                        <ui:Toggle label="Is Consumable" name="IsConsumable" />
+                        <ui:FloatField label="Use Time" value="1" name="UseTime" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Right" style="flex-grow: 1; width: 50px; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                        <ui:Label tabindex="-1" text="价值设置" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                        <ui:Toggle label="Can Sell" name="CanSell" />
+                        <ui:IntegerField label="Buy Price" value="10" name="BuyPrice" />
+                        <ui:IntegerField label="Sell Price" value="5" name="SellPrice" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Row5" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement name="Left" style="flex-grow: 1; width: 50px; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                        <ui:Label tabindex="-1" text="效果数值" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                        <ui:IntegerField label="Satiety" value="0" name="Satiety" />
+                        <ui:IntegerField label="Thirsty" value="0" name="Thirsty" />
+                        <ui:IntegerField label="Health" value="0" name="Health" />
+                        <ui:IntegerField label="Mana" value="0" name="Mana" />
+                        <ui:FloatField label="Effect Duration" value="0" name="EffectDuration" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Right" style="flex-grow: 1; width: 50px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px;">
+                        <ui:Label tabindex="-1" text="装备数值" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" style="color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); padding-left: 10px; background-color: rgb(43, 43, 43); -unity-font-style: bold;" />
+                        <ui:TextField picking-mode="Ignore" label="Tool Property" name="ToolProperty" />
+                        <ui:EnumField label="Weapon Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="WeaponType" />
+                        <ui:FloatField label="Damage" value="0" name="Damage" />
+                        <ui:FloatField label="Damage Multiplier" value="1" name="DamageMultiplier" />
+                        <ui:FloatField label="Attack Range" value="1" name="AttackRange" />
+                        <ui:FloatField label="Defense" value="1" name="Defense" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

@@ -3,7 +3,7 @@ using UnityEngine;
 public class InteractableGather : InteractableBase
 {
     [Header("采集设置")]
-    public string itemId;
+    public int itemId;
     public int minQuantity = 1;
     public int maxQuantity = 3;
 

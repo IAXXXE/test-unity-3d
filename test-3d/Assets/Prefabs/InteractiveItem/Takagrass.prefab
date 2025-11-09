@@ -72,6 +72,7 @@ MonoBehaviour:
   showOutline: 0
   interactableType: 2
   toolType: 9
+  itemId: 100000
   toolProperty: 0
 --- !u!1 &8669660335051654856
 GameObject:

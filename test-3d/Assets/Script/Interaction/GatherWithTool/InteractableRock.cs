@@ -54,8 +54,8 @@ public class InteractableRock : InteractableGatherWithTool
 
     public void DropItems()
     {
-        InventoryManager.Instance.AddItem("M0002", 3);
-        InventoryManager.Instance.AddItem("M0005", 2);
+        InventoryManager.Instance.AddItem(100002, 3);
+        InventoryManager.Instance.AddItem(100003, 2);
         gameObject.SetActive(false);
     }
 
@@ -78,8 +78,8 @@ public class InteractableRock : InteractableGatherWithTool
             PlayerUI.Instance.UpdateProgressBar(digTime / useTime);
         }
 
-        InventoryManager.Instance.AddItem("M0002", 3);
-        InventoryManager.Instance.AddItem("M0005", 2);
+        InventoryManager.Instance.AddItem(100002, 3);
+        InventoryManager.Instance.AddItem(100003, 2);
         PlayerUI.Instance.ShowProgressBar(false);
         PlayerIKController.Instance.SetAnimBool(AnimActionType.Mining, false);
         isDigging = false;

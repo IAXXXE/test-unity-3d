@@ -57,7 +57,7 @@ public class PlayerWeapon : MonoBehaviour
             );
             // 根据物品类型附加对应的行为组件
             AttachItemBehavior(item);
-            Debug.Log($"[装备] {item.data.name} ({item.data.itemType})");
+            Debug.Log($"[装备] {item.data.itemName} ({item.data.itemType})");
         }
         else
         {
@@ -188,7 +188,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public ItemData GetArrowData()
     {
-        return InventoryManager.Instance.GetItemData("W0003");
+        return InventoryManager.Instance.GetItemData(13000003);
     }
     
     public ItemBehavior GetCurrentBehavior() => currentBehavior;

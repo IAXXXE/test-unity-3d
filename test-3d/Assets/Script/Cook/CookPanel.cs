@@ -100,7 +100,7 @@ public class CookPanel : MonoBehaviour
     public void ShowIngredients()
     {
         // UI
-        infoPanel.Find("_DishesName").GetComponent<TextMeshProUGUI>().text = currDishes.name;
+        infoPanel.Find("_DishesName").GetComponent<TextMeshProUGUI>().text = currDishes.dishesName;
 
         int ingredientCount = currDishes.ingredients.Count;
         int idx = 0;

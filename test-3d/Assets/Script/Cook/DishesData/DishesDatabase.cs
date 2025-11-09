@@ -9,7 +9,7 @@ public class DishesDatabase : MonoBehaviour
     [Header("菜品数据列表")]
     public List<DishesData> allDishes = new List<DishesData>();
 
-    private Dictionary<string, DishesData> dishesDictionary = new Dictionary<string, DishesData>();
+    private Dictionary<int, DishesData> dishesDictionary = new Dictionary<int, DishesData>();
     
     void Awake()
     {
@@ -29,7 +29,7 @@ public class DishesDatabase : MonoBehaviour
     {
         foreach(DishesData dishesData in allDishes)
         {
-            if(dishesData != null && !string.IsNullOrEmpty(dishesData.id))
+            if(dishesData != null)
             {
                 if(!dishesDictionary.ContainsKey(dishesData.id))
                 {
@@ -45,7 +45,7 @@ public class DishesDatabase : MonoBehaviour
         Debug.Log($"菜品数据库初始化完成，共加载 {dishesDictionary.Count} 个");
     }
 
-    public DishesData GetCharacterData(string id)
+    public DishesData GetCharacterData(int id)
     {
         if(dishesDictionary.ContainsKey(id))
         {
