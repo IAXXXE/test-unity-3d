@@ -1,4 +1,5 @@
 using EasyButtons;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum HandType
@@ -55,6 +56,7 @@ public class PlayerWeapon : MonoBehaviour
                 item.data.posOffset, 
                 Quaternion.Euler(item.data.rotOffset)
             );
+            currentItemObjectR.transform.localScale = item.data.scale;
             // 根据物品类型附加对应的行为组件
             AttachItemBehavior(item);
             Debug.Log($"[装备] {item.data.itemName} ({item.data.itemType})");
@@ -67,13 +69,37 @@ public class PlayerWeapon : MonoBehaviour
             if(item == null) return;
             // 实例化物品模型
             currentItemObjectL = Instantiate(item.data.worldPrefab, HandL);
+
+            var (leftHandPos, leftHandRot) = ConvertToLeftHand(item.data.posOffset, item.data.rotOffset);
             currentItemObjectL.transform.SetLocalPositionAndRotation(
-                item.data.posOffset, 
-                Quaternion.Euler(item.data.rotOffset)
+                leftHandPos,
+                Quaternion.Euler(leftHandRot)
             );
+            currentItemObjectL.transform.localScale = item.data.scale;
         }
 
         if (item == null) return;
+    }
+
+    public (Vector3 position, Vector3 rotation) ConvertToLeftHand(Vector3 rightHandPos, Vector3 rightHandRot)
+    {
+        // 创建镜像矩阵（在X轴上镜像）
+        Matrix4x4 mirrorMatrix = Matrix4x4.Scale(new Vector3(-1, 1, 1));
+        
+        // 变换位置
+        Vector4 rightPos4 = new Vector4(rightHandPos.x, rightHandPos.y, rightHandPos.z, 1);
+        Vector4 leftPos4 = mirrorMatrix * rightPos4;
+        Vector3 leftHandPos = new Vector3(leftPos4.x, leftPos4.y, leftPos4.z);
+        
+        // 变换旋转（通过四元数）
+        Quaternion rightRot = Quaternion.Euler(rightHandRot);
+        Matrix4x4 rightMatrix = Matrix4x4.TRS(Vector3.zero, rightRot, Vector3.one);
+        Matrix4x4 leftMatrix = mirrorMatrix * rightMatrix * mirrorMatrix;
+        
+        Quaternion leftRot = leftMatrix.rotation;
+        Vector3 leftHandRot = leftRot.eulerAngles;
+        
+        return (leftHandPos, leftHandRot);
     }
 
     private void AttachItemBehavior(ItemBase item)
@@ -188,7 +214,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public ItemData GetArrowData()
     {
-        return InventoryManager.Instance.GetItemData(13000003);
+        return InventoryManager.Instance.GetItemData(100010);
     }
     
     public ItemBehavior GetCurrentBehavior() => currentBehavior;

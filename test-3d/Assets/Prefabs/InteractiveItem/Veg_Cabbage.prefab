@@ -283,10 +283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactName: Cabbage
-  interactDistance: 100014
+  interactDistance: 3
   showOutline: 0
   interactableType: 0
-  itemId: 0
+  itemId: 100014
   amount: 1
 --- !u!114 &-8458571882642293904
 MonoBehaviour:

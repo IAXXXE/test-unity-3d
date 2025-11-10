@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -34,6 +35,7 @@ public class Arrow : MonoBehaviour
         shooter = source;
         lifetime = life;
 
+        transform.AddComponent<Rigidbody>();
         rb = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
         arrowCollider = GetComponent<Collider>();

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class GameEventManager
@@ -48,11 +49,17 @@ public static class GameEventManager
     public static event Action<HandType> OnHeldItemConsumed;
     public static event Action OnItemUpdate;
     public static event Action<Transform> OnPlayerLookAt;
+    public static event Action<bool> OnPlayerMerge;
     // 战斗
     public static event Action<ItemData, AttackType, float> OnWeaponAttack;
     public static event Action OnLightAttackHit;
     public static event Action<ItemData> OnItemConsumed;
     public static event Action<bool> OnAimModeChanged;
+
+    // 灵
+    public static event Action<Transform> OnInspirationPointInteract;
+    public static event Action OnBattleStart;
+    public static event Action<bool> OnBattleEnd;
     #endregion
 
 
@@ -123,6 +130,8 @@ public static class GameEventManager
         => OnItemUpdate?.Invoke();
     public static void TriggerPlayerLookAt(Transform target)
         => OnPlayerLookAt?.Invoke(target);
+    public static void TriggerPlayerMerge(bool isTrue)
+        => OnPlayerMerge?.Invoke(isTrue);
     // 玩家战斗
     public static void TriggerWeaponAttack(ItemData item, AttackType type, float power)
         => OnWeaponAttack?.Invoke(item, type, power);
@@ -133,6 +142,14 @@ public static class GameEventManager
         => OnItemConsumed?.Invoke(item);
     public static void TriggerAimModeChanged(bool isAiming)
         => OnAimModeChanged?.Invoke(isAiming);
-    
+
+    // 灵
+    public static void TriggerInspirationPointInteract(Transform point)
+        => OnInspirationPointInteract?.Invoke(point);
+    public static void TriggerBattleStart()
+        => OnBattleStart?.Invoke();
+    public static void TriggerBattleEnd(bool isWin)
+        => OnBattleEnd?.Invoke(isWin);
+
     #endregion
 }

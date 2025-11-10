@@ -1,4 +1,5 @@
 using System.Collections;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerWeapon))]
@@ -13,6 +14,9 @@ public class PlayerAction : MonoBehaviour
 
     private PlayerInputActions inputActions;
     private bool isLocked = false;
+
+    private bool isMerging;
+    private float mergeTime;
 
     private void Awake()
     {
@@ -96,55 +100,65 @@ public class PlayerAction : MonoBehaviour
 
     private void OnMergePressed()
     {
+        if(isMerging) return;
+
         var itemL = weapon.GetHeldItemData(HandType.HandL);
         var itemR = weapon.GetHeldItemData(HandType.HandR);
-        Debug.Log($"try merge {weapon.GetHeldItemData(HandType.HandL).itemName} {weapon.GetHeldItemData(HandType.HandR).itemName}");
-        // 合成表
         if(itemL == null || itemR == null) return;
+        Debug.Log($"try merge {weapon.GetHeldItemData(HandType.HandL)?.itemName} {weapon.GetHeldItemData(HandType.HandR)?.itemName}");
+        // 合成表
 
         if(itemL.itemID == 100000 && itemR.itemID == 100000)
         {
-            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100004);
+            StartCoroutine(Merging(100004));
         }
         if(itemL.itemID == 100001 && itemR.itemID == 100001)
         {
-            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100005);
+            StartCoroutine(Merging(100005));
         }
         if (itemL.itemID == 100002 && itemR.itemID == 100002)
         {
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100006);
+            StartCoroutine(Merging(100006, false));
         }
         if(itemL.itemID == 100003 && itemR.itemID == 100003)
         {
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100007);
+            StartCoroutine(Merging(100006, false));
         }
 
         if((itemL.itemID == 100006 && itemR.itemID == 100001) || (itemL.itemID == 100001 && itemR.itemID == 100006))
         {
-            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100010);
+            StartCoroutine(Merging(100010));
         }
         if((itemL.itemID == 100004 && itemR.itemID == 100005) || (itemL.itemID == 100005 && itemR.itemID == 100004))
         {
-            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100011);
+            StartCoroutine(Merging(100011));
         }
         if((itemL.itemID == 100007 && itemR.itemID == 100001) || (itemL.itemID == 100001 && itemR.itemID == 100007))
         {
-            GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
-            GameEventManager.TriggerHeldItemConsumed();
-            InventoryManager.Instance.AddItem(100008);
+            StartCoroutine(Merging(100008));
+        }
+    }
+
+    private IEnumerator Merging(int id, bool bothConsumed = true, float needTime = 1f)
+    {
+        mergeTime = 0;
+
+        GameEventManager.TriggerPlayerMerge(true);
+        PlayerUI.Instance.ShowProgressBar(true, BarType.Using);
+        while (mergeTime < needTime)
+        {
+            yield return null;
+            mergeTime += Time.deltaTime;
+            PlayerUI.Instance.UpdateProgressBar(mergeTime / needTime);
         }
 
+        GameEventManager.TriggerHeldItemConsumed();
+        if(bothConsumed) GameEventManager.TriggerHeldItemConsumed(HandType.HandL);
+        InventoryManager.Instance.AddItem(id);
 
+        PlayerUI.Instance.ShowProgressBar(false);
+        GameEventManager.TriggerPlayerMerge(false);
+        yield break;
     }
 
     private void OnUIShowed()

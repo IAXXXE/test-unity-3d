@@ -17,7 +17,7 @@ public class ItemData
     [Header("持有时显示偏移设置")]
     public Vector3 posOffset;
     public Vector3 rotOffset;
-    public Vector3 scale;
+    public Vector3 scale = new(1,1,1);
 
     [Header("堆叠设置")]
     public int maxStackSize = 20;

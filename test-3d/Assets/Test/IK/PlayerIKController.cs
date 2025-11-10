@@ -11,9 +11,12 @@ public class PlayerIKController : MonoBehaviour
     public PlayerController playerController;
 
     [Header("IK 目标")]
+    public Transform aimTarget;
+    public Transform mergeTarget;
+
+    public Transform lookTarget;
     public Transform leftHandTarget;
     public Transform rightHandTarget;
-    public Transform lookTarget;
 
     [Header("平滑参数")]
     [Range(0f, 1f)] public float ikWeight = 0f;
@@ -25,7 +28,8 @@ public class PlayerIKController : MonoBehaviour
 
     [Header("控制")]
     public bool isAiming = false;
-    
+    public bool isMerging = false;
+
     private Vector3 currentLookPosition; // 当前平滑的注视位置
     private Vector3 targetLookPosition;  // 目标注视位置
 
@@ -48,7 +52,6 @@ public class PlayerIKController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerController = transform.parent.GetComponent<PlayerController>();
-        GameEventManager.OnPlayerLookAt += OnLookAt;
         
         // 初始化位置为前方
         currentLookPosition = transform.position + transform.forward * 2f;
@@ -64,11 +67,31 @@ public class PlayerIKController : MonoBehaviour
             { AnimActionType.Mining, "IsMining" }
         };
 
+        GameEventManager.OnPlayerLookAt += OnLookAt;
+        GameEventManager.OnPlayerMerge += OnMerge;
     }
 
     void OnDestroy()
     {
         GameEventManager.OnPlayerLookAt -= OnLookAt;
+        GameEventManager.OnPlayerMerge -= OnMerge;
+    }
+
+    private void OnMerge(bool isTrue)
+    {
+        isMerging = isTrue;
+
+        if(isMerging)
+        {
+            leftHandTarget = mergeTarget;
+            rightHandTarget = mergeTarget;
+
+            lookTarget = mergeTarget;
+        }
+        else
+        {
+            lookTarget = null;
+        }
     }
 
     private void OnLookAt(Transform target)
@@ -79,10 +102,15 @@ public class PlayerIKController : MonoBehaviour
     void Update()
     {
         isAiming = playerController.isAiming;
+        if(isAiming)
+        {
+            leftHandTarget = aimTarget;
+            rightHandTarget = aimTarget;
+        }
         
         // 设置目标权重
-        targetIKWeight = isAiming ? 1f : 0f;
-        targetLookWeight = (!isAiming && lookTarget != null) ? 0.5f : 0f;
+        targetIKWeight = (isAiming || isMerging) ? 1f : 0f;
+        targetLookWeight = (!(isAiming || isMerging) && lookTarget != null) ? 0.5f : 0f;
 
         // 平滑过渡权重
         ikWeight = Mathf.Lerp(ikWeight, targetIKWeight, Time.deltaTime * transitionSpeed);
