@@ -182,7 +182,7 @@ public class GhostBattleManager : MonoBehaviour
         lastWaveSpawned = false;
 
         // 停止游戏世界计时
-        Time.timeScale = 1f; // 如果需要暂停其他系统，在这里处理
+        GameTime.Instance.PauseTime(true);
         GameEventManager.TriggerBattleStart(); // 触发战斗开始事件
 
         // 创建结界
@@ -329,6 +329,7 @@ public class GhostBattleManager : MonoBehaviour
 
         // 恢复游戏世界计时
         GameEventManager.TriggerBattleEnd(isVictory);
+        GameTime.Instance.PauseTime(false);
 
         Debug.Log($"Battle ended. Victory: {isVictory}");
     }
