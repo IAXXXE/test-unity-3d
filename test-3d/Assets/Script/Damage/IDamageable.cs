@@ -7,7 +7,11 @@ public enum DamageType
     Magic,      // 魔法
     Fire,       // 火焰
     Ice,        // 冰霜
-    Poison      // 毒素
+    Poison,      // 毒素
+    Normal,
+    Ghost,
+    Explosion,
+    Projectile
 }
 
 public struct DamageInfo

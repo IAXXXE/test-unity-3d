@@ -243,10 +243,12 @@ public class GhostBattleManager : MonoBehaviour
             ghost.transform.position = spawnPos;
             
             // 设置幽灵参数（如果有Enemy组件）
-            var enemyController = ghost.GetComponent<EnemyController>();
+            var enemyController = ghost.GetComponent<GhostController>();
             if (enemyController != null)
             {
-                enemyController.Initialize(this); // 传递管理器引用，用于死亡时回收
+                // TODO: Random
+                var randomId = UnityEngine.Random.Range(0,5);
+                enemyController.Initialize(this, 1000 + randomId); // 传递管理器引用，用于死亡时回收
             }
         }
     }

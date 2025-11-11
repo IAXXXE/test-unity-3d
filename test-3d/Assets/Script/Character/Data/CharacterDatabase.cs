@@ -15,6 +15,10 @@ public class CharacterDatabase : MonoBehaviour
     public List<RaceData> allRaceData = new List<RaceData>();
     private Dictionary<RaceType, RaceData> raceDictionary = new Dictionary<RaceType, RaceData>();
 
+    public GhostDataList_SO ghostDataList_SO;
+    private List<GhostData> allGhostData;
+    private Dictionary<int, GhostData> ghostDictionary = new Dictionary<int, GhostData>();
+
     void Awake()
     {
         if (Instance == null)
@@ -63,6 +67,19 @@ public class CharacterDatabase : MonoBehaviour
             }
 
         }
+
+        allGhostData = ghostDataList_SO.ghostDataList;
+
+        foreach(var ghost in allGhostData)
+        {
+            if(ghost != null)
+            {
+                if(!ghostDictionary.ContainsKey(ghost.id))
+                {
+                    ghostDictionary.Add(ghost.id, ghost);
+                }
+            }
+        }
     }
 
     public CharacterData GetCharacterData(string id)
@@ -82,6 +99,15 @@ public class CharacterDatabase : MonoBehaviour
             return raceDictionary[type];
         }
 
+        return null;
+    }
+
+    public GhostData GetGhostData(int id)
+    {
+        if(ghostDictionary.ContainsKey(id))
+        {
+            return ghostDictionary[id];
+        }
         return null;
     }
 

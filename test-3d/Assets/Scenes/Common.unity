@@ -24001,6 +24001,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4788e62fb266489f89ba4ce074163ae, type: 2}
   - {fileID: 11400000, guid: e6e49511fe205487688b5b1ebe4dcff8, type: 2}
   - {fileID: 11400000, guid: c16b87631cb864a24b06910a1c6be5fb, type: 2}
+  ghostDataList_SO: {fileID: 11400000, guid: 8e8c187aa12894cf9a021c1277de2f5e, type: 2}
 --- !u!4 &1760172923
 Transform:
   m_ObjectHideFlags: 0
@@ -27555,7 +27556,8 @@ MonoBehaviour:
   battleData: {fileID: 11400000, guid: d7546eee420ae465689661d27f54270a, type: 2}
   ghostPrefab: {fileID: 498253721416304272, guid: 2d6e21788ea034afab173b6db31db99e,
     type: 3}
-  barrierEffectPrefab: {fileID: 0}
+  barrierEffectPrefab: {fileID: 1320622313770816227, guid: da3117221341842318d5291840bd24a0,
+    type: 3}
   poolSize: 30
 --- !u!1001 &1985350040
 PrefabInstance:

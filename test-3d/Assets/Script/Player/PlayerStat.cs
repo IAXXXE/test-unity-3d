@@ -98,6 +98,11 @@ public class PlayerStat : CharacterStat
         return weapon.GetHeldItemType();
     }
 
+    public Transform GetPlayerTransform()
+    {
+        return weapon.transform;
+    }
+
     public List<ToolProperty> GetHeldItemProperty()
     {
         return weapon.GetHeldItem()?.data.toolProperties;

@@ -49,17 +49,17 @@ public class CreatureStat : ICharacterStat
         return health;
     }
 
-    public int GetMaxHealth()
+    public virtual int GetMaxHealth()
     {
         return maxHealth;
     }
 
-    public int GetMaxSatiety()
+    public virtual int GetMaxSatiety()
     {
         return maxSatiety;
     }
 
-    public int GetMaxThirsty()
+    public virtual int GetMaxThirsty()
     {
         return maxThirsty;
     }

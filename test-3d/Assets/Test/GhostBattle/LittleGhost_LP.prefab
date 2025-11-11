@@ -383,8 +383,8 @@ GameObject:
   m_Component:
   - component: {fileID: 498253721416304299}
   - component: {fileID: 498253721416304276}
-  - component: {fileID: 9089420610118358912}
   - component: {fileID: 6822125393179032642}
+  - component: {fileID: 6890597783293016836}
   m_Layer: 9
   m_Name: LittleGhost_LP
   m_TagString: Ghost
@@ -431,18 +431,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9089420610118358912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498253721416304272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01c433b320e5046828c622fb47b454c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &6822125393179032642
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -464,6 +452,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.6305127
   m_Center: {x: -0.0029857156, y: 0.44598413, z: 0.07222127}
+--- !u!114 &6890597783293016836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498253721416304272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe7e70e73e354aeeb52f89fbb8e5556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostId: 1000
 --- !u!1 &498253721421649741
 GameObject:
   m_ObjectHideFlags: 0

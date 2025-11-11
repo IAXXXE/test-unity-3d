@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17720ce6ff28e484d879550f867def35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandL: {fileID: 6914988914022421589}
+  HandL: {fileID: 7885146646928110715}
   HandR: {fileID: 1370886768079077559}
   playerUI: {fileID: 0}
 --- !u!114 &6536859905764176270

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b752170dd20e45c7bb0fef3e46137e7, type: 3}
+  m_Name: GhostDataList_SO
+  m_EditorClassIdentifier: 
+  ghostDataList:
+  - id: 1000
+    ghostName: g1
+    ghostType: 0
+    maxHealth: 1
+    speed: 1
+    attackRange: 1
+    attackDamage: 1
+    attackCooldown: 5
+    hasShield: 0
+    teleportOnHit: 0
+    explosionRadius: 0
+  - id: 1001
+    ghostName: g2
+    ghostType: 1
+    maxHealth: 2
+    speed: 1
+    attackRange: 1
+    attackDamage: 1
+    attackCooldown: 5
+    hasShield: 0
+    teleportOnHit: 1
+    explosionRadius: 0
+  - id: 1002
+    ghostName: g3
+    ghostType: 2
+    maxHealth: 1
+    speed: 1
+    attackRange: 1
+    attackDamage: 1
+    attackCooldown: 5
+    hasShield: 0
+    teleportOnHit: 0
+    explosionRadius: 3
+  - id: 1003
+    ghostName: g4
+    ghostType: 5
+    maxHealth: 1
+    speed: 1
+    attackRange: 1
+    attackDamage: 1
+    attackCooldown: 5
+    hasShield: 0
+    teleportOnHit: 0
+    explosionRadius: 3
+  - id: 1004
+    ghostName: g5
+    ghostType: 4
+    maxHealth: 1
+    speed: 1
+    attackRange: 1
+    attackDamage: 1
+    attackCooldown: 5
+    hasShield: 0
+    teleportOnHit: 0
+    explosionRadius: 3
