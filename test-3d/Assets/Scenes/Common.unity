@@ -27554,11 +27554,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleData: {fileID: 11400000, guid: d7546eee420ae465689661d27f54270a, type: 2}
-  ghostPrefab: {fileID: 498253721416304272, guid: 2d6e21788ea034afab173b6db31db99e,
-    type: 3}
+  ghostPrefabConfigs: []
+  waveConfigs: []
   barrierEffectPrefab: {fileID: 1320622313770816227, guid: da3117221341842318d5291840bd24a0,
     type: 3}
-  poolSize: 30
 --- !u!1001 &1985350040
 PrefabInstance:
   m_ObjectHideFlags: 0

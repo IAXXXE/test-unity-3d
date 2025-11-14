@@ -20,6 +20,7 @@ public struct DamageInfo
     public DamageType damageType;
     public GameObject attacker;
     public ItemData weaponData;
+    public Vector3 hitPoint;
     public Vector3 knockbackDirection;
     public float knockbackForce;
     public bool isCritical;
