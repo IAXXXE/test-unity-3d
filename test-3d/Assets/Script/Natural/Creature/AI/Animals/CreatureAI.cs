@@ -193,7 +193,7 @@ public class CreatureAI : MonoBehaviour
         currentActionState = newState;
         currentActionState?.Enter();
 
-        Debug.Log($"{stat.data.name} change state {newState}");
+        // Debug.Log($"{stat.data.name} change state {newState}");
     }
 
     public void ForcedChangrState(CreatureActionState newState)
@@ -204,7 +204,7 @@ public class CreatureAI : MonoBehaviour
         currentActionState = newState;
         currentActionState?.Enter();
 
-        Debug.Log($"Force {stat.data.name} change state {newState}");
+        // Debug.Log($"Force {stat.data.name} change state {newState}");
     }
 
     // 受到伤害时的回调

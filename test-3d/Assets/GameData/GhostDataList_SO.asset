@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostDataList:
   - id: 1000
-    ghostName: g1
+    ghostName: g0
     ghostType: 0
     maxHealth: 1
     speed: 1
@@ -24,8 +24,15 @@ MonoBehaviour:
     hasShield: 0
     teleportOnHit: 0
     explosionRadius: 0
+    worldPrefab: {fileID: 9039229590123362372, guid: 55b28304516b9470ea2c05febfd5663b,
+      type: 3}
+    maxSize: 10
+    manaBolusDropAmount: 1
+    manaBolusDropChance: 1
+    otherDrops: []
+    spawnObjects: []
   - id: 1001
-    ghostName: g2
+    ghostName: g1
     ghostType: 1
     maxHealth: 2
     speed: 1
@@ -35,30 +42,51 @@ MonoBehaviour:
     hasShield: 0
     teleportOnHit: 1
     explosionRadius: 0
+    worldPrefab: {fileID: 1356520234387935331, guid: f697a48d944c64c239803953c3bef193,
+      type: 3}
+    maxSize: 3
+    manaBolusDropAmount: 2
+    manaBolusDropChance: 1
+    otherDrops: []
+    spawnObjects: []
   - id: 1002
-    ghostName: g3
+    ghostName: g2
     ghostType: 2
     maxHealth: 1
     speed: 1
     attackRange: 1
-    attackDamage: 1
+    attackDamage: 10
     attackCooldown: 5
     hasShield: 0
     teleportOnHit: 0
     explosionRadius: 3
+    worldPrefab: {fileID: 6174695419900861823, guid: ea93446c192c44942944b2036ca33673,
+      type: 3}
+    maxSize: 3
+    manaBolusDropAmount: 3
+    manaBolusDropChance: 1
+    otherDrops: []
+    spawnObjects: []
   - id: 1003
-    ghostName: g4
+    ghostName: g3
     ghostType: 5
     maxHealth: 1
     speed: 1
     attackRange: 1
-    attackDamage: 1
+    attackDamage: 5
     attackCooldown: 5
     hasShield: 0
     teleportOnHit: 0
     explosionRadius: 3
+    worldPrefab: {fileID: 3100921594456514025, guid: 119364d0f50314b7f8ead8397ea9e0a1,
+      type: 3}
+    maxSize: 3
+    manaBolusDropAmount: 3
+    manaBolusDropChance: 1
+    otherDrops: []
+    spawnObjects: []
   - id: 1004
-    ghostName: g5
+    ghostName: g4
     ghostType: 4
     maxHealth: 1
     speed: 1
@@ -68,3 +96,28 @@ MonoBehaviour:
     hasShield: 0
     teleportOnHit: 0
     explosionRadius: 3
+    worldPrefab: {fileID: 3100921594456514025, guid: 119364d0f50314b7f8ead8397ea9e0a1,
+      type: 3}
+    maxSize: 3
+    manaBolusDropAmount: 3
+    manaBolusDropChance: 1
+    otherDrops: []
+    spawnObjects: []
+  - id: 1005
+    ghostName: g5
+    ghostType: 0
+    maxHealth: 1
+    speed: 1
+    attackRange: 1
+    attackDamage: 1
+    attackCooldown: 5
+    hasShield: 0
+    teleportOnHit: 0
+    explosionRadius: 0
+    worldPrefab: {fileID: 4521491536088821326, guid: 95cd33258225c4ce8bd15449bffa4ff4,
+      type: 3}
+    maxSize: 10
+    manaBolusDropAmount: 1
+    manaBolusDropChance: 0.5
+    otherDrops: []
+    spawnObjects: []

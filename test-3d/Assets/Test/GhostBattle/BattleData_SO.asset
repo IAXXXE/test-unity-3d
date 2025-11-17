@@ -14,7 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battlefieldType: 0
   battleRadius: 30
-  totalBattleTime: 113
+  totalBattleTime: 180
   spawnInterval: 20
   enemiesPerWave: 5
   spawnRadius: 3
+  ghostIdList: e8030000e9030000ea030000eb030000ec030000ed030000
+  waveConfigs:
+  - waveNumber: 0
+    spawnInfos:
+    - ghostId: 1000
+      count: 3
+    - ghostId: 1005
+      count: 2
+  - waveNumber: 1
+    spawnInfos:
+    - ghostId: 1001
+      count: 1
+  - waveNumber: 2
+    spawnInfos:
+    - ghostId: 1002
+      count: 1
+  - waveNumber: 3
+    spawnInfos:
+    - ghostId: 1003
+      count: 1
+  - waveNumber: 4
+    spawnInfos:
+    - ghostId: 1004
+      count: 1
+  - waveNumber: 5
+    spawnInfos:
+    - ghostId: 1000
+      count: 5
+    - ghostId: 1001
+      count: 1
+    - ghostId: 1002
+      count: 1
+    - ghostId: 1003
+      count: 1
+    - ghostId: 1004
+      count: 1

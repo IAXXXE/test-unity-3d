@@ -679,15 +679,6 @@ public class CombatState : CreatureActionState
             };
             damageReceiver.TakeDamage(damageInfo);
         }
-        else
-        {
-            // 如果是玩家
-            if(target.CompareTag("Player"))
-            {
-                GameInstance.Instance.PlayerStat.LoseHealth(ai.attackDamage);
-            }
-        }
-        
         // 可选：播放攻击动画/音效
         // ai.anim.PlayAttackAnimation();
     }

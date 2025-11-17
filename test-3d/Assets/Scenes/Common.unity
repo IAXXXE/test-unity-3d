@@ -27519,6 +27519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1982618005}
   - component: {fileID: 1982618006}
+  - component: {fileID: 1982618007}
   m_Layer: 0
   m_Name: MN_GhostManager
   m_TagString: Untagged
@@ -27554,10 +27555,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleData: {fileID: 11400000, guid: d7546eee420ae465689661d27f54270a, type: 2}
-  ghostPrefabConfigs: []
-  waveConfigs: []
   barrierEffectPrefab: {fileID: 1320622313770816227, guid: da3117221341842318d5291840bd24a0,
     type: 3}
+--- !u!114 &1982618007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982618004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1ee87fe852f4646b8b454a54c97d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaBolusSmallPrefab: {fileID: 9046855554024134161, guid: d5605276dde204c319f2148234112359,
+    type: 3}
+  manaBolusMediumPrefab: {fileID: 9046855554024134161, guid: d0daffce94fcc4daaac4d28d4dec2304,
+    type: 3}
+  manaBolusLargePrefab: {fileID: 9046855554024134161, guid: 6018df010361349c285e9e38e5317732,
+    type: 3}
+  explosionForce: 5
+  explosionRadius: 2
+  upwardForce: 3
 --- !u!1001 &1985350040
 PrefabInstance:
   m_ObjectHideFlags: 0

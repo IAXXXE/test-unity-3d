@@ -202,7 +202,7 @@ public class WeaponMeleeBehavior : ItemBehavior
         
         if (damageable != null && !damageable.IsDead)
         {
-            Vector3 hitPoint = target.GetComponent<Collider>()?.ClosestPoint(attackPoint.position) ?? target.transform.position;
+            Vector3 meleeHitPoint = target.GetComponent<Collider>()?.ClosestPoint(attackPoint.position) ?? target.transform.position;
             
             DamageInfo damageInfo = new DamageInfo
             {
@@ -212,7 +212,8 @@ public class WeaponMeleeBehavior : ItemBehavior
                 weaponData = itemData,
                 knockbackDirection = direction,
                 knockbackForce = 5f * knockbackPower,
-                isCritical = damageable.IsWeakPoint(hitPoint)
+                hitPoint = meleeHitPoint,
+                isCritical = damageable.IsWeakPoint(meleeHitPoint)
             };
             
             damageable.TakeDamage(damageInfo);

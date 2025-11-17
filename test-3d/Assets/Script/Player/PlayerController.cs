@@ -15,7 +15,7 @@ public enum PlayerMoveState
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable, IManageable
 {
     [Header("References")]
     public Transform cameraTransform;
@@ -108,6 +108,12 @@ public class PlayerController : MonoBehaviour
     public bool IsFullySubmerged => isFullySubmerged;
     public PlayerMoveState MoveState => moveState;
 
+    // Player State
+    public PlayerStat stat;
+    public bool IsDead => (stat == null || stat.GetHealth() <= 0);
+    public float CurrentHealth => stat.GetHealth();
+    public float MaxHealth => stat.GetMaxHealth();
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -183,6 +189,8 @@ public class PlayerController : MonoBehaviour
 
         capsule.height = standingHeight;
         UpdateCapsuleCenter();
+
+        stat = GameInstance.Instance.PlayerStat;
     }
 
     void Update()
@@ -579,5 +587,59 @@ public class PlayerController : MonoBehaviour
     public bool IsCrouched() => isCrouched;
     public PlayerInputActions GetInputActions() => inputActions;
     public void SetCrouch(bool crouch) => isCrouched = crouch;
+
+    #region Damage
+
+    public void TakeDamage(DamageInfo damageInfo)
+    {
+        if (IsDead) return;
+
+        float finalDamage = damageInfo.damage;
+        
+        // 暴击伤害
+        if (damageInfo.isCritical)
+        {
+            finalDamage *= damageInfo.criticalMultiplier > 0 ? damageInfo.criticalMultiplier : 2f;
+        }
+
+        stat.LoseHealth((int)finalDamage);
+
+        // // 显示伤害数字
+        // ShowDamageText(finalDamage, damageInfo.isCritical);
+        // // 击退效果
+        // ApplyKnockback(damageInfo.knockbackDirection, damageInfo.knockbackForce);
+        // // 受击动画
+        // animator?.SetTrigger("Hit");
+
+        if (IsDead)
+        {
+            return;
+        }
+
+        // CalculateEmotionalResponse(damageInfo.damage, damageInfo.attacker);
+    }
+
+    public bool IsWeakPoint(Vector3 hitPoint)
+    {
+        return false;
+    }
+    #endregion
+
+    #region Mana
+    public void RestoreMana(int amount)
+    {
+        stat.IncreaseMagic(amount);
+    }
+
+    public int GetCurrentMana()
+    {
+        return stat.GetMagic();
+    }
+
+    public int GetMaxMana()
+    {
+        return stat.GetMaxMagic();
+    }
+    #endregion
 }
 

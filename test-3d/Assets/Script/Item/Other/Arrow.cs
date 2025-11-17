@@ -200,7 +200,7 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    private void OnHit(Collider hitCollider, Vector3 hitPoint, Vector3 hitNormal)
+    private void OnHit(Collider hitCollider, Vector3 arrowHitPoint, Vector3 hitNormal)
     {
         if (hasHit) return;
         if (hitCollider == null)
@@ -211,7 +211,7 @@ public class Arrow : MonoBehaviour
         
         hasHit = true;
 
-        Debug.Log($"[箭矢] 命中: {hitCollider.name}, 位置:{hitPoint}, GameObject:{hitCollider.gameObject.name}");
+        Debug.Log($"[箭矢] 命中: {hitCollider.name}, 位置:{arrowHitPoint}, GameObject:{hitCollider.gameObject.name}");
 
         // 尝试造成伤害
         var damageable = hitCollider.GetComponent<IDamageable>();
@@ -230,7 +230,8 @@ public class Arrow : MonoBehaviour
                 attacker = shooter,
                 knockbackDirection = direction,
                 knockbackForce = 2f,
-                isCritical = damageable.IsWeakPoint(hitPoint)
+                hitPoint = arrowHitPoint,
+                isCritical = damageable.IsWeakPoint(arrowHitPoint)
                 // isCritical = Random.value < 0.15f // 15%暴击率
             };
 
@@ -245,7 +246,7 @@ public class Arrow : MonoBehaviour
         // 粘附效果
         if (stickToTarget)
         {
-            StickToSurface(hitCollider, hitPoint, hitNormal);
+            StickToSurface(hitCollider, arrowHitPoint, hitNormal);
         }
         else
         {
