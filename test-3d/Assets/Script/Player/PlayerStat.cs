@@ -36,7 +36,7 @@ public class PlayerStat : CharacterStat
         mana = data.mana;
 
         maxMagic = data.maxMagic;
-        magic = maxMagic;
+        magic = 0;
     }
 
     public void SetMagic(int value)
@@ -51,7 +51,7 @@ public class PlayerStat : CharacterStat
     public void IncreaseMagic(int value)
     {
         var newMagic = magic + value;
-        magic = Mathf.Min(maxMagic, newMagic);
+        SetMagic(newMagic);
     }
 
     public void IncreaseMaxMagic(int value)
@@ -113,5 +113,9 @@ public class PlayerStat : CharacterStat
         return weapon.playerUI;
     }
 
+    public Transform GetTransform()
+    {
+        return weapon.transform;
+    }
 
 }

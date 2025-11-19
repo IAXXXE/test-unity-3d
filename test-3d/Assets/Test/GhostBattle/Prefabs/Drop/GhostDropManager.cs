@@ -61,12 +61,12 @@ public class GhostDropManager : MonoBehaviour
         if (totalMana <= 0) return;
 
         // 根据总量决定掉落策略
-        List<int> manaValues = CalculateManaDistribution(totalMana);
+        List<string> manaValues = CalculateManaDistribution(totalMana);
 
         // 生成魔法球并炸开
-        foreach (int manaValue in manaValues)
+        foreach (string manaSize in manaValues)
         {
-            GameObject prefab = GetManaBolusPrefab(manaValue);
+            GameObject prefab = GetManaBolusPrefab(manaSize);
             if (prefab == null) continue;
 
             // 在掉落位置周围随机偏移
@@ -80,7 +80,7 @@ public class GhostDropManager : MonoBehaviour
             ManaBolus bolus = bolusObj.GetComponent<ManaBolus>();
             if (bolus != null)
             {
-                bolus.SetManaValue(manaValue);
+                bolus.SetManaValue(manaSize);
             }
 
             // 添加爆炸效果
@@ -112,31 +112,34 @@ public class GhostDropManager : MonoBehaviour
     /// 计算魔法值分配
     /// 策略：优先生成大球，余数生成小球
     /// </summary>
-    private List<int> CalculateManaDistribution(int totalMana)
+    private List<string> CalculateManaDistribution(int totalMana)
     {
-        List<int> distribution = new List<int>();
-
-        // 策略：5个一组生成大球，3个一组生成中球，余下的生成小球
-        int largeBolus = totalMana / 5;
-        int remainder = totalMana % 5;
-
+        List<string> distribution = new();
+        
+        // 策略：30个一组生成大球，10个一组生成中球，余下的生成小球
+        int valueL = 30, valueM = 10, valueS = 1;
+        
+        int largeBolus = totalMana / valueL;
+        int remainder = totalMana % valueL;
         // 添加大球
-        for (int i = 0; i < largeBolus; i++)
+        for(int i = 0; i < largeBolus; i++)
         {
-            distribution.Add(5);
+            distribution.Add("L");
         }
 
         // 处理余数
-        if (remainder >= 3)
+        int midBolus = remainder / valueM;
+        remainder = remainder % valueM;
+        for(int i = 0; i < midBolus; i++)
         {
-            distribution.Add(3);
-            remainder -= 3;
+            distribution.Add("M");
         }
 
         // 剩余的生成小球
-        for (int i = 0; i < remainder; i++)
+        int smallBolus = remainder / valueS;
+        for(int i = 0; i < smallBolus; i++)
         {
-            distribution.Add(1);
+            distribution.Add("S");
         }
 
         return distribution;
@@ -145,11 +148,11 @@ public class GhostDropManager : MonoBehaviour
     /// <summary>
     /// 根据魔法值获取对应预制体
     /// </summary>
-    private GameObject GetManaBolusPrefab(int manaValue)
+    private GameObject GetManaBolusPrefab(string size)
     {
-        if (manaValue >= 5)
+        if (size == "L")
             return manaBolusLargePrefab;
-        else if (manaValue >= 3)
+        else if (size == "M")
             return manaBolusMediumPrefab;
         else
             return manaBolusSmallPrefab;

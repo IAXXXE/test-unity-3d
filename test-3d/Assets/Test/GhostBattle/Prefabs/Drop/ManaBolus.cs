@@ -27,7 +27,7 @@ public class ManaBolus : MonoBehaviour
 
     private void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        playerTransform = GameInstance.Instance.PlayerStat.GetTransform();
         spawnTime = Time.time;
         
         // 开始下落（物理模拟）
@@ -96,13 +96,15 @@ public class ManaBolus : MonoBehaviour
     /// <summary>
     /// 设置魔法值
     /// </summary>
-    public void SetManaValue(int value)
+    public void SetManaValue(string size)
     {
-        manaValue = value;
+        if(size == "L") manaValue = 30;
+        else if(size == "M") manaValue = 10;
+        else manaValue = 1;
         
         // 根据魔法值调整大小
-        float scale = Mathf.Lerp(0.3f, 1f, value / 10f);
-        transform.localScale = Vector3.one * scale;
+        // float scale = Mathf.Lerp(0.3f, 1f, value / 10f);
+        // transform.localScale = Vector3.one * scale;
     }
 
     /// <summary>

@@ -8,16 +8,22 @@ public class CharacterDatabase : MonoBehaviour
 
     [Header("角色数据列表")]
     public List<CharacterData> allCharacters = new List<CharacterData>();
-
     private Dictionary<string, CharacterData> characterDictionary = new Dictionary<string, CharacterData>();
 
     // TODO: 暂放
+    [Header("种族数据列表")]
     public List<RaceData> allRaceData = new List<RaceData>();
     private Dictionary<RaceType, RaceData> raceDictionary = new Dictionary<RaceType, RaceData>();
 
+    [Header("幽灵数据列表")]
     public GhostDataList_SO ghostDataList_SO;
-    private List<GhostData> allGhostData;
+    private List<GhostData> allGhostData = new();
     private Dictionary<int, GhostData> ghostDictionary = new Dictionary<int, GhostData>();
+
+    [Header("宠物数据列表")]
+    public PetDataList_SO petDataList_SO;
+    private List<PetData> allPetData = new();
+    private Dictionary<string, PetData> petDictionary = new Dictionary<string, PetData>();
 
     void Awake()
     {
@@ -69,7 +75,6 @@ public class CharacterDatabase : MonoBehaviour
         }
 
         allGhostData = ghostDataList_SO.ghostDataList;
-
         foreach(var ghost in allGhostData)
         {
             if(ghost != null)
@@ -77,6 +82,26 @@ public class CharacterDatabase : MonoBehaviour
                 if(!ghostDictionary.ContainsKey(ghost.id))
                 {
                     ghostDictionary.Add(ghost.id, ghost);
+                }
+                else
+                {
+                    Debug.LogWarning($"重复的Ghost ID: {ghost.id}");
+                }
+            }
+        }
+
+        allPetData = petDataList_SO.petDatas;
+        foreach(var pet in allPetData)
+        {
+            if(pet != null)
+            {
+                if(!petDictionary.ContainsKey(pet.petName))
+                {
+                    petDictionary.Add(pet.petName, pet);
+                }
+                else
+                {
+                    Debug.LogWarning($"重复的Pet Name: {pet.petName}");
                 }
             }
         }
@@ -111,17 +136,14 @@ public class CharacterDatabase : MonoBehaviour
         return null;
     }
 
-    // public CharacterStat CreateCharacter(string id)
-    // {
-    //     CharacterData data = GetCharacterData(id);
-    //     if(data != null)
-    //     {
-    //         var character = gameObject.AddComponent<CharacterStat>();
-    //         return character;
-    //     }
-
-    //     return null;
-    // }
+    public PetData GetPetData(string name)
+    {
+        if(petDictionary.ContainsKey(name))
+        {
+            return petDictionary[name];
+        }
+        return null;
+    }
 
 }
 

@@ -69,6 +69,7 @@ public class GameInstance : MonoBehaviour
     public void InitPlayer()
     {
         PlayerStat = new PlayerStat("0");
+        PlayerStat.Init();
     }
 
     #endregion
