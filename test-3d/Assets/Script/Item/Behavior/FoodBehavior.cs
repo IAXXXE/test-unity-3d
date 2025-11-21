@@ -11,14 +11,12 @@ public class FoodBehavior : ItemBehavior
 
     public override void OnUse()
     {
-        // Use键改为开始使用
         if (isEating) return;
         StartEating();
     }
 
     public override void OnPrimaryStart()
     {
-        // 主要按键也可以触发使用
         if (isEating) return;
         StartEating();
     }
@@ -58,7 +56,7 @@ public class FoodBehavior : ItemBehavior
         PlayerUI.Instance.ShowProgressBar(true, BarType.Eating);
         PlayerUI.Instance.UpdateProgressBar(0f);
 
-        Debug.Log($"[消耗品] 开始使用: {itemData.itemName} (按住以继续)");
+        Debug.Log($"[食物] 开始食用: {itemData.itemName} (按住以继续)");
 
         // TODO: 播放使用动画
         // TODO: 播放使用音效
@@ -74,7 +72,7 @@ public class FoodBehavior : ItemBehavior
 
         if (useSuccess)
         {
-            Debug.Log($"[消耗品] 使用完成: {itemData.itemName}");
+            Debug.Log($"[食物] 食用完成: {itemData.itemName}");
             GameEventManager.TriggerHeldItemConsumed();
         }
 
@@ -83,7 +81,7 @@ public class FoodBehavior : ItemBehavior
 
     private void CancelEat()
     {
-        Debug.Log($"[消耗品] 取消使用: {itemData.itemName} (进度: {eatTimer / totalEatTime:P0})");
+        Debug.Log($"[[食物] 取消食用: {itemData.itemName} (进度: {eatTimer / totalEatTime:P0})");
         
         isEating = false;
         eatTimer = 0f;
@@ -133,8 +131,32 @@ public class FoodBehavior : ItemBehavior
     }
 
     // Feed
-    
-    public override void OnSecondaryStart() { }
-    public override void OnSecondaryEnd() { }
-    public override void OnSecondaryUpdate(float deltaTime) { }
+    public bool isFeeding;
+    public override void OnSecondaryStart()
+    {
+        Debug.Log("Player Feeding");
+        if(isFeeding) return;
+        StartFeeding();
+    }
+
+    public override void OnSecondaryEnd()
+    {
+        isFeeding = false;
+    }
+
+    public override void OnSecondaryUpdate(float deltaTime)
+    {
+        
+    }
+
+    private void StartFeeding()
+    {
+        isFeeding = true;
+        var pets = PetManager.Instance.ownedPets;
+        if(pets.Count == 0) return;
+        foreach(PetBase pet in pets)
+        {
+            pet.TryFeed();
+        }
+    }
 }

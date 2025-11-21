@@ -5439,7 +5439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e647f1ace234874bb5dbf70367dc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1088893200}
 --- !u!114 &349830767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15556,8 +15555,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tip
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c43cdc5274daa438fa10fc01470cc084, type: 2}
-  m_sharedMaterial: {fileID: -2252950506690914252, guid: c43cdc5274daa438fa10fc01470cc084,
+  m_fontAsset: {fileID: 11400000, guid: 3ffe5f1b91e324d71a37a4f11a848262, type: 2}
+  m_sharedMaterial: {fileID: -7502629830488448646, guid: 3ffe5f1b91e324d71a37a4f11a848262,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

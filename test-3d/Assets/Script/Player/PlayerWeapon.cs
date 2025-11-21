@@ -124,6 +124,8 @@ public class PlayerWeapon : MonoBehaviour
                 break;
 
             case ItemType.Food:
+                currentBehavior = gameObject.AddComponent<FoodBehavior>();
+                break;
             case ItemType.Potion:
                 currentBehavior = gameObject.AddComponent<ConsumableBehavior>();
                 break;

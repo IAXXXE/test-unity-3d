@@ -110,34 +110,13 @@ public class SoulSoilPet : PetBase
         Debug.Log("Water " + moisture);
     }
 
-    public void BeFeed()
-    {
-        Debug.Log("See Food ! ");
-        agent.SetDestination(followTarget.position);
-        StartCoroutine(MoveToPlayer());
-    }
-
-    public void OnFeed()
+    public override void OnFeed()
     {
         // animation
+        if(isEating) return;
         isEating = true;
-        StartCoroutine(Eating());
-    }
-
-    private IEnumerator MoveToPlayer()
-    {
-        float distance = Vector3.Distance(transform.position, followTarget.position);
-        while(distance > 2f)
-        {
-            yield return new WaitForSeconds(0.5f);
-            distance = Vector3.Distance(transform.position, followTarget.position);
-        }
-
-        EnterInteractionMode();
-
-        // 吃下
         GameEventManager.TriggerHeldItemConsumed();
-        OnFeed();
+        StartCoroutine(Eating());
     }
 
     private IEnumerator Eating()

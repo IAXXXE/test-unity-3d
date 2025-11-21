@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public abstract class PetBase : MonoBehaviour, IPet, IInteractable
 {
@@ -223,6 +224,33 @@ public abstract class PetBase : MonoBehaviour, IPet, IInteractable
     public void Interact(PlayerController player)
     {
         PetManager.Instance.EnterInteractionMode(this);
+    }
+
+    public void TryFeed()
+    {
+        agent.SetDestination(followTarget.position);
+        StartCoroutine(MoveToPlayer());
+    }
+
+    private IEnumerator MoveToPlayer()
+    {
+        float distance = Vector3.Distance(transform.position, followTarget.position);
+        while(distance > 1)
+        {
+            yield return new WaitForSeconds(0.5f);
+            distance = Vector3.Distance(transform.position, followTarget.position);
+            agent.SetDestination(followTarget.position);
+        }
+
+        EnterInteractionMode();
+
+        // Eat
+        OnFeed();
+    }
+
+    public virtual void OnFeed()
+    {
+        
     }
 
     public void SetHighlight(bool on)
