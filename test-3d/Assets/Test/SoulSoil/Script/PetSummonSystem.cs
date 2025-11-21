@@ -8,6 +8,8 @@ public class PetSummonSystem : MonoBehaviour
     public Transform summonPoint;
     public float summonRadius = 2f;
     
+    public GameObject summonEffect;
+    
     private PetManager petManager;
     
     private void Start()
@@ -45,7 +47,7 @@ public class PetSummonSystem : MonoBehaviour
         Vector3 spawnPosition = GetSummonPosition();
         
         // 生成宠物
-        GameObject petObject = Instantiate(data.prefab, spawnPosition, Quaternion.identity);
+        GameObject petObject = Instantiate(data.prefab, spawnPosition, Quaternion.identity, PetManager.Instance.transform);
         PetBase pet = petObject.GetComponent<PetBase>();
         
         if (pet != null)
@@ -95,7 +97,7 @@ public class PetSummonSystem : MonoBehaviour
     private void PlaySummonEffect(Vector3 position)
     {
         // 播放召唤粒子特效
-        // ParticleSystem effect = Instantiate(summonEffectPrefab, position, Quaternion.identity);
-        // Destroy(effect.gameObject, 2f);
+        ParticleSystem effect = Instantiate(summonEffect, position, Quaternion.identity).GetComponent<ParticleSystem>();
+        Destroy(effect.gameObject, 2f);
     }
 }

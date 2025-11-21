@@ -1,13 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TextMeshPro))]
-public class DamagePopup : MonoBehaviour
+public class PetStatsPopup : MonoBehaviour
 {
     // cached
     Transform _tr;
     TextMeshPro _tmp;
+    SpriteRenderer _sprite;
     Camera _cam;
 
     // runtime state
@@ -15,6 +16,8 @@ public class DamagePopup : MonoBehaviour
     float _age;
     Vector3 _velocity;
     bool _inUse;
+
+    public SerializableDictionary<string, Sprite> stringToSprite = new();
 
     // inspector-configurable
     public float lifetime = 1.0f;
@@ -34,20 +37,21 @@ public class DamagePopup : MonoBehaviour
     void Awake()
     {
         _tr = transform;
-        _tmp = GetComponent<TextMeshPro>();
+        _tmp = GetComponentInChildren<TextMeshPro>();
         _tmp.enableWordWrapping = false;
         _tmp.alignment = TextAlignmentOptions.Center;
         _tmp.raycastTarget = false;
+        _sprite = GetComponentInChildren<SpriteRenderer>();
         _cam = Camera.main;
         gameObject.SetActive(false);
     }
 
-    public void Play(string text, Vector3 worldPos, Camera cam = null, bool isCritical = false, float life = -1f)
+    public void Play(string text, Vector3 worldPos, string spriteID, Camera cam = null, bool isFull = false, float life = -1f)
     {
         if (cam != null) _cam = cam;
         _tmp.text = text;
-        _tmp.color = isCritical ? critColor : normalColor;
-        if(isCritical) _tmp.text += "  !!!";
+        _tmp.color = isFull ? critColor : normalColor;
+        _sprite.sprite = stringToSprite[spriteID];
         _lifeTime = life > 0 ? life : lifetime;
         _age = 0f;
         _inUse = true;

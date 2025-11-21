@@ -134,7 +134,6 @@ public class FoodBehavior : ItemBehavior
     public bool isFeeding;
     public override void OnSecondaryStart()
     {
-        Debug.Log("Player Feeding");
         if(isFeeding) return;
         StartFeeding();
     }
@@ -142,16 +141,18 @@ public class FoodBehavior : ItemBehavior
     public override void OnSecondaryEnd()
     {
         isFeeding = false;
+        GameEventManager.TriggerPlayerFeed(false);
     }
 
     public override void OnSecondaryUpdate(float deltaTime)
     {
-        
+        if(item == null) GameEventManager.TriggerPlayerFeed(false);
     }
 
     private void StartFeeding()
     {
         isFeeding = true;
+        GameEventManager.TriggerPlayerFeed(true);
         var pets = PetManager.Instance.ownedPets;
         if(pets.Count == 0) return;
         foreach(PetBase pet in pets)

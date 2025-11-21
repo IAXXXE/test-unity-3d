@@ -15,8 +15,8 @@ public class PetManager : MonoBehaviour
     public PetBase activePet;
     
     [Header("互动设置")]
-    public KeyCode interactKey = KeyCode.E;
-    public float interactionCheckRadius = 5f;
+    // public KeyCode interactKey = KeyCode.E;
+    // public float interactionCheckRadius = 5f;
     
     private PetBase nearbyPet;
     private bool isInInteractionMode = false;
@@ -46,50 +46,50 @@ public class PetManager : MonoBehaviour
         }
     }
     
-    private void Update()
-    {
-        CheckNearbyPets();
-        HandleInteractionInput();
-    }
+    // private void Update()
+    // {
+    //     CheckNearbyPets();
+    //     HandleInteractionInput();
+    // }
     
-    private void CheckNearbyPets()
-    {
-        if (isInInteractionMode) return;
+    // private void CheckNearbyPets()
+    // {
+    //     if (isInInteractionMode) return;
         
-        nearbyPet = null;
-        float closestDistance = interactionCheckRadius;
+    //     nearbyPet = null;
+    //     float closestDistance = interactionCheckRadius;
         
-        foreach (var pet in ownedPets)
-        {
-            if (pet != null && pet.gameObject.activeInHierarchy)
-            {
-                float distance = Vector3.Distance(player.position, pet.GetTransform().position);
+    //     foreach (var pet in ownedPets)
+    //     {
+    //         if (pet != null && pet.gameObject.activeInHierarchy)
+    //         {
+    //             float distance = Vector3.Distance(player.position, pet.GetTransform().position);
                 
-                if (distance < closestDistance && pet.IsInInteractionRange(player))
-                {
-                    closestDistance = distance;
-                    nearbyPet = pet;
-                }
-            }
-        }
-    }
+    //             if (distance < closestDistance && pet.IsInInteractionRange(player))
+    //             {
+    //                 closestDistance = distance;
+    //                 nearbyPet = pet;
+    //             }
+    //         }
+    //     }
+    // }
     
-    private void HandleInteractionInput()
-    {
-        if (Input.GetKeyDown(interactKey))
-        {
-            if (isInInteractionMode)
-            {
-                // 退出互动模式
-                ExitInteractionMode();
-            }
-            else if (nearbyPet != null)
-            {
-                // 进入互动模式
-                EnterInteractionMode(nearbyPet);
-            }
-        }
-    }
+    // private void HandleInteractionInput()
+    // {
+    //     if (Input.GetKeyDown(interactKey))
+    //     {
+    //         if (isInInteractionMode)
+    //         {
+    //             // 退出互动模式
+    //             ExitInteractionMode();
+    //         }
+    //         else if (nearbyPet != null)
+    //         {
+    //             // 进入互动模式
+    //             EnterInteractionMode(nearbyPet);
+    //         }
+    //     }
+    // }
     
     public void EnterInteractionMode(PetBase pet)
     {

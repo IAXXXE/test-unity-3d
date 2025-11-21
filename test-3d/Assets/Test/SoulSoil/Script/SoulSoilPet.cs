@@ -105,25 +105,48 @@ public class SoulSoilPet : PetBase
 
     public void OnWater()
     {
-        // animation VFX UI
-        moisture += 10f;
-        Debug.Log("Water " + moisture);
+        animator.SetTrigger("IsWatering");
     }
 
     public override void OnFeed()
     {
-        // animation
-        if(isEating) return;
-        isEating = true;
-        GameEventManager.TriggerHeldItemConsumed();
+        if(isEating)
+        {
+            FloatingTextPool.Instance.ShowPetStats(transform.position + Vector3.up * 2f, "eat", "Is Eating...", false, 1.5f);
+            return;
+        }
         StartCoroutine(Eating());
     }
 
     private IEnumerator Eating()
     {
+        isEating = true;
+        // animation
+        GameEventManager.TriggerHeldItemConsumed();
+        animator.SetTrigger("IsEating");
+
         yield return new WaitForSeconds(10f);
 
         isEating = false;
+    }
+
+    public void PlayVFX(string id)
+    {
+        if(id == "eat")
+        {
+            FloatingTextPool.Instance.ShowPetStats(transform.position + Vector3.up * 2f, "eat", " : 10s", false, 1.5f);
+            transform.Find("_VFXPoint/_GreenBuff").gameObject.SetActive(true);
+            transform.Find("_VFXPoint/_GreenBuff").GetComponent<ParticleSystem>().Play();
+        }
+        else if(id == "water")
+        {
+            FloatingTextPool.Instance.ShowPetStats(transform.position + Vector3.up * 2f, "water", " + 10", false, 1.5f);
+            transform.Find("_VFXPoint/_BlueBuff").gameObject.SetActive(true);
+            transform.Find("_VFXPoint/_BlueBuff").GetComponent<ParticleSystem>().Play();
+            moisture += 10f;
+        }
+
+        ExitInteractionMode();
     }
 
     public void OnPick()
@@ -160,4 +183,5 @@ public class SoulSoilPet : PetBase
         crop.GetChild(0).gameObject.SetActive(false);
         crop.GetChild(1).gameObject.SetActive(true);
     }
+
 }

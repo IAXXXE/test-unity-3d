@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using System.Collections;
 
 public abstract class PetBase : MonoBehaviour, IPet, IInteractable
@@ -17,7 +15,6 @@ public abstract class PetBase : MonoBehaviour, IPet, IInteractable
     public float updateInterval = 0.2f;      // 更新间隔
     
     [Header("互动设置")]
-    public float interactionRange = 3f;      // 互动范围
     public Transform interactionPoint;       // 互动点位置
     
     [Header("组件引用")]
@@ -177,10 +174,10 @@ public abstract class PetBase : MonoBehaviour, IPet, IInteractable
     public abstract InteractionOption[] GetAvailableInteractions();
     
     // 检查是否在互动范围内
-    public bool IsInInteractionRange(Transform target)
-    {
-        return Vector3.Distance(interactionPoint.position, target.position) <= interactionRange;
-    }
+    // public bool IsInInteractionRange(Transform target)
+    // {
+    //     return Vector3.Distance(interactionPoint.position, target.position) <= interactionRange;
+    // }
     
     // 事件回调（子类可重写）
     protected virtual void OnStartFollow() 
@@ -209,10 +206,10 @@ public abstract class PetBase : MonoBehaviour, IPet, IInteractable
         Debug.Log($"{petName} 退出互动模式");
     }
 
-        // IInteractable
-
+    // IInteractable接口实现
     public string GetInteractText()
     {
+        Debug.Log($"“E” 与 {petName} 互动");
         return $"“E” 与 {petName} 互动";
     }
 
@@ -228,18 +225,24 @@ public abstract class PetBase : MonoBehaviour, IPet, IInteractable
 
     public void TryFeed()
     {
-        agent.SetDestination(followTarget.position);
         StartCoroutine(MoveToPlayer());
+    }
+
+    public void CancelFeed()
+    {
+        
     }
 
     private IEnumerator MoveToPlayer()
     {
+        agent.SetDestination(followTarget.position);
         float distance = Vector3.Distance(transform.position, followTarget.position);
-        while(distance > 1)
+        while(distance > 2f)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             distance = Vector3.Distance(transform.position, followTarget.position);
-            agent.SetDestination(followTarget.position);
+            if(agent.velocity.magnitude <= 0) 
+                agent.SetDestination(followTarget.position);
         }
 
         EnterInteractionMode();

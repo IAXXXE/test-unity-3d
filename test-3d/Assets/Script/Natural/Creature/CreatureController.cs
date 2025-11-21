@@ -92,7 +92,7 @@ public class CreatureController : MonoBehaviour, IDamageable
 
     private void ShowDamageText(float damage, bool isCritical)
     {
-        DamagePopupPool.Instance.ShowDamage(transform.position + Vector3.up * 2f, (int)damage, isCritical, 1.5f);
+        FloatingTextPool.Instance.ShowDamage(transform.position + Vector3.up * 2f, (int)damage, isCritical, 1.5f);
     }
 
     private void ApplyKnockback(Vector3 direction, float force)

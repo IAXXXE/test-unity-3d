@@ -7011,9 +7011,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb72e7ad7485e4bb290bdb384472ff0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetCamera: {fileID: 330585545}
   popupPrefab: {fileID: 7982407933221788058, guid: a26fb70d5ac4643c9b4fa8561f401657,
     type: 3}
-  targetCamera: {fileID: 330585545}
+  petStatsPrefab: {fileID: 1842279145852375283, guid: 1cb04b23bfa01415ea4eea2f44b7592f,
+    type: 3}
   initialPool: 10
   maxPool: 200
 --- !u!4 &448270361
@@ -8846,6 +8848,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   summonPoint: {fileID: 0}
   summonRadius: 2
+  summonEffect: {fileID: 7761031033666763820, guid: 9f1ce8e42f76d476eb92fbd45a71e80b,
+    type: 3}
 --- !u!4 &551349802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5473569773201559785, guid: fd8e0760db14a534a89257f68a4f2a8c,
@@ -28419,8 +28423,6 @@ MonoBehaviour:
   player: {fileID: 1088893200}
   ownedPets: []
   activePet: {fileID: 0}
-  interactKey: 101
-  interactionCheckRadius: 5
 --- !u!114 &1956363560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32324,6 +32326,11 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 6914988913484132019, guid: efc8b08f14d334259b52b2e8de49f1c5,
+        type: 3}
+      propertyPath: detectionRadius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

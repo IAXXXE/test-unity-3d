@@ -51,6 +51,7 @@ public static class GameEventManager
     public static event Action OnItemUpdate;
     public static event Action<Transform> OnPlayerLookAt;
     public static event Action<bool> OnPlayerMerge;
+    public static event Action<bool> OnPlayerFeed;
     // 战斗
     public static event Action<ItemData, AttackType, float> OnWeaponAttack;
     public static event Action OnLightAttackHit;
@@ -135,6 +136,8 @@ public static class GameEventManager
         => OnPlayerLookAt?.Invoke(target);
     public static void TriggerPlayerMerge(bool isTrue)
         => OnPlayerMerge?.Invoke(isTrue);
+    public static void TriggerPlayerFeed(bool isTrue)
+        => OnPlayerFeed?.Invoke(isTrue);
     // 玩家战斗
     public static void TriggerWeaponAttack(ItemData item, AttackType type, float power)
         => OnWeaponAttack?.Invoke(item, type, power);

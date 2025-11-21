@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8434175221514640856}
+  - component: {fileID: 3916421346324400512}
   m_Layer: 0
   m_Name: _PetStatsText
   m_TagString: Untagged
@@ -117,6 +118,61 @@ Transform:
   - {fileID: 8675954511663602382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3916421346324400512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842279145852375283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfea7e3a76809426da1d58c7a27df4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stringToSprite:
+    m_keys:
+    - eat
+    - water
+    m_values:
+    - {fileID: 21300000, guid: da7129ed6a246f048a49d8d97de2d2d4, type: 3}
+    - {fileID: 21300000, guid: ace8a02646afeda4880fc3cb14cad705, type: 3}
+  lifetime: 1
+  initialVelocity: {x: 0, y: 1, z: 0}
+  gravity: -1.5
+  scaleByDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.05
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0.5
+      inSlope: -0.05
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minDistance: 1
+  maxDistance: 30
+  minScale: 0.5
+  maxScale: 1
+  faceCamera: 1
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  critColor: {r: 1, g: 0.86267257, b: 0, a: 1}
+  fadeStart: 0.6
+  fadeEnd: 1
 --- !u!1 &2001418784160313831
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerIKController : MonoBehaviour
     [Header("IK 目标")]
     public Transform aimTarget;
     public Transform mergeTarget;
+    public Transform feedTarget;
 
     public Transform lookTarget;
     public Transform leftHandTarget;
@@ -29,6 +30,7 @@ public class PlayerIKController : MonoBehaviour
     [Header("控制")]
     public bool isAiming = false;
     public bool isMerging = false;
+    public bool isFeeding = false;
 
     private Vector3 currentLookPosition; // 当前平滑的注视位置
     private Vector3 targetLookPosition;  // 目标注视位置
@@ -69,12 +71,14 @@ public class PlayerIKController : MonoBehaviour
 
         GameEventManager.OnPlayerLookAt += OnLookAt;
         GameEventManager.OnPlayerMerge += OnMerge;
+        GameEventManager.OnPlayerFeed += OnFeed;
     }
 
     void OnDestroy()
     {
         GameEventManager.OnPlayerLookAt -= OnLookAt;
         GameEventManager.OnPlayerMerge -= OnMerge;
+        GameEventManager.OnPlayerFeed -= OnFeed;
     }
 
     private void OnMerge(bool isTrue)
@@ -94,6 +98,22 @@ public class PlayerIKController : MonoBehaviour
         }
     }
 
+    private void OnFeed(bool isTrue)
+    {
+        isFeeding = isTrue;
+        if(isFeeding)
+        {
+            leftHandTarget = null;
+            rightHandTarget = feedTarget;
+            lookTarget = feedTarget;
+        }
+        else
+        {
+            rightHandTarget = null;
+            lookTarget = null;
+        }
+    }
+
     private void OnLookAt(Transform target)
     {
         lookTarget = target;
@@ -109,8 +129,8 @@ public class PlayerIKController : MonoBehaviour
         }
         
         // 设置目标权重
-        targetIKWeight = (isAiming || isMerging) ? 1f : 0f;
-        targetLookWeight = (!(isAiming || isMerging) && lookTarget != null) ? 0.5f : 0f;
+        targetIKWeight = (isAiming || isMerging || isFeeding) ? 1f : 0f;
+        targetLookWeight = (!(isAiming || isMerging || isFeeding) && lookTarget != null) ? 0.5f : 0f;
 
         // 平滑过渡权重
         ikWeight = Mathf.Lerp(ikWeight, targetIKWeight, Time.deltaTime * transitionSpeed);
