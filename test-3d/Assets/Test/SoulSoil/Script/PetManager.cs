@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.AI;
 
 public class PetManager : MonoBehaviour
 {
+    public static PetManager Instance;
+
     [Header("玩家引用")]
     public Transform player;
     
@@ -19,7 +20,19 @@ public class PetManager : MonoBehaviour
     
     private PetBase nearbyPet;
     private bool isInInteractionMode = false;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     
     private void Start()
     {
@@ -59,16 +72,6 @@ public class PetManager : MonoBehaviour
                 }
             }
         }
-        
-        // 显示/隐藏互动提示UI
-        if (nearbyPet != null)
-        {
-            ShowInteractionPrompt(nearbyPet);
-        }
-        else
-        {
-            HideInteractionPrompt();
-        }
     }
     
     private void HandleInteractionInput()
@@ -88,7 +91,7 @@ public class PetManager : MonoBehaviour
         }
     }
     
-    private void EnterInteractionMode(PetBase pet)
+    public void EnterInteractionMode(PetBase pet)
     {
         isInInteractionMode = true;
         activePet = pet;
@@ -153,22 +156,11 @@ public class PetManager : MonoBehaviour
         pet.gameObject.SetActive(false);
     }
     
-    // UI相关方法
-    private void ShowInteractionPrompt(PetBase pet)
-    {
-        // 显示 "按E互动" 提示
-        PetInteractionUI.Instance?.ShowPrompt($"按 {interactKey} 与 {pet.GetPetName()} 互动");
-    }
-    
-    private void HideInteractionPrompt()
-    {
-        PetInteractionUI.Instance?.HidePrompt();
-    }
-    
     private void ShowInteractionUI(PetBase pet)
     {
         InteractionOption[] options = pet.GetAvailableInteractions();
-        PetInteractionUI.Instance?.ShowInteractionPanel(pet, options);
+        GameEventManager.TriggerPetInteraction(pet, options);
+        // PetInteractionUI.Instance?.ShowInteractionPanel(pet, options);
     }
     
     private void HideInteractionUI()
@@ -182,6 +174,7 @@ public class PetManager : MonoBehaviour
         {
             InteractionOption[] options = activePet.GetAvailableInteractions();
             PetInteractionUI.Instance?.RefreshOptions(options);
+            PetInteractionUI.Instance?.UpdateStatBars(activePet);
         }
     }
     

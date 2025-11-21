@@ -12,19 +12,9 @@ public class PetSystemExample : MonoBehaviour
     private void Update()
     {
         // 快捷键测试
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            summonSystem.SummonPet("小狗");
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            summonSystem.SummonPet("机械助手");
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            summonSystem.SummonPet("光之精灵");
+            summonSystem.SummonPet("soso");
         }
         
         // 收回所有宠物

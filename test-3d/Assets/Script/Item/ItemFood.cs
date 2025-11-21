@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemComsumable : MonoBehaviour
+public class ItemFood : ItemBase
 {
+    public ItemFood(ItemData data) : base(data)
+    {
+    }
+
     // Start is called before the first frame update
     void Start()
     {

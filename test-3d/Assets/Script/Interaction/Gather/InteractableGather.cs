@@ -32,7 +32,7 @@ public class InteractableGather : InteractableBase
         if (added)
         {
             Debug.Log($"采集了 {quantity} 个 {itemId}");
-            StartCooldown();
+            // StartCooldown();
         }
 
         StopGather();

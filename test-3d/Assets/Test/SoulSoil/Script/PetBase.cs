@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
-public abstract class PetBase : MonoBehaviour, IPet
+public abstract class PetBase : MonoBehaviour, IPet, IInteractable
 {
     [Header("基础信息")]
     public string petName = "Pet";
@@ -205,5 +206,32 @@ public abstract class PetBase : MonoBehaviour, IPet
     protected virtual void OnExitInteractionMode() 
     {
         Debug.Log($"{petName} 退出互动模式");
+    }
+
+        // IInteractable
+
+    public string GetInteractText()
+    {
+        return $"“E” 与 {petName} 互动";
+    }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
+
+    public void Interact(PlayerController player)
+    {
+        PetManager.Instance.EnterInteractionMode(this);
+    }
+
+    public void SetHighlight(bool on)
+    {
+        return;
+    }
+
+    public string GetDisplayName()
+    {
+        return "soso";
     }
 }

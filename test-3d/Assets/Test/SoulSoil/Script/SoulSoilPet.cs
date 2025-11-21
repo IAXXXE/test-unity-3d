@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoulSoilPet : PetBase
 {
+    
     [Header("土壤属性")]
     public float moisture = 100;
     public float maxMoisture = 100;
@@ -12,13 +13,16 @@ public class SoulSoilPet : PetBase
     public float soulPower = 100;
     public float maxSoulPower = 100;
 
-    private float moistureDrainRate = 1f;  // 水分消耗
+    private float moistureDrainRate = 0.5f;  // 水分消耗
     private float decompositeRate = 3f; // 分解速率
 
     private bool isEating;
 
     [Header("作物属性")]
     public Transform crop;
+    public float growthRate = 0;
+    public float maxGrowthRate = 100;
+    public bool isRipening = false;
 
     protected override void Update()
     {
@@ -31,7 +35,20 @@ public class SoulSoilPet : PetBase
 
         if(isEating)
         {
-            fertility = Mathf.Max(maxFertility, fertility + decompositeRate * Time.deltaTime);
+            fertility = Mathf.Min(maxFertility, fertility + decompositeRate * Time.deltaTime);
+        }
+        else
+        {
+            fertility = Mathf.Max(maxFertility, fertility - decompositeRate * Time.deltaTime);
+        }
+
+        if(growthRate < maxGrowthRate)
+        {
+            growthRate = Mathf.Min(maxGrowthRate, growthRate + 1f * Time.deltaTime);
+            if(growthRate == maxGrowthRate)
+            {
+                CropRipen();
+            }
         }
     }
 
@@ -41,27 +58,27 @@ public class SoulSoilPet : PetBase
 
         // 浇水
         bool needWater = moisture < maxMoisture;
-        var waterOption = new InteractionOption(InteractionType.Water, "浇水", needWater);
+        var waterOption = new InteractionOption(InteractionType.Water, "Water", needWater);
         if(!needWater)
             waterOption.unavailableReason = "水分充足";
         options.Add(waterOption);
 
         // 喂食
         bool needFeed = fertility < maxFertility;
-        var feedOption = new InteractionOption(InteractionType.Feed, "", needFeed);
+        var feedOption = new InteractionOption(InteractionType.Feed, "Feed", needFeed);
         if(!needFeed)
             feedOption.unavailableReason = "养分充足";
         options.Add(feedOption); 
 
         // 采摘
         bool canPick = CanPick();
-        var pickOption = new InteractionOption(InteractionType.Pick, "", canPick);
+        var pickOption = new InteractionOption(InteractionType.Pick, "Pick", canPick);
         if(!canPick)
             pickOption.unavailableReason = "没有可以采摘的";
         options.Add(pickOption);
 
         // 玩耍（用锄头挠挠）
-        var playOption = new InteractionOption(InteractionType.Play, "", true);
+        var playOption = new InteractionOption(InteractionType.Play, "Plow", true);
         options.Add(playOption);
 
         return options.ToArray();
@@ -88,20 +105,58 @@ public class SoulSoilPet : PetBase
 
     public void OnWater()
     {
-        // animation
+        // animation VFX UI
         moisture += 10f;
+        Debug.Log("Water " + moisture);
+    }
+
+    public void BeFeed()
+    {
+        Debug.Log("See Food ! ");
+        agent.SetDestination(followTarget.position);
+        StartCoroutine(MoveToPlayer());
     }
 
     public void OnFeed()
     {
         // animation
+        isEating = true;
+        StartCoroutine(Eating());
+    }
 
+    private IEnumerator MoveToPlayer()
+    {
+        float distance = Vector3.Distance(transform.position, followTarget.position);
+        while(distance > 2f)
+        {
+            yield return new WaitForSeconds(0.5f);
+            distance = Vector3.Distance(transform.position, followTarget.position);
+        }
+
+        EnterInteractionMode();
+
+        // 吃下
+        GameEventManager.TriggerHeldItemConsumed();
+        OnFeed();
+    }
+
+    private IEnumerator Eating()
+    {
+        yield return new WaitForSeconds(10f);
+
+        isEating = false;
     }
 
     public void OnPick()
     {
         // animation
+        isRipening = false;
+        growthRate = 0;
 
+        crop.GetChild(0).gameObject.SetActive(true);
+        crop.GetChild(1).gameObject.SetActive(false);
+
+        InventoryManager.Instance.AddItem(100013, 1);
     }
 
     public void OnPlay()
@@ -112,11 +167,18 @@ public class SoulSoilPet : PetBase
 
     public bool CanPick()
     {
-        return true;
+        return isRipening;
     }
 
     public bool CanHoeing()
     {
         return true;
+    }
+
+    private void CropRipen()
+    {
+        isRipening = true;
+        crop.GetChild(0).gameObject.SetActive(false);
+        crop.GetChild(1).gameObject.SetActive(true);
     }
 }

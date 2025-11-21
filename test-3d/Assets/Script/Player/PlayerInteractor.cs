@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerInteractor : MonoBehaviour
@@ -87,13 +86,11 @@ public class PlayerInteractor : MonoBehaviour
             var go = (it as MonoBehaviour).gameObject;
             Vector3 dir = (go.transform.position - transform.position).normalized;
             float dot = Vector3.Dot(transform.forward, dir);
-            // Debug.Log("1 : " + "dot " + dot + " bs : " + bestScore + "Can Inter " + it.CanInteract());
             if (dot > bestScore && it.CanInteract())
             {
                 Vector3 origin = playerCamera.transform.position;
                 Vector3 toTarget = go.transform.position - origin;
                 int mask = LayerMask.GetMask("Default");
-                // Debug.Log("2 " + !Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore));
                 if (!Physics.Raycast(origin, toTarget.normalized, toTarget.magnitude, mask, QueryTriggerInteraction.Ignore))
                 {
                     best = it;
@@ -152,18 +149,6 @@ public class PlayerInteractor : MonoBehaviour
             }
         }
     }
-
-    // // 示例：供 Door with need key 或 Herb 调用
-    // public bool HasItem(string itemId)
-    // {
-    //     // TODO: 查询背包逻辑
-    //     return false;
-    // }
-
-    // public void AddItem(string itemId)
-    // {
-    //     // TODO: 加入背包逻辑
-    // }
 
     void OnDrawGizmosSelected()
     {

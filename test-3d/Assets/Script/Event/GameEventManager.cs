@@ -44,6 +44,7 @@ public static class GameEventManager
     #region 5-Gameplay
     // 特殊界面
     public static event Action<CookLevel> OnCooked;
+    public static event Action<PetBase, InteractionOption[]> OnPetInteraction;
     // 玩家行为
     public static event Action<ItemBase, HandType> OnItemHeld;
     public static event Action<HandType> OnHeldItemConsumed;
@@ -120,6 +121,8 @@ public static class GameEventManager
     #region 5-Gameplay Event Triggers
     public static void TriggerCooked(CookLevel level) 
         => OnCooked?.Invoke(level);
+    public static void TriggerPetInteraction(PetBase pet, InteractionOption[] options)
+        => OnPetInteraction?.Invoke(pet, options);
 
     // 玩家行为
     public static void TriggerItemHeld(ItemBase item, HandType type = HandType.HandR)

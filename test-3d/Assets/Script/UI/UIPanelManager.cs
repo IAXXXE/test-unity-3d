@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIPanelManager : MonoBehaviour
@@ -7,6 +6,7 @@ public class UIPanelManager : MonoBehaviour
     private GameObject currPanel;
     private GameObject cookBook;
     private GameObject cookPanel;
+    private GameObject petInteractionPanel;
 
     private PlayerInputActions inputActions;
 
@@ -16,33 +16,50 @@ public class UIPanelManager : MonoBehaviour
         cookBook = transform.Find("BT_CookBook").gameObject;
         cookPanel = transform.Find("UI_CookPanel").gameObject;
 
-        GameEventManager.OnCooked += OnCookPanelShow;
-        
+        petInteractionPanel = transform.Find("UI_PetInteraction").gameObject;
     }
 
     void Start()
     {
         inputActions = GameInstance.Instance.inputActions;
         inputActions.Player.Cancel.started += ctx => HidePanel();
+
+        GameEventManager.OnCooked += OnCookPanelShow;
+        GameEventManager.OnPetInteraction += OnPetInteractionPanelShow;
     }
 
     void OnDestroy()
     {
-        GameEventManager.OnCooked += OnCookPanelShow;
+        inputActions.Player.Cancel.started -= ctx => HidePanel();
+
+        GameEventManager.OnCooked -= OnCookPanelShow;
+        GameEventManager.OnPetInteraction -= OnPetInteractionPanelShow;
     }
 
-    private void HidePanel()
+    public void HidePanel()
     {
-        currPanel.gameObject.SetActive(false);
+        Debug.Log("??? QQ");
+        if(currPanel == null) return;
+        currPanel?.gameObject.SetActive(false);
+        currPanel = null;
 
         GameEventManager.TriggerUIHided();
     }
 
     private void OnCookPanelShow(CookLevel level)
     {
+        GameEventManager.TriggerUIShowed();
+
         currPanel = cookPanel;
 
-        cookPanel.GetComponent<CookPanel>().InitPanel(level);
-        cookPanel.SetActive(true);
+        cookPanel.GetComponent<CookPanel>().ShowPanel(level);
+    }
+
+    private void OnPetInteractionPanelShow(PetBase pet, InteractionOption[] options)
+    {
+        GameEventManager.TriggerUIShowed();
+
+        currPanel = petInteractionPanel;
+        petInteractionPanel.GetComponent<PetInteractionUI>().ShowPanel(pet, options);
     }
 }

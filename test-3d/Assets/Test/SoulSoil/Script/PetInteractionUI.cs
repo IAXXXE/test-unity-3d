@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System;
 
 public class PetInteractionUI : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class PetInteractionUI : MonoBehaviour
     
     public PetManager petManager;
     private List<GameObject> activeButtons = new List<GameObject>();
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,51 +40,47 @@ public class PetInteractionUI : MonoBehaviour
     
     private void Start()
     {   
-        HidePrompt();
-        HideInteractionPanel();
+        gameObject.SetActive(false);
     }
-    
+
+    public void ShowPanel(PetBase pet, InteractionOption[] options)
+    {
+        ShowInteractionPanel(pet, options);
+        gameObject.SetActive(true);
+    }
+
     // 显示互动提示
-    public void ShowPrompt(string text)
-    {
-        if (promptPanel != null)
-        {
-            promptPanel.SetActive(true);
-            promptText.text = text;
-        }
-    }
+    // public void ShowPrompt(string text)
+    // {
+    //     promptPanel.SetActive(true);
+    //     promptText.text = text;
+    // }
     
-    public void HidePrompt()
-    {
-        if (promptPanel != null)
-        {
-            promptPanel.SetActive(false);
-        }
-    }
+    // public void HidePrompt()
+    // {
+    //     promptPanel.SetActive(false);
+    // }
     
     // 显示互动面板
     public void ShowInteractionPanel(PetBase pet, InteractionOption[] options)
     {
-        if (interactionPanel != null)
-        {
-            interactionPanel.SetActive(true);
-            petNameText.text = pet.GetPetName();
-            
-            // 显示宠物信息
-            UpdatePetInfo(pet);
-            
-            // 创建互动按钮
-            CreateOptionButtons(options);
-        }
+        interactionPanel.SetActive(true);
+        petNameText.text = pet.GetPetName();
+        
+        // 显示宠物信息
+        UpdatePetInfo(pet);
+        
+        // 创建互动按钮
+        CreateOptionButtons(options);
     }
     
     public void HideInteractionPanel()
     {
-        if (interactionPanel != null)
-        {
-            interactionPanel.SetActive(false);
-            ClearOptionButtons();
-        }
+        interactionPanel.SetActive(false);
+        ClearOptionButtons();
+
+        petInfoPanel.SetActive(false);
+        GameEventManager.TriggerUIHided();
     }
     
     // 刷新选项
@@ -155,22 +152,19 @@ public class PetInteractionUI : MonoBehaviour
         petInfoPanel.SetActive(true);
         
         // 显示宠物类型
-        if (petTypeText != null)
-        {
-            petTypeText.text = pet.GetPetType().ToString();
-        }
+        petTypeText.text = pet.GetPetType().ToString();
         
         // 根据宠物类型显示不同的状态条
         UpdateStatBars(pet);
     }
 
-    private void UpdateStatBars(PetBase pet)
+    // TODO:
+    public void UpdateStatBars(PetBase pet)
     {
         // 隐藏所有状态条
         foreach (var bar in statBars)
         {
-            if (bar != null)
-                bar.gameObject.SetActive(false);
+            bar.transform.parent.gameObject.SetActive(false);
         }
         
         // 根据宠物类型显示对应状态
@@ -186,6 +180,10 @@ public class PetInteractionUI : MonoBehaviour
         {
             ShowElementalStats(elementalPet);
         }
+        else if(pet is SoulSoilPet soulSoilPet)
+        {
+            ShowSoulSoilStats(soulSoilPet);
+        }
     }
 
     private void ShowCreatureStats(CreaturePet pet)
@@ -193,17 +191,17 @@ public class PetInteractionUI : MonoBehaviour
         if (statBars.Length >= 3)
         {
             // 饥饿度
-            statBars[0].gameObject.SetActive(true);
+            statBars[0].transform.parent.gameObject.SetActive(true);
             statBars[0].value = (float)pet.hunger / pet.maxHunger;
             SetBarLabel(statBars[0], "饥饿度", pet.hunger, pet.maxHunger);
             
             // 亲密度
-            statBars[1].gameObject.SetActive(true);
+            statBars[1].transform.parent.gameObject.SetActive(true);
             statBars[1].value = (float)pet.affection / pet.maxAffection;
             SetBarLabel(statBars[1], "亲密度", pet.affection, pet.maxAffection);
             
             // 精力
-            statBars[2].gameObject.SetActive(true);
+            statBars[2].transform.parent.gameObject.SetActive(true);
             statBars[2].value = (float)pet.energy / pet.maxEnergy;
             SetBarLabel(statBars[2], "精力", pet.energy, pet.maxEnergy);
         }
@@ -214,12 +212,12 @@ public class PetInteractionUI : MonoBehaviour
         if (statBars.Length >= 2)
         {
             // 电量
-            statBars[0].gameObject.SetActive(true);
+            statBars[0].transform.parent.gameObject.SetActive(true);
             statBars[0].value = pet.battery / pet.maxBattery;
             SetBarLabel(statBars[0], "电量", (int)pet.battery, (int)pet.maxBattery);
             
             // 耐久度
-            statBars[1].gameObject.SetActive(true);
+            statBars[1].transform.parent.gameObject.SetActive(true);
             statBars[1].value = pet.durability / pet.maxDurability;
             SetBarLabel(statBars[1], "耐久度", (int)pet.durability, (int)pet.maxDurability);
         }
@@ -230,18 +228,42 @@ public class PetInteractionUI : MonoBehaviour
         if (statBars.Length >= 1)
         {
             // 元素能量
-            statBars[0].gameObject.SetActive(true);
+            statBars[0].transform.parent.gameObject.SetActive(true);
             statBars[0].value = pet.elementalEnergy / pet.maxElementalEnergy;
             SetBarLabel(statBars[0], "元素能量", (int)pet.elementalEnergy, (int)pet.maxElementalEnergy);
         }
     }
 
+    private void ShowSoulSoilStats(SoulSoilPet pet)
+    {
+        if(statBars.Length >= 3)
+        {
+            statBars[0].transform.parent.gameObject.SetActive(true);
+            statBars[0].value = (float)pet.moisture / pet.maxMoisture;
+            SetBarLabel(statBars[0], "水分", (int)pet.moisture, (int)pet.maxMoisture);
+            
+            statBars[1].transform.parent.gameObject.SetActive(true);
+            statBars[1].value = (float)pet.fertility / pet.maxFertility;
+            SetBarLabel(statBars[1], "养分", (int)pet.fertility, (int)pet.maxFertility);
+            
+            statBars[2].transform.parent.gameObject.SetActive(true);
+            statBars[2].value = (float)pet.soulPower / pet.maxSoulPower;
+            SetBarLabel(statBars[2], "灵感", (int)pet.soulPower, (int)pet.maxSoulPower);
+        }
+    }
+
     private void SetBarLabel(Slider slider, string label, int current, int max)
     {
-        TextMeshProUGUI labelText = slider.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI labelText = slider.transform.parent.Find("_Text").GetComponentInChildren<TextMeshProUGUI>();
         if (labelText != null)
         {
-            labelText.text = $"{label}: {current}/{max}";
+            labelText.text = $"{label}:";
+        }
+
+        TextMeshProUGUI valueText = slider.transform.parent.Find("_Value").GetComponentInChildren<TextMeshProUGUI>();
+        if (valueText != null)
+        {
+            valueText.text = $"{current}/{max}";
         }
     }
 

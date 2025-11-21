@@ -38,6 +38,9 @@ public enum InteractableType
     
     // 对话/NPC
     Dialogue,
+
+    // 互动/Pet
+    Interacte,
     
     // 任务相关
     Quest

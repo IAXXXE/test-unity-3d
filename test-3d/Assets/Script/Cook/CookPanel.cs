@@ -36,17 +36,7 @@ public class CookPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void OnEnable()
-    {
-        GameEventManager.TriggerUIShowed();
-    }
-
-    void OnDisable()
-    {
-        GameEventManager.TriggerUIHided();
-    }
-
-    public void InitPanel(CookLevel level)
+    public void ShowPanel(CookLevel level)
     {
         if(currentLevel == level)
         {
@@ -64,6 +54,8 @@ public class CookPanel : MonoBehaviour
                 break;
         }
         currentLevel = level;
+
+        gameObject.SetActive(true);
     }
 
     void InitDishes()

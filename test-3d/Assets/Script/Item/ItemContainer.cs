@@ -48,6 +48,16 @@ public class ItemContainer : ItemBase
     {
         fillingType = FillingType.Empty;
         SetCurrentCap(0);
+
+        Collider[] cols = Physics.OverlapSphere(GameInstance.Instance.PlayerStat.GetTransform().position, 2);
+        foreach (var c in cols)
+        {
+            var interactable = c.GetComponent<SoulSoilPet>();
+            if (interactable != null)
+            {
+                interactable.OnWater();
+            }
+        }
     }
 
     private void SetCurrentCap(int value)

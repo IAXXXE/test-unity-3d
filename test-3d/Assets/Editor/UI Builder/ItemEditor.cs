@@ -88,8 +88,6 @@ public class ItemEditor : EditorWindow
         }
         itemList = dataBase.itemDataList;
         EditorUtility.SetDirty(dataBase);
-
-        Debug.Log(itemList[0].itemID);
     }
 
     private void GenerateListView()

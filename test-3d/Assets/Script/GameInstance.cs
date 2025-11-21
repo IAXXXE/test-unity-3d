@@ -55,14 +55,11 @@ public class GameInstance : MonoBehaviour
     {
         inputActions = new PlayerInputActions();
         // Inventory = transform.parent.Find("UI_Canvas/MN_Inventory").GetComponent<InventoryManager>();
-
-        
     }
 
     public void NewGame()
     {
         InitPlayer();
-
         GameEventManager.TriggerGameStart();
     }
 

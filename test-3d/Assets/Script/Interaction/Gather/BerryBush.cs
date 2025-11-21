@@ -105,7 +105,6 @@ public class BerryBush : InteractableGather
                 UpdateVisualState();
                 // 开始生长周期
                 StartGrowthCycle();
-                StartCooldown();
             }
         }
 

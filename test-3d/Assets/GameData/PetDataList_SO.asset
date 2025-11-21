@@ -20,7 +20,7 @@ MonoBehaviour:
       type: 3}
     maxHealth: 100
     moveSpeed: 3
-    followDistance: 5
-    stopDistance: 3
-    teleportDistance: 15
+    followDistance: 10
+    stopDistance: 5
+    teleportDistance: 20
     description: "\u6D3B\u7684\u571F"
