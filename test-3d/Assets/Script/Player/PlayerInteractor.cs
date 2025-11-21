@@ -27,7 +27,7 @@ public class PlayerInteractor : MonoBehaviour
     
     private IInteractable currentTarget;
     private bool isLocked;
-    private float nextDetectionTime;
+    private float nextDetectionTime = 1f;
     
     // 缓存计算结果
     private Vector3 cameraPosition;
@@ -40,7 +40,7 @@ public class PlayerInteractor : MonoBehaviour
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        defaultLayerMask = LayerMask.GetMask("Default");
+        defaultLayerMask = LayerMask.GetMask("Default", "Player");
     }
 
     void Start()
@@ -202,7 +202,8 @@ public class PlayerInteractor : MonoBehaviour
             if (mb == null) continue;
 
             float score = CalculateInteractableScore(mb.transform.position);
-            
+            // TODO:There?
+            Debug.Log($"{mb.gameObject.name} IsTargetVisible {IsTargetVisible(mb.transform.position)}");
             if (score > bestScore && IsTargetVisible(mb.transform.position))
             {
                 best = interactable;
@@ -326,7 +327,7 @@ public class PlayerInteractor : MonoBehaviour
         {
             string interactText = target.GetInteractText();
             pickupPrompt.Show($"[E] {interactText}");
-            Debug.Log($"ShowPromptForTarget {target.GetInteractText()}");
+            Debug.Log($"!!! Show Prompt ForTarget {target.GetInteractText()}");
         }
     }
 
